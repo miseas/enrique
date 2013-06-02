@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+<!--     <bean id="abstractHibernateDao" abstract="true" -->
+<!--     	class="com.jpmorgan.iscpp.db.dao.hibernate.AbstractHibernateDAO"> -->
+<!--     	<property name="hibernateTemplate"> -->
+<!--     		<ref bean="hibernateTemplate" /> -->
+<!--     	</property> -->
+<!--     </bean> -->    
+
+    	<bean id="hibernateDaoSupport" abstract="true" class="org.springframework.orm.hibernate3.support.HibernateDaoSupport" >
+    		<property name="hibernateTemplate" ref="hibernateTemplate" />
+    	</bean>
+    	
+<!--    	    <bean id="productDAO" parent="hibernateDaoSupport" -->
+<!--     		class="invcont.web.dao.impl.ProductDAOImpl" /> -->
+
+<!--    	    <bean id="alertDAO" parent="hibernateDaoSupport" -->
+<!--     		class="invcont.web.dao.impl.AlertDAOImpl" /> -->
+    		
+        <bean id="clientDAO" parent="hibernateDaoSupport"
+    		class="com.decorart.web.dao.impl.ClientDAOImpl" />
+    
+        <bean id="providerDAO" parent="hibernateDaoSupport"
+    		class="com.decorart.web.dao.impl.ProviderDAOImpl" />
+    		
+        <bean id="ordenCompraDAO" parent="hibernateDaoSupport"
+    		class="com.decorart.web.dao.impl.OrdenCompraDAOImpl" />
+   		
+   		<bean id="productoOCDAO" parent="hibernateDaoSupport"
+    		class="com.decorart.web.dao.impl.ProductoOCDAOImpl" />    
+    		
+    	<bean id="pagoDAO" parent="hibernateDaoSupport"
+    		class="com.decorart.web.dao.impl.PagoDAOImpl" />  		
+	
+</beans>

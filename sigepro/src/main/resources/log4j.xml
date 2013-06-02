@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+  <appender name="ConsoleAppender" class="org.apache.log4j.ConsoleAppender">
+    <layout class="org.apache.log4j.SimpleLayout"/>
+  </appender>
+  
+  <appender name="FileAppender" class="org.apache.log4j.FileAppender">
+      <param name="file" value="C:/decorart/logs-audit/my-audit.log"/>
+    <layout class="org.apache.log4j.SimpleLayout"/>
+  </appender>
+      
+  <category name="fr.xebia.audit">
+    <priority value="TRACE"/>
+     <appender-ref ref="FileAppender" /> 
+  </category>
+  
+  <category name="org.springframework.security">
+    <priority value="info"/>
+  </category>
+  
+  <category name="org.springframework.web">
+    <priority value="info"/>
+  </category>
+  <category name="org.springframework">
+    <priority value="info"/>
+  </category>
+  <category name="org.springframework.jdbc">
+    <priority value="info"/>
+  </category>
+  <category name="org.springframework.beans.factory.xml">
+    <priority value="info"/>
+  </category>
+  
+  <category name="com.packtpub">
+    <priority value="debug"/>
+  </category>
+  
+  
+<!--  <logger name="org.hibernate"> -->
+<!--     <level value="ALL" /> -->
+<!-- </logger> -->
+  
+  <root>
+  	<priority value="info"/>
+    <appender-ref ref="ConsoleAppender"/>
+  </root>
+</log4j:configuration>
