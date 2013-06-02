@@ -14,21 +14,21 @@
         http://www.xebia.fr/schema/xebia-spring-security-extras http://www.xebia.com/schema/security/xebia-spring-security-extras.xsd ">
  
    <context:annotation-config/>   
-   <context:component-scan base-package="com.decorart.web.controller" />
-   <context:component-scan base-package="com.decorart.web.service.impl" />
-   <context:component-scan base-package="com.decorart.web.transformer" />
+   <context:component-scan base-package="com.sigepro.web.controller" />
+   <context:component-scan base-package="com.sigepro.web.service.impl" />
+<!--    <context:component-scan base-package="com.sigepro.web.transformer" /> -->
       
    
    <mvc:annotation-driven/>   
 
    <aop:aspectj-autoproxy  proxy-target-class="true" />
 <!--   activate the AuditAspect  -->
-   <security-extras:audit-aspect />
+<!--    <security-extras:audit-aspect /> -->
 	
-   <import resource="classpath:/hibernate/db_spring_hsql.xml" />
-   <import resource="classpath:/hibernate/db_dao.xml" />
-   <import resource="classpath:/hibernate/db_dao-locator.xml" />
-   <import resource="classpath:/mail/mail-config.xml" />
+<!--    <import resource="classpath:/hibernate/db_spring_hsql.xml" /> -->
+<!--    <import resource="classpath:/hibernate/db_dao.xml" /> -->
+<!--    <import resource="classpath:/hibernate/db_dao-locator.xml" /> -->
+<!--    <import resource="classpath:/mail/mail-config.xml" /> -->
    
             
   	<bean  id="messageSource"  
@@ -48,19 +48,19 @@
 	</bean>
 	
 	
-	<bean id="clientTransformer" class="com.decorart.web.transformer.ClienteTransformer">
-	</bean>
+<!-- 	<bean id="clientTransformer" class="com.decorart.web.transformer.ClienteTransformer"> -->
+<!-- 	</bean> -->
 	
-	<bean id="proveedorTransformer" class="com.decorart.web.transformer.ProveedorTransformer">
-	</bean>
+<!-- 	<bean id="proveedorTransformer" class="com.decorart.web.transformer.ProveedorTransformer"> -->
+<!-- 	</bean> -->
 	
-	<bean id="ordenCompraTransformer" class="com.decorart.web.transformer.OrdenCompraTransformer">
-	</bean>
+<!-- 	<bean id="ordenCompraTransformer" class="com.decorart.web.transformer.OrdenCompraTransformer"> -->
+<!-- 	</bean> -->
 	
-	<bean id="productOCTransformer" class="com.decorart.web.transformer.ProductOCTransformer">
-	</bean>
+<!-- 	<bean id="productOCTransformer" class="com.decorart.web.transformer.ProductOCTransformer"> -->
+<!-- 	</bean> -->
 	
-	<bean id="pagoOCTransformer" class="com.decorart.web.transformer.PagoOCTransformer">
-	</bean>
+<!-- 	<bean id="pagoOCTransformer" class="com.decorart.web.transformer.PagoOCTransformer"> -->
+<!-- 	</bean> -->
 
 </beans>

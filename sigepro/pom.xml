@@ -16,17 +16,23 @@
     </properties>
 
     <dependencies>
+    
+	<dependency>
+	   <groupId>javax.servlet</groupId>
+	   <artifactId>jstl</artifactId>
+	   <version>1.2</version>
+	</dependency>
         <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-web-api</artifactId>
             <version>6.0</version>
             <scope>provided</scope>
         </dependency>
-<dependency>
-  <groupId>org.springframework</groupId>
-  <artifactId>spring-core</artifactId>
-  <version>${org.springframework.version}</version>
-</dependency>
+	<dependency>
+	  <groupId>org.springframework</groupId>
+	  <artifactId>spring-core</artifactId>
+	  <version>${org.springframework.version}</version>
+	</dependency>
  
 		<!--
 		    Expression Language (depends on spring-core)
