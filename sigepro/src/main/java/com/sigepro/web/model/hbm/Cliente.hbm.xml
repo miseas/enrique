@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 02/06/2013 23:23:40 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.sigepro.web.model.pojo.Cliente" table="CLIENTE" schema="SIGEPRODB">
+        <id name="idcliente" type="java.lang.Integer">
+            <column name="IDCLIENTE" />
+            <generator class="increment" />
+        </id>
+        <many-to-one name="estadoCli" class="com.sigepro.web.model.pojo.EstadoCli" lazy="false" fetch="select">
+            <column name="IDESTADOCLI" />
+        </many-to-one>
+        <many-to-one name="localidad" class="com.sigepro.web.model.pojo.Localidad" lazy="false" fetch="select">
+            <column name="IDLOCALIDAD" />
+        </many-to-one>
+        <property name="nombre" type="string">
+            <column name="NOMBRE" length="100" />
+        </property>
+        <property name="apellido" type="string">
+            <column name="APELLIDO" length="100" />
+        </property>
+        <property name="direccion" type="string">
+            <column name="DIRECCION" length="100" />
+        </property>
+        <property name="email" type="string">
+            <column name="EMAIL" length="100" />
+        </property>
+        <property name="telefono" type="string">
+            <column name="TELEFONO" length="25" />
+        </property>
+        <property name="telefono2" type="string">
+            <column name="TELEFONO2" length="25" />
+        </property>
+                <property name="telefono3" type="string">
+            <column name="TELEFONO3" length="25" />
+        </property>
+        <property name="notas" type="string">
+            <column name="NOTAS" length="100" />
+        </property>
+        <property name="ccNro" type="string">
+            <column name="CC_NRO" length="25" />
+        </property>
+        <property name="puntuacion" type="java.lang.Integer">
+            <column name="PUNTUACION" />
+        </property>
+        <property name="fechaAgregado" type="date">
+            <column name="FECHA_AGREGADO" length="100" />
+        </property>
+        <property name="cuit" type="string">
+            <column name="CUIT" length="30" />
+        </property>
+    </class>
+</hibernate-mapping>

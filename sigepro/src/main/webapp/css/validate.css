@@ -1,0 +1,21 @@
+label.error {
+background:url(images/exclamation.gif) no-repeat 0px 0px;
+padding: 10px;
+position: absolute;
+margin-top:12px;
+}
+
+input.error { 
+border-color: red !important;
+background-image: none;
+background-color: #ffffff;
+}
+	
+.error2{
+ background:url(images/exclamation.gif) no-repeat 19px 5px !important;
+ padding: 3px 31px 5px 3px !important;;
+ height: 21px !important;
+ left: 97%;
+ position: absolute;
+ top:0;
+}

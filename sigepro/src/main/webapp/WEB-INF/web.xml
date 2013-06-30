@@ -12,7 +12,7 @@
 		<param-name>contextConfigLocation</param-name>		
 		<param-value>
 					/WEB-INF/applicationContext.xml
-					/WEB-INF/sigeco-security.xml		
+					/WEB-INF/sigepro-security.xml		
 		</param-value>
 	</context-param>
 	
@@ -67,7 +67,9 @@
     <welcome-file>login.htm</welcome-file>
   </welcome-file-list>
     
-    
+   <session-config>
+   <session-timeout>120</session-timeout>
+   </session-config>
 </web-app>
 
 

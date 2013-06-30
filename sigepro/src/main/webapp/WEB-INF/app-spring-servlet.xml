@@ -25,9 +25,9 @@
 <!--   activate the AuditAspect  -->
 <!--    <security-extras:audit-aspect /> -->
 	
-<!--    <import resource="classpath:/hibernate/db_spring_hsql.xml" /> -->
-<!--    <import resource="classpath:/hibernate/db_dao.xml" /> -->
-<!--    <import resource="classpath:/hibernate/db_dao-locator.xml" /> -->
+   <import resource="classpath:/hibernate/db_spring_hsql.xml" />
+   <import resource="classpath:/hibernate/db_dao.xml" />
+   <import resource="classpath:/hibernate/db_dao-locator.xml" />
 <!--    <import resource="classpath:/mail/mail-config.xml" /> -->
    
             
@@ -48,8 +48,8 @@
 	</bean>
 	
 	
-<!-- 	<bean id="clientTransformer" class="com.decorart.web.transformer.ClienteTransformer"> -->
-<!-- 	</bean> -->
+	<bean id="clientTransformer" class="com.sigepro.web.transformer.ClienteTransformer">
+	</bean>
 	
 <!-- 	<bean id="proveedorTransformer" class="com.decorart.web.transformer.ProveedorTransformer"> -->
 <!-- 	</bean> -->

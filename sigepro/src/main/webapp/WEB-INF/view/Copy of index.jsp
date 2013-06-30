@@ -1,35 +1,54 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="form2" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"  %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
    "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Bootstrap, from Twitter</title>
+    <title>SigePRO</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-
     <!-- Le styles -->
     <link href="css/bootstrap.css" rel="stylesheet">
     <style type="text/css">
-      body {
-        padding-top: 60px;
-        padding-bottom: 40px;
-      }
-      .sidebar-nav {
-        padding: 9px 0;
-      }
+			body {
+			    padding-bottom: 40px;
+			    padding-top: 60px;
+			}
+	      .sidebar-nav {
+	        padding: 9px 0;
+	      }
+	
+	      @media (max-width: 980px) {
+	        /* Enable use of floated navbar text */
+	        .navbar-text.pull-right {
+	          float: none;
+	          padding-left: 5px;
+	          padding-right: 5px;
+	        }
+	      }
+	      
+		#footer {
+		background-color: #f5f5f5;
+		}
+		/* Lastly, apply responsive CSS fixes as necessary */
+		@media (max-width: 767px) {
+		#footer {
+		margin-left: -20px;
+		margin-right: -20px;
+		padding-left: 20px;
+		padding-right: 20px;
+		}
+		} 
 
-      @media (max-width: 980px) {
-        /* Enable use of floated navbar text */
-        .navbar-text.pull-right {
-          float: none;
-          padding-left: 5px;
-          padding-right: 5px;
-        }
-      }
     </style>
-    <link href="../assets/css/bootstrap-responsive.css" rel="stylesheet">
+    
+    <link href="css/bootstrap-responsive.css" rel="stylesheet">
+
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -39,9 +58,10 @@
     <!-- Fav and touch icons -->
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
-      <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
-                    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
-                                   <link rel="shortcut icon" href="../assets/ico/favicon.png">
+     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
+     <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
+     <link rel="shortcut icon" href="../assets/ico/favicon.png">
+                  
   </head>
 
   <body>
@@ -54,38 +74,56 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="brand" href="#">Project name</a>
+          <a class="brand" href="#">SigePRO</a>
           <div class="nav-collapse collapse">
             <ul class="nav">
+            <li class="divider-vertical"></li>
               <li class="active"><a href="#">Home</a></li>
-              <li><a href="#about">About</a></li>
-              <li><a href="#contact">Contact</a></li>
               <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+               <a href="#" data-target="#" class="dropdown-toggle" data-toggle="dropdown">Clientes <b class="caret"></b></a>
                 <ul class="dropdown-menu">
-                  <li><a href="#">Action</a></li>
-                  <li><a href="#">Another action</a></li>
-                  <li><a href="#">Something else here</a></li>
+                  <li class="nav-header">Operaciones</li>
                   <li class="divider"></li>
-                  <li class="nav-header">Nav header</li>
-                  <li><a href="#">Separated link</a></li>
-                  <li><a href="#">One more separated link</a></li>
+                  <li><a href="#">Agregar</a></li>
+                  <li class="divider"></li>
+                  <li class="disabled"><a href="#">Modificar</a></li>
+                  <li class="divider"></li>
+                  <li class="disabled"><a href="#">Otro</a></li>
                 </ul>
-              </li>
+               </li>
+              <li><a href="#contact">Contacto</a></li>
             </ul>
-            <form class="navbar-form pull-right">
-              <input class="span2" type="text" placeholder="Email">
-              <input class="span2" type="password" placeholder="Password">
-              <button type="submit" class="btn">Sign in</button>
+           <div lang="loginDivData" style="display: none" >
+            <form class="navbar-form pull-right" action="j_spring_security_check" method="post">
+              <input class="span2" type="text" id="j_username" name="j_username" placeholder="Usuario">
+              <input class="span2" type="password" id="j_password" name="j_password" placeholder="Password">
+              <button type="submit" onclick="jQuery(this).button('loading')" class="btn btn-primary" data-loading-text="Iniciando...">Iniciar sesión</button>
             </form>
-          </div><!--/.nav-collapse -->
+            </div>
+             <div lang="alreadyLoggued" class="pull-right" style="display: none" id="templatemo_main">
+					<p class="navbar-text pull-left">
+             		 Logueado como 
+             		 	 <sec:authorize ifAnyGranted="ROLE_USER,ROLE_ADMIN">
+						 <strong><sec:authentication property="principal.username"/></strong>
+						 </sec:authorize>
+           			 </p>
+           			 <button type="button" onclick="javascript:window.location.href='logout'" style="margin-left: 10px;" class="btn btn-primary pull-right">
+						 Salir<i style="margin-left:5px" class="icon-share"></i>
+			         </button>
+				</div>		        
+	       </div><!--/.nav-collapse -->
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="container-fluid">
-      <div class="row-fluid">
-        <div class="span3">
+    <div class="container">
+        <div class="hero-unit">
+            <h1>Hello, world!</h1>
+            <p>This is a template for a simple marketing or informational website. It includes a large callout called the hero unit and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
+            <p><a href="#" class="btn btn-primary btn-large">Learn more &raquo;</a></p>
+          </div>
+         <div class="row-fluid">      
+          <div class="span3">
           <div class="well sidebar-nav">
             <ul class="nav nav-list">
               <li class="nav-header">Sidebar</li>
@@ -95,24 +133,10 @@
               <li><a href="#">Link</a></li>
               <li class="nav-header">Sidebar</li>
               <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li class="nav-header">Sidebar</li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
             </ul>
           </div><!--/.well -->
-        </div><!--/span-->
+        </div>
         <div class="span9">
-          <div class="hero-unit">
-            <h1>Hello, world!</h1>
-            <p>This is a template for a simple marketing or informational website. It includes a large callout called the hero unit and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-            <p><a href="#" class="btn btn-primary btn-large">Learn more &raquo;</a></p>
-          </div>
           <div class="row-fluid">
             <div class="span4">
               <h2>Heading</h2>
@@ -148,22 +172,35 @@
             </div><!--/span-->
           </div><!--/row-->
         </div><!--/span-->
-      </div><!--/row-->
+        </div><!--/row-->
 
       <hr>
 
-      <footer>
-        <p>&copy; Company 2013</p>
-      </footer>
-
     </div><!--/.fluid-container-->
-
+  <div id="footer">
+      <div class="container">
+        <p class="muted credit">Example courtesy <a href="http://martinbean.co.uk">Martin Bean</a> and <a href="http://ryanfait.com/sticky-footer/">Ryan Fait</a>.</p>
+      </div>
+    </div>
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
      <script src="http://code.jquery.com/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(function() {
 
+<sec:authorize ifAnyGranted="ROLE_USER,ROLE_ADMIN">
+	jQuery("div[lang='loginDivData']").hide();
+	jQuery("div[lang='alreadyLoggued']").show();
+</sec:authorize>
+<sec:authorize ifNotGranted="ROLE_USER">
+jQuery("div[lang='loginDivData']").show();
+jQuery("#j_username").focus();
+</sec:authorize>
+
+});
+</script> 
 
   </body>
 </html>

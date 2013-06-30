@@ -15,39 +15,48 @@
     <!-- Le styles -->
     <link href="css/bootstrap.css" rel="stylesheet">
     <style type="text/css">
-      body {
-        padding-top: 60px;
-        padding-bottom: 40px;
-      }
-      .sidebar-nav {
-        padding: 9px 0;
-      }
-
-      @media (max-width: 980px) {
-        /* Enable use of floated navbar text */
-        .navbar-text.pull-right {
-          float: none;
-          padding-left: 5px;
-          padding-right: 5px;
-        }
-      }
-      
-
-#footer {
-background-color: #f5f5f5;
-}
-/* Lastly, apply responsive CSS fixes as necessary */
-@media (max-width: 767px) {
-#footer {
-margin-left: -20px;
-margin-right: -20px;
-padding-left: 20px;
-padding-right: 20px;
-}
-} 
-
+			body {
+			    padding-bottom: 10px;
+			    padding-top: 60px;
+			}
+	      .sidebar-nav {
+	        padding: 9px 0;
+	      }
+	
+	      @media (max-width: 980px) {
+	        /* Enable use of floated navbar text */
+	        .navbar-text.pull-right {
+	          float: none;
+	          padding-left: 5px;
+	          padding-right: 5px;
+	        }
+	      }
+	      
+		#footer {
+		background-color: #f5f5f5;
+		}
+		/* Lastly, apply responsive CSS fixes as necessary */
+		@media (max-width: 767px) {
+		#footer {
+		margin-left: -20px;
+		margin-right: -20px;
+		padding-left: 20px;
+		padding-right: 20px;
+		}
+		} 
+		
+		.show-grid[class*="span"] {
+			background-color: #F5F5F5;
+		    border: 1px solid #E3E3E3;
+		    border-radius: 4px 4px 4px 4px;
+		    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05) inset;
+		    min-height: 20px;
+		    padding: 10px 19px;
+		}
     </style>
-    <link href="../assets/css/bootstrap-responsive.css" rel="stylesheet">
+    
+    <link href="css/bootstrap-responsive.css" rel="stylesheet">
+	<link href="css/font-awesome.min.css" rel="stylesheet">
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -76,119 +85,131 @@ padding-right: 20px;
           <a class="brand" href="#">SigePRO</a>
           <div class="nav-collapse collapse">
             <ul class="nav">
-              <li class="active"><a href="#">Home</a></li>
+            <li class="divider-vertical"></li>
+            <sec:authorize ifAnyGranted="ROLE_USER,ROLE_ADMIN">
+              <li class="active"><a href="login.htm">Inicio</a></li>
               <li class="dropdown">
-               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Clientes <b class="caret"></b></a>
+               <a href="#" data-target="#" class="dropdown-toggle" data-toggle="dropdown">Clientes <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                   <li class="nav-header">Operaciones</li>
                   <li class="divider"></li>
-                  <li><a href="#">Agregar</a></li>
+                  <li><a href="addClient.htm">Agregar</a></li>
                   <li class="divider"></li>
-                  <li><a href="#">Modificar</a></li>
+                  <li class=""><a href="listClient.htm">Buscar</a></li>
                   <li class="divider"></li>
-                  <li><a href="#">Otro</a></li>
+                  <li class="disabled"><a href="#">Otro</a></li>
                 </ul>
                </li>
+			  <li class="dropdown">
+               <a href="#" data-target="#" class="dropdown-toggle" data-toggle="dropdown">Abonos<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li class="nav-header">Operaciones</li>
+                  <li class="divider"></li>
+                  <li><a href="addClient.htm">Crear</a></li>
+                  <li class="divider"></li>
+                  <li class=""><a href="listClient.htm">Buscar</a></li>
+                  <li class="divider"></li>
+                  <li class="disabled"><a href="#">Otro</a></li>
+                </ul>
+               </li>
+               </sec:authorize>
               <li><a href="#contact">Contacto</a></li>
             </ul>
            <div lang="loginDivData" style="display: none" >
             <form class="navbar-form pull-right" action="j_spring_security_check" method="post">
               <input class="span2" type="text" id="j_username" name="j_username" placeholder="Usuario">
               <input class="span2" type="password" id="j_password" name="j_password" placeholder="Password">
-              <button type="submit" class="btn btn-primary">Iniciar sesión</button>
+              <button type="submit" onclick="jQuery(this).button('loading')" class="btn btn-primary" data-loading-text="Iniciando...">Iniciar sesión</button>
             </form>
             </div>
-                <div lang="alreadyLoggued" style="display: none" id="templatemo_main">
-					<p class="navbar-text pull-right">
-             		 Logueado como <a class="navbar-link" href="#">
-             		 		<sec:authorize ifAnyGranted="ROLE_USER,ROLE_ADMIN">
+             <div lang="alreadyLoggued" class="pull-right" style="display: none" id="templatemo_main">
+					<p class="navbar-text pull-left">
+             		 Logueado como 
+             		 	 <sec:authorize ifAnyGranted="ROLE_USER,ROLE_ADMIN">
 						 <strong><sec:authentication property="principal.username"/></strong>
 						 </sec:authorize>
-						 </a> 
-						 <button type="button" onclick="javascript:window.location.href='logout'" style="margin-left: 10px" class="btn btn-primary  pull-right">Salir</button>
            			 </p>
+           			 <button type="button" onclick="javascript:window.location.href='logout'" style="margin-left: 10px;" class="btn btn-primary pull-right">
+						 Salir<i style="margin-left:5px" class="icon-share"></i>
+			         </button>
 				</div>		        
-			   <div class="cleaner"></div>    
-	       </div>
-          </div><!--/.nav-collapse -->
+	       </div><!--/.nav-collapse -->
+          </div>
         </div>
       </div>
-    </div>
 
     <div class="container">
         <div class="hero-unit">
-            <h1>Hello, world!</h1>
-            <p>This is a template for a simple marketing or informational website. It includes a large callout called the hero unit and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-            <p><a href="#" class="btn btn-primary btn-large">Learn more &raquo;</a></p>
+      		<sec:authorize ifNotGranted="ROLE_USER,ROLE_ADMIN">        
+	            <h1>Logueo de usuario</h1>
+	            <p>Se deberá loguear para poder acceder a las diferentes opciones del menú</p>
+	            <p><a href="#" id="helpLoginButton" class="btn btn-primary btn-large">Ayuda &raquo;</a></p>
+            </sec:authorize>
+            <sec:authorize ifAnyGranted="ROLE_USER,ROLE_ADMIN">          
+	            	<h1>Bienvenido!</h1>
+	            	<div class="alert alert-success">
+	                <p>Se encuentra logueado con el usuario:
+	                		 <sec:authorize ifAnyGranted="ROLE_USER,ROLE_ADMIN">
+							 <strong><sec:authentication property="principal.username"/></strong>
+							 </sec:authorize>
+						. Si lo desea puede <span class="label label-info" style="font-size: 14px">Salir</span> y loguearse con otro usuario</p>
+					</div>	
+	                
+	               	<c:url value="/logout" var="logoutUrl"/>	  
+	          	 <p><a class="btn btn-primary btn-large" href="${logoutUrl}" style="font-size: 20px;" >Salir <i style="margin-left:5px" class="icon-share"></i></a></p>                 
+	         </sec:authorize>
           </div>
-         <div class="row-fluid">      
-          <div class="span3">
-          <div class="well sidebar-nav">
-            <ul class="nav nav-list">
-              <li class="nav-header">Sidebar</li>
-              <li class="active"><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li class="nav-header">Sidebar</li>
-              <li><a href="#">Link</a></li>
-            </ul>
-          </div><!--/.well -->
+      <div class="row-fluid">
+        <div class="span6 show-grid" style="background-color: white">
+             <h2>Incidencias del dia</h2>
+              <p>Aqui van datos sobre las incidencias mas relevantes para mostrar rapidamente</p>
+              <p>Diferente info relacionada a las incidencias y los clientes</p>
+              <div class="tabbable"> <!-- Only required for left/right tabs -->
+			    <ul class="nav nav-tabs">
+				    <li class="active"><a href="#tab1" data-toggle="tab"><span class="label label-important">Importantes</span></a></li>
+				    <li><a href="#tab2" data-toggle="tab"><span class="label label-warning">Normales</span></a></li>
+				    <li><a href="#tab3" data-toggle="tab"><span class="label label-info">Otras</span></a></li>
+			    </ul>
+			    <div class="tab-content">
+				    <div class="tab-pane active in fade" id="tab1">
+				    <p>Cosas importantes</p>
+				    <p>Aqui!!!</p>
+				    </div>
+				    <div class="tab-pane fade" id="tab2">
+				    <p>De todos los dias, pero aun relevante.</p>
+				    </div>
+				   <div class="tab-pane fade" id="tab3">
+				    <p>Puede llegar a ser interesante...</p>
+				    </div>
+			    </div>
+			   </div>
         </div>
-        <div class="span9">
-          <div class="row-fluid">
-            <div class="span4">
-              <h2>Heading</h2>
-              <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-              <p><a class="btn" href="#">View details &raquo;</a></p>
+            <div class="span3 show-grid">
+              <h2>Ultimos clientes agregados</h2>
+              <p>Puede mostrarse info acerca de los ultimos cientes agregados, sus estados, incidencias, algun otro dato de rapido acceso</p>
             </div><!--/span-->
-            <div class="span4">
-              <h2>Heading</h2>
-              <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-              <p><a class="btn" href="#">View details &raquo;</a></p>
-            </div><!--/span-->
-            <div class="span4">
-              <h2>Heading</h2>
-              <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-              <p><a class="btn" href="#">View details &raquo;</a></p>
+            <div class="span3 show-grid">
+              <h2>Otra info</h2>
+              <p>Cualquier otra informacion que valga la pena mostrar en la pantalla principal y sin necesitar logueo...o si</p>
+              <p><a class="btn" href="#">Mas detalles &raquo;</a></p>
             </div><!--/span-->
           </div><!--/row-->
-          <div class="row-fluid">
-            <div class="span4">
-              <h2>Heading</h2>
-              <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-              <p><a class="btn" href="#">View details &raquo;</a></p>
-            </div><!--/span-->
-            <div class="span4">
-              <h2>Heading</h2>
-              <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-              <p><a class="btn" href="#">View details &raquo;</a></p>
-            </div><!--/span-->
-            <div class="span4">
-              <h2>Heading</h2>
-              <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-              <p><a class="btn" href="#">View details &raquo;</a></p>
-            </div><!--/span-->
-          </div><!--/row-->
-        </div><!--/span-->
-        </div><!--/row-->
 
       <hr>
 
     </div><!--/.fluid-container-->
   <div id="footer">
       <div class="container">
-        <p class="muted credit">Example courtesy <a href="http://martinbean.co.uk">Martin Bean</a> and <a href="http://ryanfait.com/sticky-footer/">Ryan Fait</a>.</p>
+        <p class="muted credit">Creada por <a href="#">[Matias Iseas]</a>.</p>
       </div>
     </div>
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-     <script src="http://code.jquery.com/jquery.js"></script>
+    <script type="text/javascript" src="js/jquery-1.7.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
 <script type="text/javascript">
 jQuery(function() {
-	jQuery("#j_username").focus();
 
 <sec:authorize ifAnyGranted="ROLE_USER,ROLE_ADMIN">
 	jQuery("div[lang='loginDivData']").hide();
@@ -196,7 +217,11 @@ jQuery(function() {
 </sec:authorize>
 <sec:authorize ifNotGranted="ROLE_USER">
 jQuery("div[lang='loginDivData']").show();
+jQuery("#j_username").focus();
 </sec:authorize>
+
+$('#helpLoginButton').popover({html:true,content:"Debe acceder con un <strong>usuario/password</strong> en la barra de menú de arriba"});
+
 
 });
 </script> 

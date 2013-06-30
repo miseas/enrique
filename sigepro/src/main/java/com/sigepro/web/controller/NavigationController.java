@@ -41,14 +41,14 @@ public class NavigationController {
     @RequestMapping(value = "/addClient")
     public ModelAndView loadAddClientPage() {
         ModelAndView model = new ModelAndView();
-        model.setViewName("addclient");
+        model.setViewName("addClient");
         return model;
     }
     
     @RequestMapping(value = "/listClient")
     public ModelAndView loadlistClientPage() {
         ModelAndView model = new ModelAndView();
-        model.setViewName("listclient");
+        model.setViewName("listClient");
         return model;
     }
 

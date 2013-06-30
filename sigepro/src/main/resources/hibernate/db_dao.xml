@@ -21,18 +21,18 @@
 <!--     		class="invcont.web.dao.impl.AlertDAOImpl" /> -->
     		
         <bean id="clientDAO" parent="hibernateDaoSupport"
-    		class="com.decorart.web.dao.impl.ClientDAOImpl" />
+    		class="com.sigepro.web.dao.impl.ClientDAOImpl" />
     
-        <bean id="providerDAO" parent="hibernateDaoSupport"
-    		class="com.decorart.web.dao.impl.ProviderDAOImpl" />
+<!--         <bean id="providerDAO" parent="hibernateDaoSupport" -->
+<!--     		class="com.decorart.web.dao.impl.ProviderDAOImpl" /> -->
     		
-        <bean id="ordenCompraDAO" parent="hibernateDaoSupport"
-    		class="com.decorart.web.dao.impl.OrdenCompraDAOImpl" />
+<!--         <bean id="ordenCompraDAO" parent="hibernateDaoSupport" -->
+<!--     		class="com.decorart.web.dao.impl.OrdenCompraDAOImpl" /> -->
    		
-   		<bean id="productoOCDAO" parent="hibernateDaoSupport"
-    		class="com.decorart.web.dao.impl.ProductoOCDAOImpl" />    
+<!--    		<bean id="productoOCDAO" parent="hibernateDaoSupport" -->
+<!--     		class="com.decorart.web.dao.impl.ProductoOCDAOImpl" />     -->
     		
-    	<bean id="pagoDAO" parent="hibernateDaoSupport"
-    		class="com.decorart.web.dao.impl.PagoDAOImpl" />  		
+<!--     	<bean id="pagoDAO" parent="hibernateDaoSupport" -->
+<!--     		class="com.decorart.web.dao.impl.PagoDAOImpl" />  		 -->
 	
 </beans>

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 02/06/2013 23:23:40 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.sigepro.web.model.pojo.Localidad" table="LOCALIDAD" schema="SIGEPRODB" >
+        <id name="idlocalidad" type="java.lang.Integer">
+            <column name="IDLOCALIDAD" />
+            <generator class="increment" />
+        </id>
+        <property name="descripcion" type="string">
+            <column name="DESCRIPCION" length="100"  />
+        </property>
+        <set name="clientes" table="CLIENTE"  inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="IDLOCALIDAD" />
+            </key>
+            <one-to-many class="com.sigepro.web.model.pojo.Cliente" />
+        </set>
+    </class>
+</hibernate-mapping>
