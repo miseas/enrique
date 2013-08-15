@@ -59,7 +59,7 @@
 	    border: 2px solid #DDDDDD;
 	    border-radius: 4px 0 4px 0;
 	    color: #FFFFFF; 
-	    content: "Editar Cliente";
+	    content: "Editar Abono";
 	    font-size: 15px;
 	    font-weight: bold;
 	    left: -1px;
@@ -85,7 +85,7 @@
 
     </style>
     <link href="css/bootstrap-responsive.css" rel="stylesheet">
-    <link href="css/font-awesome.min.css" rel="stylesheet">
+        <link href="css/font-awesome.min.css" rel="stylesheet">
     <link href="css/validate.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" media="screen"	href="css/jquery-ui-1.8.16.custom.css" />
 <link rel="stylesheet" type="text/css" media="screen" href="css/ui.jqgrid.css" />
@@ -120,7 +120,7 @@
             <li class="divider-vertical"></li>
             <sec:authorize ifAnyGranted="ROLE_USER,ROLE_ADMIN">
               <li ><a href="login.htm">Inicio</a></li>
-              <li class=" active dropdown">
+              <li class="dropdown">
                <a href="#" data-target="#" class="dropdown-toggle" data-toggle="dropdown">Clientes <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                   <li class="nav-header">Operaciones</li>
@@ -132,7 +132,7 @@
                   <li class=""><a href="assignClientAbono.htm">Asignar Abono</a></li>
                 </ul>
                </li>
-               <li class="dropdown">
+              <li class="active dropdown">
                <a href="#" data-target="#" class="dropdown-toggle" data-toggle="dropdown">Abonos<b class="caret"></b></a>
                 <ul class="dropdown-menu">
                   <li class="nav-header">Operaciones</li>
@@ -168,7 +168,7 @@
         <div class="span12">
 			<ul class="nav nav-pills">
 		    <li class="active">
-		    <a href="#">Buscar Cliente</a>
+		    <a href="#">Buscar Abono</a>
 		    </li>
 		    </ul>
 		    <div style="margin-bottom: -18px;" ></div>
@@ -186,17 +186,12 @@
 						<input type="text" class="" id="nombreSearch" name="nombreSearch" />
 				</div>
 				<div class="span3">    
-					<label for="apellidoSearch"><strong>Apellido</strong></label>
+					<label for="apellidoSearch"><strong>Vel. Subida</strong></label>
 						<input type="text" class="" id="apellidoSearch" name="apellidoSearch" />
 				</div>
 				<div class="span3">    
-					<label for="localidadC"><strong>Localidad</strong></label> 
-						<select id="localidadCSearch" name="localidadC" class="">
-						</select>
-			    </div>
-				<div class="span3">    
-					<label for="cuitSearch"><strong>CUIT/DNI</strong></label>
-						<input type="text" class="" id="cuitSearch" name="cuitSearch" />
+					<label for="localidadC"><strong>Vel. Bajada</strong></label>
+						<input type="text" class="" id="localidadSearch" name="localidadSearch" />
 				</div>
 			</div>		
 				<div class="row-fluid">	 
@@ -216,78 +211,57 @@
 <!-- 		  Tabla -->
 		     		<div style="" align="center">
 			    		<div style="height: 1px" ></div>
-	  						 <table style="text-align: center;font-size: 18px" align="center" id="listClientTable">
+	  						 <table style="text-align: center;font-size: 18px" align="center" id="listAbonoTable">
 	             			 </table>	
-	             		<div id="listClientTableGrid"></div>
+	             		<div id="listAbonoTableGrid"></div>
               		</div>
 		  </div>
-     <div class="editClientDiv" style="display: none;">
+     <div class="editAbonoDiv" style="display: none;">
      <div class="row-fluid">
 			<br>
 			<div class="bs-docs-example">
- 	  		 <form id="editClientForm" action="" method="post">
- 	  		 <input type="hidden" class="" id="idClientEdit" name="idClientEdit" /> 
-	         <div class="row-fluid">
+ 	  		 <form id="editAbonoForm" action="" method="post">
+ 	  		 <input type="hidden" class="" id="idAbonoEdit" name="idAbonoEdit" /> 
+ 	  	         <div class="row-fluid">
 	        	<div class="span4">    
 					<label for="nombreC"><strong>Nombre</strong></label>
-						<input type="text" class="" id="nombreC" name="nombreC" />
-					<label for="apellidoC"><strong>Apellido</strong></label>
-						<input type="text" class="" id="apellidoC" name="apellidoC" />
-					<label for="direccionC"><strong>Dirección</strong></label>
-						<input type="text" class="span12" id="direccionC" name="direccionC" />
+						<input type="text" class="input-xlarge" id="nombreC" name="nombreC" />
 				</div>
-				<div class="span4">    
-					<label for="localidadC"><strong>Localidad</strong></label>
+				 <div class="span4">    
+					<label for="price"><strong>Precio</strong></label>
 					<div class="input-prepend">
-						<span class="add-on"><i class="icon-map-marker"></i></span>
-<!-- 						<input type="text" class="" id="localidadC" name="localidadC" /> -->
-						<select id="localidadC" name="localidadC">
-						</select>
+					 <span class="add-on"><i class="icon-dollar icon-large"></i></span>
+						<input type="text" class="input-small" id="price" name="price" />
 					</div>
-					<label for="emailC"><strong>Correo electrónico</strong></label>
-					 <div class="input-prepend">
-					 <span class="add-on"><i class="icon-envelope"></i></span>
-						<input type="text" class="" id="emailC" name="emailC" />
-						</div>
-				 <div id="phone-container">
-					<div class="" id="phone-form" >
-					<label for="telC"><strong>Teléfono</strong></label>
-						<div class="form-search input-prepend">
-						<span class="add-on">#</span>
-						<input type="text" class="" id="telC-1" name="telC" /><button type="button" style="display: none" id="removeBtn" class="btn btn-mini btn-danger"><i class="icon-remove icon-white"></i></button>
-						</div>   
-						<span id="helpB" class="help-block"><a id="addNumberBtn" class="btn btn-mini btn-info" ><i class="icon-plus icon-white"></i> Agregar otro Nro de Teléfono</a></span>
+				</div>
+			</div>
+			<div class="row-fluid">
+				<div class="span3">    
+					<label for="localidadC"><strong>Vel. Bajada</strong></label>
+					 <div class="input-prepend input-append">
+					 <span class="add-on"><i class="icon-download icon-large"></i></span>
+						<input type="text" class="input-small" id="velDown" name="velDown" />
+						<span class="add-on">kbps</span>
 					</div>
-					</div> 
+				</div>
+				<div class="span3">    
+					<label for="localidadC"><strong>Vel. Subida</strong></label>
+					 <div class="input-prepend input-append">
+					 <span class="add-on"><i class="icon-upload icon-large"></i></span>
+						<input type="text" class="input-small" id="velUp" name="velUp" />
+						 <span class="add-on">kbps</span>
+					</div>
 				</div>	
-				<div class="span4">		 
-				   <div class="row-fluid">
-				     <div class="span4">
-				     <label for="typeId"><strong>Tipo ID</strong></label>
-						<select id="typeId" name="typeId" class="span10">
-						</select>
-					</div>	
-				    <div class="span5">
-					<label for="cuitC"><strong>Número Documento</strong></label>
-						<input type="text" class="" id="cuitC" name="cuitC" />
-					</div>	
-					</div>	
-					<label for="clientState"><strong>Estado</strong></label>
-						<select id="clientState"  name="clientState">
-						</select>
-		            <label for="clientNum"><strong>Número Cliente</strong></label>
-						<input type="text" class="" id="clientNum" name="clientNum" />
 				</div>	
-				</div>		
 				<div class="row-fluid">	 
 					<div class="span7">							 
-						<label for="comentC"><strong>Comentario</strong></label>
-					  		<textarea name="comentC" id="comentC" rows="3" class="input-block-level"></textarea>
+						<label for="comentC"><strong>Descripción</strong></label>
+					  		<textarea name="decription" id="decription" rows="3" class="input-block-level"></textarea>
 					</div>
 				</div>
 				<div class="row-fluid">	 
 				<div class="pull-right">			
-		               <button type="button" onclick="jQuery('#editClientForm').submit()" class="btn btn-primary">Guardar</button>
+		               <button type="button" onclick="jQuery('#editAbonoForm').submit();" class="btn btn-primary">Guardar</button>
 		               <button type="button" onclick="cancelEdit();" class="btn" >Cancelar</button>	
 				</div>
 				</div>
@@ -306,19 +280,13 @@
         <p class="muted credit">Creada por <a href="#">[Matias Iseas]</a>.</p>
       </div>
     </div>
-   	<div id="dialogSendEmail" style="display: none" align="" title="Enviar email" >
-	<p style="margin:0px;">Destinatario: <input class="text2" type="text" id="toEmail" /> </p>
-	<p style="margin:0px;">Asunto: <input class="text2" type="text" id="subjectEmail" /> </p>
-	<p style="margin:10px 0px 0px 0px">Contenido:</p>
-	<textarea style="width: 500px" name="contentEmail" id="contentEmail" rows="8" cols="6"></textarea>
+	<div id="dialogDeleteClient" style="display: none" align="" title="Eliminar abono" >
+	<p style="margin:0px;"><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>Esta seguro de que desea eliminar el abono? </p>
 	</div> 
-	<div id="dialogDeleteClient" style="display: none" align="" title="Eliminar cliente" >
-	<p style="margin:0px;"><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>Esta seguro de que desea eliminar el cliente? </p>
-	</div> 
-	<div id="dialogErrorOperation" class="" style="display: none" align="" title="Eliminar cliente" >
+	<div id="dialogErrorOperation" class="" style="display: none" align="" title="Eliminar abono" >
 	<p style="margin:0px;"><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>Se ha producido un error al realizar la operacion! </p>
 	</div> 
-	<div id="dialogSuccessOperation"  style="display: none" align="" title="Eliminar cliente" >
+	<div id="dialogSuccessOperation"  style="display: none" align="" title="Eliminar abono" >
 	<p style="margin:0px;"><span class="ui-icon ui-icon-circle-check" style="float: left; margin: 0 7px 20px 0;"></span>Operacion realizada exitosamente!</p>
 	</div> 
     <!-- Le javascript
@@ -334,83 +302,35 @@
 <script type="text/javascript">
 jQuery(function() {
 cleanScreenSearch();
-
-jQuery.ajax({
-    url: '<c:url value="/loadAllCatAddClient.htm" />',
-    type: "GET",
-    dataType: "json",
-    contentType: "application/json",
-    data:"", 
-    success: function(resp){                                       
-     var options = $("#localidadCSearch");
-     $.each(resp.localidades, function() {
-    	     options.append($("<option />").val(this.idlocalidad).text(this.descripcion));
-     });   	 
-     var options = $("#localidadC");
-   	 $.each(resp.localidades, function() {
-   	     options.append($("<option />").val(this.idlocalidad).text(this.descripcion));
-   	 });
-   	 var options = $("#typeId");
-   	 $.each(resp.typeID, function() {
-   	     options.append($("<option />").val(this.iddnitipo).text(this.descripcion));
-   	 });
-   	 var options = $("#clientState");
-   	 $.each(resp.estadoCli, function() {
-   	     options.append($("<option />").val(this.idestadocli).text(this.descripcion));
-   	 });
-    }
-  });
-  
-jQuery("#editClientForm").validate({
+jQuery("#editAbonoForm").validate({
 		focusInvalid:false,
 	    rules: {
-	    	nombreC:{required: true},
-			apellidoC:{required: true},
-			emailC:{email:true},
-			cuitC:{digits:true}
+	    	nombreC:{required: true}
         },
 	    messages: {
-	    	nombreC: {required: "campo obligatorio"},
-	    	apellidoC: {required: "campo obligatorio"},
-	    	emailC:{email:"email incorrecto"},
-	    	cuitC:{digits:"campo numerico"}
+	    	nombreC: {required: "campo obligatorio"}
 	    },
   	submitHandler: function() { 	  	
   		var nombreNew = jQuery("#nombreC").val();
-  		var apellidoNew = jQuery("#apellidoC").val();
-  		var direccionNew = jQuery("#direccionC").val();
-  		var localidadNew = jQuery("#localidadC").val();
-  		var emailNew = jQuery("#emailC").val();
-  		var telNew = jQuery("#telC-1").val();
-  		var telNew2 =" ";
- 		if (jQuery("#telC-2").length>0){
-  			telNew2 = jQuery("#telC-2").val();
-  		}
-  		var telNew3 =" ";
-  		if (jQuery("#telC-3").length>0){
-  				telNew3 = jQuery("#telC-3").val();
-  		}
-  		var cuitNew = jQuery("#cuitC").val();
-  		var puntuaNew = 1;
-  		var comentNew = jQuery("#comentC").val();
-  		var clientStateID = jQuery("#clientState").val();
-  		var idClient = jQuery("#idClientEdit").val();
-  		var clientNum = jQuery("#clientNum").val();
-  		var typeId = jQuery("#typeId").val();
-
-  		var newClient = {'idcliente':idClient,'nombre':nombreNew,'apellido':apellidoNew,'direccion':direccionNew,"iddnitipo":typeId,
-  					    'localidadId':localidadNew,'email':emailNew,'telefono':telNew+"@@"+telNew2+"@@"+telNew3,
-  						'notas':comentNew,'estadoCliId':clientStateID,'puntuacion':puntuaNew, 'cuit':cuitNew,'numerocli':clientNum};		  		 
+  		var velUp = jQuery("#velUp").val();
+  		var velDown = jQuery("#velDown").val();
+  		var decription = jQuery("#decription").val();
+  		var price = jQuery("#price").val();
+  		var idAbono = jQuery("#idAbonoEdit").val();
+  		
+  		var newAbono = {'idabono':idAbono,'nombre':nombreNew,'descripcion':decription,
+  					    'maxbajada':velDown,'maxsubida':velUp,'precio':price};	
+  		  		 
   		 
         jQuery.ajax({
-             url: '<c:url value="/editClient.htm" />',
+             url: '<c:url value="/editAbono.htm" />',
              type: "POST",
              dataType: "json",
              contentType: "application/json",
-             data: JSON.stringify( newClient ), 
+             data: JSON.stringify( newAbono ), 
              success: function(resp){                                       
               	 if(resp!=-1){ 
-              		jQuery("#dialogSuccessOperation").dialog( "option", "title", "Editar cliente" );
+              		jQuery("#dialogSuccessOperation").dialog( "option", "title", "Editar abono" );
             		 jQuery("#dialogSuccessOperation").dialog("open");
             		 cancelEdit();
          	 	}
@@ -428,8 +348,7 @@ jQuery("#searchButton").click(function(){
 	 var name = jQuery("#nombreSearch").val();
 	 var lastName = jQuery("#apellidoSearch").val();
 	 var cuit = jQuery("#cuitSearch").val();
-	 var score = "";
-      jQuery("#listClientTable").jqGrid('setGridParam',{url:"<c:url value="/loadListClientsByParameter.htm" />?name="+name+"&lastName="+lastName+"&cuit="+cuit+"&score="+score,page:1}).trigger('reloadGrid');
+      jQuery("#listAbonoTable").jqGrid('setGridParam',{url:"<c:url value="/loadListAbonoByParameter.htm" />?name="+name+"&lastName="+lastName+"&cuit="+cuit+"&score="+score,page:1}).trigger('reloadGrid');
 });
 
 jQuery("#clearSearchButton").click(function(){
@@ -438,23 +357,21 @@ jQuery("#clearSearchButton").click(function(){
 });
 
 
-jQuery("#listClientTable").jqGrid({
-	 url: '<c:url value="/loadlistClients.htm"/>',
+jQuery("#listAbonoTable").jqGrid({
+	 url: '<c:url value="/loadlistAbonos.htm"/>',
 	 datatype: "json", 
 	 width : 1158,
 	 height : 200,
-	 colNames : ['Operación','','<fmt:message key="message.cli.nombre"/>',  '<fmt:message key="message.cli.apellido"/>',
-	             '<fmt:message key="message.cli.direc"/>', '<fmt:message key="message.cli.localidad"/>','','','','','','CUIT/DNI','','','','','','' ],
+	 colNames : ['Operación','','Nombre','Vel. Bajada (kbps)','Vel. Subida (kbps)','Precio','','' ],
 		colModel : [ 
 		        	{name: 'myac',
-						 width:77, 
+						 width:67, 
 						 fixed:true, 
 						 sortable:false, 
 						 resize:false, 
 							search: false,
 							formatter:function(){
 								return "<div style='margin-left: 7px;'>"+
-								'<div onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onmouseover="jQuery(this).addClass(\'ui-state-hover\');"  class="ui-pg-div ui-inline-edit" style="float: left; cursor: pointer; display: block;" title="Enviar mail a..."><span op="email" class="ui-icon ui-icon-mail-closed"></span></div>'+											
 								'<div onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onmouseover="jQuery(this).addClass(\'ui-state-hover\');"  class="ui-pg-div ui-inline-edit" style="float: left; cursor: pointer; display: block;margin-left: 4px;margin-right: 4px;" title="Modificar fila seleccionada"><span op="edit" class="ui-icon ui-icon-pencil"></span></div>'+											
 								'<div onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onmouseover="jQuery(this).addClass(\'ui-state-hover\');"  class="ui-pg-div ui-inline-edit" style="float: left; cursor: pointer; display: block;" title="Eliminar fila seleccionada"><span op="delete" class="ui-icon ui-icon-trash"></span></div>'+											
 								"</div>";
@@ -462,8 +379,8 @@ jQuery("#listClientTable").jqGrid({
 
 					},
 		{
-			name : 'idcliente',
-			index : 'idcliente',
+			name : 'idabono',
+			index : 'idabono',
 			width : 1,
 			hidden:true					
 		},
@@ -474,86 +391,25 @@ jQuery("#listClientTable").jqGrid({
 			width : 180
 		}
 		, {
-			name : 'apellido',
-			index : 'apellido',
+			name : 'maxbajada',
+			index : 'maxbajada',
 			align: 'center',
 			width : 180
 		}, {
-			name : 'direccion',
-			index : 'direccion',
+			name : 'maxsubida',
+			index : 'maxsubida',
 			align: 'center',
 			width : 200
 		}, {
-			name : 'localidad',
-			index : 'localidad',
+			name : 'precio',
+			index : 'precio',
 			align: 'center',
+			formatter:'currency',
+			formatoptions:{prefix:"$"},
 			width : 100
 		}, {
-			name : 'email',
-			index : 'email',
-			align: 'center',
-			width : 1,
-			hidden:true
-		}, {
-			name : 'telefono',
-			index : 'telefono',
-			align: 'center',
-			width : 1,
-			hidden:true
-		},{
-			name : 'telefono2',
-			index : 'telefono2',
-			align: 'center',
-			width : 1,
-			hidden:true
-		},{
-			name : 'telefono3',
-			index : 'telefono3',
-			align: 'center',
-			width : 1,
-			hidden:true
-		}, {
-			name : 'notas',
-			index : 'notas',
-			align: 'center',
-			width : 1,
-			hidden:true
-		}, {
-			name : 'cuit',
-			index : 'cuit',
-			align: 'center',
-			width : 100
-		}, {
-			name : 'ccNro',
-			index : 'ccNro',
-			align: 'center',
-			width : 1,
-			hidden:true
-		},
-		 {
-			name : 'estadoCliId',
-			index : 'estadoCliId',
-			align: 'center',
-			width : 1,
-			hidden:true
-		},
-		 {
-			name : 'iddnitipo',
-			index : 'iddnitipo',
-			align: 'center',
-			width : 1,
-			hidden:true
-		},
-		 {
-			name : 'numerocli',
-			index : 'numerocli',
-			align: 'center',
-			width : 1,
-			hidden:true
-		},
-		 {
-			name : 'localidadId',
-			index : 'localidadId',
+			name : 'descripcion',
+			index : 'descripcion',
 			align: 'center',
 			width : 1,
 			hidden:true
@@ -571,7 +427,7 @@ jQuery("#listClientTable").jqGrid({
 	  rowList:[10,20,30],
 	  multiselect: true,
 	  sortable: true,
-	  pager: '#listClientTableGrid',
+	  pager: '#listAbonoTableGrid',
 	  pgbuttons: false,
 	  pginput:false,
 	  rownumbers : true,
@@ -587,23 +443,14 @@ jQuery("#listClientTable").jqGrid({
      beforeSelectRow: function(rowid, e) {
 			 var iCol = jQuery.jgrid.getCellIndex(e.target);
 			 if(iCol == 2){
- 			 	if(e.target.attributes.op.value=="email"){		 
-					 var row = jQuery('#listClientTable').jqGrid('getRowData',rowid);	
-					 if (row.email=="" || row.email==null){
-							row.email="(Cliente sin email)";
-					}
-					 jQuery("#toEmail").val(row.email);
- 	        	     jQuery("#dialogSendEmail" ).dialog("open");
-		              return false;
-		            }
 			 	if(e.target.attributes.op.value=="edit"){		 		
-					 var row = jQuery('#listClientTable').jqGrid('getRowData',rowid);										 
-					 updateClient(row);		
+					 var row = jQuery('#listAbonoTable').jqGrid('getRowData',rowid);										 
+					 updateAbono(row);		
 		             return false;
 		            }
 			 	if(e.target.attributes.op.value=="delete"){
-			 		 var idCliente = jQuery('#listClientTable').jqGrid('getCell',rowid,"idcliente");
-			 		 jQuery.data(document.body,"clientData",{"idcliente":idCliente});
+			 		 var idabono = jQuery('#listAbonoTable').jqGrid('getCell',rowid,"idabono");
+			 		 jQuery.data(document.body,"clientData",{"idabono":idabono});
 			 		 jQuery("#dialogDeleteClient" ).dialog("open");
 			 		 //delClient(idCliente);
 			 		return false;
@@ -619,53 +466,13 @@ jQuery("#listClientTable").jqGrid({
 		  },
 	  viewrecords: true, 
 	  sortorder: "desc", 
-	  caption:'<fmt:message key="message.cli.titulo"/>', 
+	  caption:'Abonos', 
 	  editurl: "dummy.htm"
 	  });
 
-$("#gview_listClientTable").css("font-size","14px");
+// $("#gview_listClientTable").css("font-size","14px");
 
 
-
-
-jQuery("#dialogSendEmail").dialog({
-	autoOpen: false,
-	width: 550,
-	modal:true,
-	buttons: {
-		"Cerrar": function() {
-			jQuery( this ).dialog( "close" );
-		},
-		"Enviar": function() {
-			jQuery(".ui-dialog-buttonset button").hide();
-			jQuery(".ui-dialog-buttonset").append("<div class='ui-loadingBar' style='width: 260px; height: 40px;'></div>");
-			var toEmail = jQuery("#toEmail").val();
-			var subjectEmail = jQuery("#subjectEmail").val();
-			var contentEmail = jQuery("#contentEmail").val();
-			var emailData = {"toEmail":toEmail.split(";"),"subject":subjectEmail,"content":contentEmail};
-			
-	         jQuery.ajax({
-                 url: '<c:url value="/sendEmailClient.htm" />',
-                 type: "POST",
-                 dataType: "json",
-                 contentType: "application/json",
-                 data: JSON.stringify( emailData ), 
-                 success: function(resp){                                       
-                			jSuccess("Operacion realizada exitosamente", "Enviar Email",function(){
-                				jQuery("#dialogSendEmail").dialog( "close" );
-                				jQuery(".ui-dialog-buttonset div").hide();
-        						jQuery(".ui-dialog-buttonset button").show();
-                			},["Aceptar"]);
-                	                                
-                 }
-               });
-		}
-	},
-	resizable: false,
-	draggable: false,
-	close: function() {
-	}
-});	 	
 
 jQuery("#dialogDeleteClient").dialog({
 	autoOpen: false,
@@ -673,7 +480,7 @@ jQuery("#dialogDeleteClient").dialog({
 	modal:true,
 	buttons: {
 		"Ok": function() {
-			delClient();
+			delAbono();
 			jQuery( this ).dialog( "close" );
 		},
 		"Cancelar": function() {
@@ -708,7 +515,7 @@ jQuery("#dialogSuccessOperation").dialog({
 	buttons: {
 		"Ok": function() {
 			jQuery( this ).dialog( "close" );
-			 jQuery("#listClientTable").trigger('reloadGrid');
+			 jQuery("#listAbonoTable").trigger('reloadGrid');
 		}
 	},
 	resizable: false,
@@ -745,106 +552,33 @@ jQuery("#nombreSearch" ).autocomplete({
 	}
 });
 
-jQuery("#apellidoSearch" ).autocomplete({
-	source: function( request, response ) {
-		$.ajax({
-			url: '<c:url value="/searchClientByName.htm" />',
-			dataType: "json",
-			type: "POST",
-			data: {
-				featureClass: "P",
-				style: "full",
-				maxRows: 12,
-				nameStartWith: request.term
-			},
-			success: function( data ) {
-				response( jQuery.map( data, function (elementOfArray, indexInArray){							
-					return  { value:capitaliseFirstLetter(elementOfArray.apellido)};											
-				}));						
-			}
-		});
-	},
-	minLength: 1,
-	select: function(event, ui){
-	},
-	open: function() {
-	},
-	close: function() {
-	}
-});
-
-
-$("#addNumberBtn").click(function(){
-	var idLastNum = jQuery('#phone-container input').last().attr("id");
-	var counter = parseInt(idLastNum.split("-")[1]);
-	var phoneForm = jQuery('#phone-form').clone(true);
-	if (counter==1){
-		jQuery('#helpB').hide();
-	}else{
-		$("#phone-form-"+(counter-1)).find('#helpB').hide();
-		$("#phone-form-"+(counter-1)).find("#removeBtn").hide();
-		if (counter<2){
-			phoneForm.find('#helpB').show();
-		}
-	}
-	phoneForm.find("label").html("<strong>"+phoneForm.find("label").text()+" "+(counter+1)+"</strong>");
-	phoneForm.find("#removeBtn").show();
-	phoneForm.find("input").attr("id","telC-"+(counter+1)).val("");
-	phoneForm.attr("id","phone-form-"+counter);
-	phoneForm.insertAfter('#phone-container div:last-child');
-});
-
-$("#removeBtn").click(function(){
-	var idSelecNum = $(this).prev().attr("id");
-	var counter = parseInt(idSelecNum.split("-")[1]);
-	jQuery('#phone-form-'+(counter-1)).remove();		
-	jQuery('#phone-container div:last-child').find('#helpB').show();
-	$("#phone-form-"+(counter-2)).find("#removeBtn").show();
-});
-
 });
 //Other functions
 
-function updateClient(row){
-	jQuery('#listClientTable').jqGrid('setGridState','hidden');	
+function updateAbono(row){
+	jQuery('#listAbonoTable').jqGrid('setGridState','hidden');	
 	
 	jQuery("#nombreC").val(capitaliseFirstLetter(row.nombre));
-	jQuery("#apellidoC").val(capitaliseFirstLetter(row.apellido));
-	jQuery("#direccionC").val(row.direccion);
-	jQuery("#localidadC").val(row.localidadId);
-	jQuery("#emailC").val(row.email);
-	jQuery("#telC-1").val(row.telefono);
-	if(row.telefono2.length>1){
-		jQuery("#addNumberBtn").trigger("click");
-		jQuery("#telC-2").val(row.telefono2);
-	}
-	if(row.telefono3.length>1){
-		jQuery("#addNumberBtn").trigger("click");
-		jQuery("#telC-3").val(row.telefono3);
-	}
-	jQuery("#comentC").val(row.notas);
-	jQuery("#ccC").val(row.ccNro);
-	jQuery("#cuitC").val(row.cuit);
+    jQuery("#velUp").val(row.maxsubida);
+  	jQuery("#velDown").val(row.maxbajada);
+  	jQuery("#decription").val(row.descripcion);
+  	jQuery("#price").val(row.precio);
+	jQuery("#idAbonoEdit").val(row.idabono);
 	
-	jQuery("#clientState").val(row.estadoCliId);
-	jQuery("#typeId").val(row.iddnitipo);
-	jQuery("#clientNum").val(row.numerocli);
-
-	jQuery("#idClientEdit").val(row.idcliente);
-	jQuery(".editClientDiv").show();
-		
-	}
-function delClient(){
+	jQuery(".editAbonoDiv").show();		
+	jQuery("#nombreC").focus();
+}
+function delAbono(){
 	      var clientObj = jQuery.data(document.body,"clientData");
 		   jQuery.ajax({
-		          url: '<c:url value="/delClient.htm" />',
+		          url: '<c:url value="/delAbono.htm" />',
 		          type: "GET",
 		          dataType: "json",
 		          contentType: "application/json",
-		          data: {idClient:clientObj.idcliente}, 
+		          data: {idAbono:clientObj.idabono}, 
 		          success: function(resp){     
 	            	 if(resp){
-	               		jQuery("#dialogSuccessOperation").dialog( "option", "title", "Eliminar cliente" );
+	               		jQuery("#dialogSuccessOperation").dialog( "option", "title", "Eliminar abono" );
 	            		 jQuery("#dialogSuccessOperation").dialog("open");
 
 		          	  }
@@ -858,31 +592,22 @@ function delClient(){
 
 function cleanScreenSearch(){
 	 jQuery("#nombreSearch").val("");
-	  	 jQuery("#apellidoSearch").val("");
-		 jQuery("#cuitSearch").val("");		 
-		 jQuery("#localidadSearch").val("");
-		 jQuery("#nombreSearch").focus();
+
 }
 function cleanScreenEdit(){
 	 jQuery(".editClientDiv").hide();			 
      jQuery("#nombreC").val("");
- 	 jQuery("#apellidoC").val("");
-	 jQuery("#direccionC").val("");
-	 jQuery("#localidadC").val(0);
-	 jQuery("#emailC").val("");
-	 jQuery("#telC-1").val("");
-	 jQuery("#phone-form-1").remove();
-	 jQuery("#phone-form-2").remove();
-	 jQuery("#cuitC").val("");
-	 jQuery("#comentC").val("");
-	 jQuery("#nombreC").focus();
-	 jQuery("#listClientTable").trigger('reloadGrid');
+     jQuery("#velUp").val("");
+   	 jQuery("#velDown").val("");
+   	 jQuery("#decription").val("");
+   	 jQuery("#price").val("");
+	 jQuery("#listAbonoTable").trigger('reloadGrid');
 
 }
 function cancelEdit(){
 	jQuery("div .ui-inline-cancel").trigger("click");
-	jQuery(".editClientDiv").hide();
-	jQuery('#listClientTable').jqGrid('setGridState','visible');	
+	jQuery(".editAbonoDiv").hide();
+	jQuery('#listAbonoTable').jqGrid('setGridState','visible');	
 	cleanScreenEdit();
 }	
 

@@ -23,6 +23,7 @@ import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.sigepro.web.dao.ClientDAO;
+import com.sigepro.web.model.pojo.CatDnitipo;
 import com.sigepro.web.model.pojo.Cliente;
 import com.sigepro.web.model.pojo.EstadoCli;
 import com.sigepro.web.model.pojo.Localidad;
@@ -156,13 +157,48 @@ public class ClientDAOImpl extends HibernateDaoSupport implements ClientDAO {
     @SuppressWarnings("unchecked")
     public Localidad loadLocalidadById(final Integer idLocalidad) throws DataAccessException {
 
-        List<Localidad> lstCliente = getHibernateTemplate().find(
+        List<Localidad> lstResults = getHibernateTemplate().find(
                 "select C from Localidad as C where C.idlocalidad=" + idLocalidad);
 
-        if (lstCliente.isEmpty()) {
+        if (lstResults.isEmpty()) {
             return null;
         } else
-            return lstCliente.get(0);
+            return lstResults.get(0);
+    }
+    
+    @SuppressWarnings("unchecked")
+    public List<Localidad> loadAllLocalidades() throws DataAccessException {
+
+        List<Localidad> lstResults = getHibernateTemplate().find(
+                "select C from Localidad as C");
+
+        if (lstResults.isEmpty()) {
+            return null;
+        } else
+            return lstResults;
+    }
+    @SuppressWarnings("unchecked")
+    public List<CatDnitipo> loadAllTypeDni() throws DataAccessException {
+
+        List<CatDnitipo> lstResults = getHibernateTemplate().find(
+                "select T from CatDnitipo as T");
+
+        if (lstResults.isEmpty()) {
+            return null;
+        } else
+            return lstResults;
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<EstadoCli> loadAllClientState() throws DataAccessException {
+
+        List<EstadoCli> lstResults = getHibernateTemplate().find(
+                "select E from EstadoCli as E");
+
+        if (lstResults.isEmpty()) {
+            return null;
+        } else
+            return lstResults;
     }
     
     @SuppressWarnings("unchecked")

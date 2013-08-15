@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.dao.DataAccessException;
 
+import com.sigepro.web.model.pojo.CatDnitipo;
 import com.sigepro.web.model.pojo.Cliente;
 import com.sigepro.web.model.pojo.EstadoCli;
 import com.sigepro.web.model.pojo.Localidad;
@@ -29,6 +30,11 @@ public interface ClientDAO extends DAO {
     
     Localidad loadLocalidadById(final Integer idLocalidad) throws DataAccessException;
 
+    List<Localidad> loadAllLocalidades() throws DataAccessException;
+
+    List<CatDnitipo> loadAllTypeDni() throws DataAccessException;
+    
+    List<EstadoCli> loadAllClientState() throws DataAccessException;
 
  	
 }

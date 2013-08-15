@@ -9,7 +9,7 @@
 		<property name="daos">
             <map>
                 <entry key="com.sigepro.web.dao.ClientDAO" value-ref="clientDAO"/>               
-<!--                  <entry key="com.decorart.web.dao.ProviderDAO" value-ref="providerDAO"/> -->
+                 <entry key="com.sigepro.web.dao.AbonoDAO" value-ref="abonoDAO"/>
 <!--                  <entry key="com.decorart.web.dao.OrdenCompraDAO" value-ref="ordenCompraDAO"/>    -->
 <!--                  <entry key="com.decorart.web.dao.ProductoOCDAO" value-ref="productoOCDAO"/>    -->
 <!--  				 <entry key="com.decorart.web.dao.PagoDAO" value-ref="pagoDAO"/>                                                        -->

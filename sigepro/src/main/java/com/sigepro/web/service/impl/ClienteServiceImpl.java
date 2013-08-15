@@ -8,7 +8,9 @@ package com.sigepro.web.service.impl;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +22,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.sigepro.web.dao.ClientDAO;
 import com.sigepro.web.dao.impl.DAOLocator;
 import com.sigepro.web.model.dto.ClienteDTO;
+import com.sigepro.web.model.dto.ReportData;
+import com.sigepro.web.model.pojo.CatDnitipo;
 import com.sigepro.web.model.pojo.Cliente;
 import com.sigepro.web.model.pojo.EstadoCli;
 import com.sigepro.web.model.pojo.Localidad;
@@ -57,7 +61,7 @@ public class ClienteServiceImpl implements ClienteService {
     public Integer saveClient(ClienteDTO clientDTO) {
 
         Cliente cliente =  new Cliente();
-        
+        cliente.setNumerocli(clientDTO.getNumerocli());
         cliente.setNombre(clientDTO.getNombre().toLowerCase());
         cliente.setApellido(clientDTO.getApellido().toLowerCase());
         cliente.setCcNro(clientDTO.getCcNro());
@@ -65,6 +69,9 @@ public class ClienteServiceImpl implements ClienteService {
         cliente.setDireccion(clientDTO.getDireccion());
         cliente.setEmail(clientDTO.getEmail());
         cliente.setFechaAgregado(Calendar.getInstance().getTime());
+        CatDnitipo catDnitipo = new CatDnitipo();
+        catDnitipo.setIddnitipo(clientDTO.getIddnitipo());
+		cliente.setCatDnitipo(catDnitipo);
         Localidad localidad = new Localidad();
         localidad.setIdlocalidad(clientDTO.getLocalidadId());
         
@@ -82,7 +89,7 @@ public class ClienteServiceImpl implements ClienteService {
         cliente.setTelefono3(numbers[2]);
 
         EstadoCli estadoCli = new EstadoCli();
-        estadoCli.setIdestadocli(0);
+        estadoCli.setIdestadocli(Integer.parseInt(clientDTO.getEstadoCliId()));
         cliente.setEstadoCli(estadoCli);
         Integer id =getClientDAO().saveClient(cliente);
         return id;
@@ -96,6 +103,7 @@ public class ClienteServiceImpl implements ClienteService {
         if (cliente == null) {
             cliente = new Cliente();
         }
+        cliente.setNumerocli(clientDTO.getNumerocli());
         cliente.setNombre(clientDTO.getNombre().toLowerCase());
         cliente.setApellido(clientDTO.getApellido().toLowerCase());
         cliente.setCcNro(clientDTO.getCcNro());
@@ -107,6 +115,9 @@ public class ClienteServiceImpl implements ClienteService {
         cliente.setDireccion(clientDTO.getDireccion());
         cliente.setEmail(clientDTO.getEmail());
         cliente.setFechaAgregado(Calendar.getInstance().getTime());
+        CatDnitipo catDnitipo = new CatDnitipo();
+        catDnitipo.setIddnitipo(clientDTO.getIddnitipo());
+		cliente.setCatDnitipo(catDnitipo);
         Localidad localidad = new Localidad();
         localidad.setIdlocalidad(clientDTO.getLocalidadId());
         cliente.setLocalidad(localidad);
@@ -122,7 +133,7 @@ public class ClienteServiceImpl implements ClienteService {
         cliente.setTelefono3(numbers[2]);
         
         EstadoCli estadoCli = new EstadoCli();
-        estadoCli.setIdestadocli(0);
+        estadoCli.setIdestadocli(Integer.parseInt(clientDTO.getEstadoCliId()));
         cliente.setEstadoCli(estadoCli);
         
         getClientDAO().saveClient(cliente);
@@ -178,6 +189,57 @@ public class ClienteServiceImpl implements ClienteService {
 
         return lastId;
 
+	}
+	
+	public Map<String,Object> loadAllAddClientCat(){
+		LOG.info("loadAllAddClientCat");
+		Map<String,Object> mapElements = new HashMap<String, Object>();
+        try {
+        	List<Localidad> localidades = getClientDAO().loadAllLocalidades();
+        	List<CatDnitipo> typeDni = getClientDAO().loadAllTypeDni();
+        	List<EstadoCli> clientState = getClientDAO().loadAllClientState();
+        	mapElements.put("localidades", localidades);
+        	mapElements.put("typeID", typeDni);
+        	mapElements.put("estadoCli", clientState);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return mapElements;
+
+	}
+	
+	public ReportData loadCPForReport(Integer ocId){
+        ReportData reportData = null;
+		try {
+			Cliente client = getClientDAO().loadClientById(ocId);
+        	reportData = createReportData(client);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return reportData;
+	}
+	
+	private ReportData createReportData(Cliente client) {
+		ReportData reportData = new ReportData();
+		ClienteDTO clientDTO = clientTransformer.transform(client);
+		reportData.setClient(clientDTO);
+//		if (presup.getFechaentrega()!=null){
+//		reportData.setDateDelivery(dateFormatter.format(presup.getFechaentrega()));
+//		}
+//		reportData.setDateReport(dateFormatter.format(presup.getFechacompra()));
+//		reportData.setPayCondition(presup.getCondcompra());
+//		DecimalFormat df = new DecimalFormat("##.00");
+//		reportData.setTotalPriceOrder(df.format(presup.getPreciototal()));
+//		reportData.setNumPresupuesto(presup.getNrocompra().toString());
+		
+//		List<ProductReportDTO> productReportDTOs = new ArrayList<ProductReportDTO>();
+//		for (ProductoOc product : presup.getProductoOcs()){
+//			productReportDTOs.add(productOCTransformer.transform(product));
+//		}
+//		reportData.setItems(productReportDTOs);
+		return reportData;
 	}
 
 

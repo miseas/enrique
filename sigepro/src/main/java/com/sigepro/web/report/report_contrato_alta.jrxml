@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" whenResourceMissingType="Key" uuid="ddc6ef62-8855-4455-bdea-a5bbd732f98c">
+	<property name="ireport.zoom" value="1.5000000000000346"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="96"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<subDataset name="dataset1" uuid="38dd7405-bfb9-48a6-8634-4329f73cfafe"/>
+	<parameter name="FECHAREPORTE" class="java.lang.String"/>
+	<parameter name="LOCALIDAD" class="java.lang.String"/>
+	<parameter name="DIRECCION" class="java.lang.String"/>
+	<parameter name="NOMBRE" class="java.lang.String"/>
+	<parameter name="TELEFONO" class="java.lang.String"/>
+	<parameter name="CUIT" class="java.lang.String"/>
+	<parameter name="CONDPAGO" class="java.lang.String"/>
+	<parameter name="FECHAENTREGA" class="java.lang.String"/>
+	<parameter name="EMAIL" class="java.lang.String"/>
+	<group name="Group1">
+		<groupExpression><![CDATA[]]></groupExpression>
+		<groupHeader>
+			<band height="6"/>
+		</groupHeader>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="79">
+			<image>
+				<reportElement uuid="f3c1ae4a-94f7-4fc5-ac38-46ee174978ba" x="8" y="0" width="211" height="79"/>
+				<imageExpression><![CDATA["logo.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement uuid="a847e865-9c53-48fa-915e-6693e99dcf64" x="217" y="21" width="333" height="37"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="25" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[CONTRATO DE SERVICIO]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band/>
+	</pageHeader>
+	<columnHeader>
+		<band height="119">
+			<staticText>
+				<reportElement uuid="3e9d33c9-b95c-4499-9af8-92c641d8d98e" style="Column header" x="8" y="0" width="61" height="19" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="false" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[FECHA:]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="8210b5b4-b77f-4c37-b779-8bd963057331" x="130" y="19" width="421" height="18"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{NOMBRE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="7fca39df-e2f8-4e2b-8b36-e92b9311cbec" x="131" y="38" width="123" height="18"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{DIRECCION}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="c83844ef-f699-4f9b-96e4-3b5e3c2a6666" x="4" y="57" width="547" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement uuid="40d5eed4-c323-40e0-88d5-0b1e75f569bb" x="4" y="76" width="547" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement uuid="9fc17ca9-716c-4b9f-bbe7-12baf23e134e" x="266" y="41" width="190" height="16"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{LOCALIDAD}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="b123fc39-e578-435e-a128-8cb2ab673db5" x="84" y="59" width="141" height="15"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{TELEFONO}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="9dde42cd-45e8-413d-b80e-4de760c327a4" x="4" y="19" width="547" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement uuid="789ee5fd-a268-4700-91e9-f61b198c8779" x="4" y="38" width="547" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement uuid="cda779d3-4a46-4265-a171-0d2083201673" x="4" y="96" width="547" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement uuid="5feca996-2e0d-4498-9e0f-23a3aa254857" x="4" y="115" width="547" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement uuid="4946ab79-6c4b-4a6f-9825-e324c4d9460d" x="277" y="96" width="1" height="19"/>
+			</line>
+			<line>
+				<reportElement uuid="a683c655-2af2-423d-9bbb-c948fd33336e" x="277" y="58" width="1" height="19"/>
+			</line>
+			<staticText>
+				<reportElement uuid="3229b20c-a583-42fe-ace8-1ed37c88f864" style="Column header" x="280" y="1" width="137" height="18" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="false" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[TIPO Y N° DE DOCUMENTO:]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="783e2c2d-7dd3-461f-885c-4bc03bd6cb7f" x="277" y="0" width="1" height="19"/>
+			</line>
+			<staticText>
+				<reportElement uuid="6d5424f9-fbec-486c-b01b-66fe71187b73" style="Column header" x="8" y="19" width="123" height="19" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="false" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[NOMBRE Y APELLIDO:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="49b907f4-5c05-4041-a4b0-a5e135c3835a" style="Column header" x="8" y="39" width="123" height="18" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="false" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[DOMICILIO:]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="321204fa-fe0c-441d-a07e-175e399e00d8" x="456" y="38" width="1" height="19"/>
+			</line>
+			<staticText>
+				<reportElement uuid="405717d2-04a1-460f-89a8-356017fecf8e" style="Column header" x="459" y="38" width="43" height="19" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="false" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[CP:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="8049c0fd-39f1-4c9f-b177-431f591d50e8" style="Column header" x="8" y="57" width="123" height="20" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="false" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[LOCALIDAD:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="1382b0dc-40ea-483b-994b-719c66ee48d4" style="Column header" x="280" y="57" width="123" height="20" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="false" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[TELEFONOS:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="59725c2d-8655-45d6-8208-ef34c9a5e302" style="Column header" x="8" y="77" width="61" height="20" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="false" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[EMAIL:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="275f3f39-5fcb-4d84-a266-654aa9d584f0" style="Column header" x="8" y="96" width="196" height="20" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="false" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[FECHA INSTALACIÓN:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f29a3c5c-dc55-4181-8eb6-4b7056ab0ef2" style="Column header" x="280" y="96" width="196" height="20" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="false" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[SERVICIO CONTRATADO:]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="bc4cb589-7c44-4d4a-a579-d51f3bfeeef8" x="417" y="1" width="132" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{CUIT}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="91353541-6791-47eb-a13b-5b39912f3406" x="69" y="77" width="135" height="19"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{EMAIL}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="444">
+			<staticText>
+				<reportElement uuid="e1e6d0e7-9a06-467d-b0eb-8f05799a9325" style="Column header" x="7" y="0" width="196" height="20" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="false" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[OBSERVACIONES:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e684a7b8-5627-4990-9080-b1c09d9265e0" x="0" y="20" width="555" height="416" isPrintWhenDetailOverflows="true"/>
+				<textElement>
+					<font size="9" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[ La empresa prestadora del servicio es GIGA IT ARGENTINA S.A. Cuit 30-71121518-9
+  Servicio prestado bajo Licencia s/Res Secom 512/01 y 145/03 de la CNC (Comisión Nacional de Comunicaciones)
+
+ Los equipos instalados son propiedad de la empresa y deben ser devueltos cuando finalice el presente contrato o solicite la baja del
+  servicio.
+
+ El contrato tiene una validez de 6 meses renovables automáticamente; en caso de no realizar renovación, el cliente deberá avisar con
+  30 días de antelación.
+
+ La manipulación, como el mantenimiento de los equipos es exclusivo de la empresa, en caso de que el equipo sea dañado por un
+  evento de la naturaleza (granizo, tormentas, etc.) será reemplazado sin costo.
+
+ En caso que el equipo sea robado o manipulado/roto por personal no autorizado, el cliente deberá abonar el valor de marcado del
+  equipo estipulado en $650 al 01 de octubre de 2012.
+
+ Es responsabilidad del cliente contar con estabilizador de tensión para proteger la fuente de alimentación, ya que en caso contrario,
+  el cliente deberá abonar el costo de reposición o reparación de la misma (valor de referencia al 12 de octubre de 2012 $80 final).
+
+ El servicio se abona por adelantado del día 1 al día 10 de cada mes. Siendo el primer vencimiento el día 10 o siguiente día hábil y el
+  segundo vencimiento los días 21 de cada mes.
+
+ Luego del segundo vencimiento la empresa puede incomunicar el servicio por falta de pago y exigir un costo de reconexión
+  de $30 IVA incluido al rehabilitar el servicio.
+
+ El precio de los planes/abonos podrán actualizarse con 30 días de antelación informándole por correo electrónico dicho cambio.
+
+ El servicio podrá ser utilizado las 24 hs del día en la modalidad de tarifa plana, sin franjas horarias, ni límites de transferencia. En caso
+  que el cliente instale un Router o Punto de Acceso inalámbrico, el mantenimiento de dicho equipo corre bajo exclusiva
+  responsabilidad del cliente, la empresa garantiza la calidad del servicio en la boca de red cableada (Salida LAN del equipo dado en
+  Comodato).
+
+ El prestador no se responsabiliza por lucro cesante, daño moral del contenido al que se acceda o información que se transmita
+  mediante nuestro servicio.
+
+ Por servicio técnico, deberá realizar un reclamo comunicándose únicamente a los teléfonos, domicilio y/o correo electrónico que
+  figuran en el pie de página. Los mismos serán resueltos dentro de las 72hs hábiles de notificado el caso.]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="78">
+			<staticText>
+				<reportElement uuid="28e33f87-9389-4160-b7c4-df9778c86916" x="402" y="57" width="145" height="20"/>
+				<textElement/>
+				<text><![CDATA[Firma, aclaración y DNI]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="935b6fa0-54d3-468d-88af-4bff6d426ead" x="392" y="57" width="124" height="1"/>
+			</line>
+			<staticText>
+				<reportElement uuid="700e3976-4e17-4685-b01f-bb22fa384401" x="0" y="0" width="555" height="11"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Por cuestiones de seguridad los días de lluvia y/o tormenta NO se realizarán tareas de instalación o mantenimiento en exteriores.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="bebb2415-ac66-4f23-a1bd-2cb44a918c45" x="0" y="11" width="251" height="20"/>
+				<textElement>
+					<font fontName="Calibri"/>
+				</textElement>
+				<text><![CDATA[He leído y acepto las condiciones del presente contrato.]]></text>
+			</staticText>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="22">
+			<staticText>
+				<reportElement uuid="498fc433-c097-4d17-bde1-7c78221a8b28" stretchType="RelativeToBandHeight" x="0" y="0" width="555" height="22"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Arial" size="6"/>
+				</textElement>
+				<text><![CDATA[Comuniquese con nosotros al (0221) 422-1234 o al 425-8899 de Lunes a Viernes de 9 a 13 hs y de 14 a 19 hs, los días sábados de 9 a 13 hs o bien por email a  internetwisp@gmail.com las 24 hs.]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

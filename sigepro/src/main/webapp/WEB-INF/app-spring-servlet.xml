@@ -51,8 +51,8 @@
 	<bean id="clientTransformer" class="com.sigepro.web.transformer.ClienteTransformer">
 	</bean>
 	
-<!-- 	<bean id="proveedorTransformer" class="com.decorart.web.transformer.ProveedorTransformer"> -->
-<!-- 	</bean> -->
+	<bean id="abonoTransformer" class="com.sigepro.web.transformer.AbonoTransformer">
+	</bean>
 	
 <!-- 	<bean id="ordenCompraTransformer" class="com.decorart.web.transformer.OrdenCompraTransformer"> -->
 <!-- 	</bean> -->

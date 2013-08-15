@@ -7,7 +7,9 @@ package com.sigepro.web.controller;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,8 +24,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.sigepro.web.model.dto.ClienteDTO;
 import com.sigepro.web.model.dto.PageResult;
 import com.sigepro.web.service.ClienteService;
-
-
 
 import fr.xebia.audit.Audited;
 
@@ -169,7 +169,7 @@ public class ClientController {
     @RequestMapping(value = "/delClient", method = RequestMethod.GET)
     public @ResponseBody
     boolean deleteClient(@RequestParam(value = "idClient", required = false, defaultValue = "") Integer idClient) {
-    	LOG.info("AlertController.deleteAlert()");
+    	LOG.info("ClientController.deleteClient()");
         try {
         	clientService.deleteClientById(idClient);
         } catch (Exception e) {
@@ -193,6 +193,22 @@ public class ClientController {
         }
 
         return lastId;
+    }
+    
+    
+    @Audited(message = "Accion: Busqueda inical de clientes en Listado")
+    @RequestMapping(value = "/loadAllCatAddClient", method = RequestMethod.GET)
+    public @ResponseBody
+    Map<String, Object> loadAllCat() {
+    	LOG.info("ClientController.listClients()");
+        Map<String, Object> catalogs = new HashMap<String, Object>();
+        try {
+            catalogs = clientService.loadAllAddClientCat();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return catalogs;
     }
     
 //    @Audited(message = "Accion: Enviar mail")

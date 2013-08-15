@@ -95,7 +95,7 @@
             <li class="divider-vertical"></li>
             <sec:authorize ifAnyGranted="ROLE_USER,ROLE_ADMIN">
               <li ><a href="login.htm">Inicio</a></li>
-              <li class=" active dropdown">
+              <li class="dropdown">
                <a href="#" data-target="#" class="dropdown-toggle" data-toggle="dropdown">Clientes <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                   <li class="nav-header">Operaciones</li>
@@ -107,7 +107,7 @@
                   <li class=""><a href="assignClientAbono.htm">Asignar Abono</a></li>
                 </ul>
                </li>
-               <li class="dropdown">
+               <li class="active dropdown">
                <a href="#" data-target="#" class="dropdown-toggle" data-toggle="dropdown">Abonos<b class="caret"></b></a>
                 <ul class="dropdown-menu">
                   <li class="nav-header">Operaciones</li>
@@ -143,7 +143,7 @@
         <div class="span12">
 			<ul class="nav nav-pills">
 		    <li class="active">
-		    <a href="#">Agregar Cliente</a>
+		    <a href="#">Crear Abono</a>
 		    </li>
 		    </ul>
 		    <div style="margin-bottom: -18px;" ></div>
@@ -154,68 +154,47 @@
       <div class="row-fluid">
      <div class="span12 thumbnail">
 		  <div class="row-fluid">
- 	  		 <form id="addClientForm" action="" method="post">
+ 	  		 <form id="addAbonoForm" action="" method="post">
 	         <div class="row-fluid">
 	        	<div class="span4">    
 					<label for="nombreC"><strong>Nombre</strong></label>
-						<input type="text" class="" id="nombreC" name="nombreC" />
-					<label for="apellidoC"><strong>Apellido</strong></label>
-						<input type="text" class="" id="apellidoC" name="apellidoC" />
-					<label for="direccionC"><strong>Dirección</strong></label>
-						<input type="text" class="span12" id="direccionC" name="direccionC" />
+						<input type="text" class="input-xlarge" id="nombreC" name="nombreC" />
 				</div>
-				<div class="span4">    
-					<label for="localidadC"><strong>Localidad</strong></label>
+				 <div class="span4">    
+					<label for="price"><strong>Precio</strong></label>
 					<div class="input-prepend">
-						<span class="add-on"><i class="icon-map-marker icon-large"></i></span>
-<!-- 						<input type="text" class="" id="localidadC" name="localidadC" /> -->
-						<select id="localidadC" name="localidadC">
-						</select>
+					 <span class="add-on"><i class="icon-dollar icon-large"></i></span>
+						<input type="text" class="input-small" id="price" name="price" />
 					</div>
-					<label for="emailC"><strong>Correo electrónico</strong></label>
-					 <div class="input-prepend">
-					 <span class="add-on"><i class="icon-envelope icon-large"></i></span>
-						<input type="text" class="" id="emailC" name="emailC" />
-						</div>
-				 <div id="phone-container">
-					<div class="" id="phone-form" >
-					<label for="telC"><strong>Teléfono</strong></label>
-						<div class="form-search input-prepend">
-						<span class="add-on">#</span>
-						<input type="text" class="" id="telC-1" name="telC" /><button type="button" style="display: none" id="removeBtn" class="btn btn-mini btn-danger"><i class="icon-remove icon-white icon-large"></i></button>
-						</div>   
-						<span id="helpB" class="help-block"><a id="addNumberBtn" class="btn btn-mini btn-info" ><i class="icon-plus icon-white"></i> Agregar otro Nro de Teléfono</a></span>
+				</div>
+			</div>
+			<div class="row-fluid">
+				<div class="span3">    
+					<label for="localidadC"><strong>Vel. Bajada</strong></label>
+					 <div class="input-prepend input-append">
+					 <span class="add-on"><i class="icon-download icon-large"></i></span>
+						<input type="text" class="input-small" id="velDown" name="velDown" />
+						<span class="add-on">kbps</span>
 					</div>
-					</div> 
+				</div>
+				<div class="span3">    
+					<label for="localidadC"><strong>Vel. Subida</strong></label>
+					 <div class="input-prepend input-append">
+					 <span class="add-on"><i class="icon-upload icon-large"></i></span>
+						<input type="text" class="input-small" id="velUp" name="velUp" />
+						 <span class="add-on">kbps</span>
+					</div>
 				</div>	
-				<div class="span4">	
-				    <div class="row-fluid">
-				     <div class="span4">
-				     <label for="typeId"><strong>Tipo ID</strong></label>
-						<select id="typeId" name="typeId" class="span10">
-						</select>
-					</div>	
-				    <div class="span5">
-					<label for="cuitC"><strong>Número Documento</strong></label>
-						<input type="text" class="" id="cuitC" name="cuitC" />
-					</div>	
-					</div>	
-					<label for="clientState"><strong>Estado Inicial</strong></label>
-						<select id="clientState"  name="clientState">
-						</select>
-		            <label for="clientNum"><strong>Número Cliente</strong></label>
-						<input type="text" class="" id="clientNum" name="clientNum" />
 				</div>	
-				</div>		
 				<div class="row-fluid">	 
 					<div class="span7">							 
-						<label for="comentC"><strong>Comentario</strong></label>
-					  		<textarea name="comentC" id="comentC" rows="3" class="input-block-level"></textarea>
+						<label for="comentC"><strong>Descripción</strong></label>
+					  		<textarea name="decription" id="decription" rows="3" class="input-block-level"></textarea>
 					</div>
 				</div>
 				<div class="row-fluid">	 
 				<div class="pull-right">			
-		               <button type="button" onclick="jQuery('#addClientForm').submit();" class="btn btn-primary">Guardar</button>
+		               <button type="button" onclick="jQuery('#addAbonoForm').submit();" class="btn btn-primary">Guardar</button>
 		               <button type="button" onclick="cleanScreenAdd();" class="btn" >Resetear</button>	
 				</div>
 				</div>
@@ -251,80 +230,41 @@
 jQuery(function() {
 	cleanScreenAdd();
 	jQuery("#nombreC").focus();
-	
-	 jQuery.ajax({
-         url: '<c:url value="/loadAllCatAddClient.htm" />',
-         type: "GET",
-         dataType: "json",
-         contentType: "application/json",
-         data:"", 
-         success: function(resp){                                       
-        	 var options = $("#localidadC");
-        	 $.each(resp.localidades, function() {
-        	     options.append($("<option />").val(this.idlocalidad).text(this.descripcion));
-        	 });
-        	 var options = $("#typeId");
-        	 $.each(resp.typeID, function() {
-        	     options.append($("<option />").val(this.iddnitipo).text(this.descripcion));
-        	 });
-        	 var options = $("#clientState");
-        	 $.each(resp.estadoCli, function() {
-        	     options.append($("<option />").val(this.idestadocli).text(this.descripcion));
-        	 });
-         }
-       });
 
-	jQuery("#addClientForm").validate({
+    jQuery("#velDown, #velUp, #price").bind("keypress",function(event) {
+	    var chars = "0123456789.,";
+        var chr = String.fromCharCode(event.charCode == undefined ? event.keyCode : event.charCode);
+        return event.ctrlKey || (chr < ' ' || !chars || chars.indexOf(chr) > -1);
+    });
+    
+	jQuery("#addAbonoForm").validate({
 		focusInvalid:false,
 	    rules: {
-	    	nombreC:{required: true},
-			apellidoC:{required: true},
-			emailC:{email:true},
-			cuitC:{digits:true}
+	    	nombreC:{required: true}
         },
 	    messages: {
-	    	nombreC: {required: "Campo obligatorio"},
-	    	apellidoC: {required: "Campo obligatorio"},
-	    	emailC:{email:"Email incorrecto"},
-	    	cuitC:{digits:"Campo numerico"}
+	    	nombreC: {required: "Campo obligatorio"}
 	    },
   	submitHandler: function() { 	  	
   		var nombreNew = jQuery("#nombreC").val();
-  		var apellidoNew = jQuery("#apellidoC").val();
-  		var direccionNew = jQuery("#direccionC").val();
-  		var localidadNew = jQuery("#localidadC").val();
-  		var emailNew = jQuery("#emailC").val();
-  		var telNew = jQuery("#telC-1").val();
-  		var telNew2 =" ";
-  		if (jQuery("#telC-2").length>0){
-  			telNew2 = jQuery("#telC-2").val();
-  		}
-  		var telNew3 =" ";
-  		if (jQuery("#telC-3").length>0){
-  				telNew3 = jQuery("#telC-3").val();
-  		}
-  		var cuitNew = jQuery("#cuitC").val();
-  		var puntuaNew = 1;
-  		var comentNew = jQuery("#comentC").val();
-  		var clientStateID = jQuery("#clientState").val();
-  		var typeId = jQuery("#typeId").val();
-  		var clientNum = jQuery("#clientNum").val();
-  		
-  		var newClient = {'nombre':nombreNew,'apellido':apellidoNew,'direccion':direccionNew,"iddnitipo":typeId,
-  					    'localidadId':localidadNew,'email':emailNew,'telefono':telNew+"@@"+telNew2+"@@"+telNew3,
-  						'notas':comentNew,'estadoCliId':clientStateID,'puntuacion':puntuaNew, 'cuit':cuitNew, 'numerocli':clientNum};		  		 
+  		var velUp = jQuery("#velUp").val();
+  		var velDown = jQuery("#velDown").val();
+  		var decription = jQuery("#decription").val();
+  		var price = jQuery("#price").val();
+  			
+  		var newAbono = {'nombre':nombreNew,'descripcion':decription,
+  					    'maxbajada':velDown,'maxsubida':velUp,'precio':price};		  		 
   		 
         jQuery.ajax({
-             url: '<c:url value="/addNewClient.htm" />',
+             url: '<c:url value="/addNewAbono.htm" />',
              type: "POST",
              dataType: "json",
              contentType: "application/json",
-             data: JSON.stringify( newClient ), 
+             data: JSON.stringify( newAbono ), 
              success: function(resp){                                       
             	 if(resp!=-1){ 
             		 jQuery("#dialogSuccessOperation").dialog("open");
          				cleanScreenAdd();
-         				//loadLastClientId();
          	 	}
          	 	else{
            		 jQuery("#dialogErrorOperation").dialog("open");
@@ -358,6 +298,7 @@ jQuery(function() {
 		buttons: {
 			"Ok": function() {
 				jQuery( this ).dialog( "close" );
+				jQuery("#nombreC").focus();
 			}
 		},
 		resizable: false,
@@ -366,52 +307,16 @@ jQuery(function() {
 		}
 	});	 	
 	
-	
-	$("#addNumberBtn").click(function(){
-		var idLastNum = jQuery('#phone-container input').last().attr("id");
-		var counter = parseInt(idLastNum.split("-")[1]);
-		var phoneForm = jQuery('#phone-form').clone(true);
-		if (counter==1){
-			jQuery('#helpB').hide();
-		}else{
-			$("#phone-form-"+(counter-1)).find('#helpB').hide();
-			$("#phone-form-"+(counter-1)).find("#removeBtn").hide();
-			if (counter<2){
-				phoneForm.find('#helpB').show();
-			}
-		}
-		phoneForm.find("label").html("<strong>"+phoneForm.find("label").text()+" "+(counter+1)+"</strong>");
-		phoneForm.find("#removeBtn").show();
-		phoneForm.find("input").attr("id","telC-"+(counter+1)).val("");
-		phoneForm.attr("id","phone-form-"+counter);
-		phoneForm.insertAfter('#phone-container div:last-child');
-	});
-	
-	$("#removeBtn").click(function(){
-		var idSelecNum = $(this).prev().attr("id");
-		var counter = parseInt(idSelecNum.split("-")[1]);
-		jQuery('#phone-form-'+(counter-1)).remove();		
-		jQuery('#phone-container div:last-child').find('#helpB').show();
-		$("#phone-form-"+(counter-2)).find("#removeBtn").show();
-	});
+
 
 });
 //Other functions
 function cleanScreenAdd(){
      jQuery("#nombreC").val("");
- 	 jQuery("#apellidoC").val("");
-	 jQuery("#direccionC").val("");
-	 jQuery("#localidadC").val(0);
-     jQuery("#clientState").val(0);
-  	 jQuery("#typeId").val(0);
-	 jQuery("#emailC").val("");
-	 jQuery("#telC-1").val("");
-	 jQuery("#phone-form-1").remove();
-	 jQuery("#phone-form-2").remove();
-	 jQuery("#cuitC").val("");
-	 jQuery("#comentC").val("");
-	 jQuery("#clientNum").val("");
-	 jQuery("#nombreC").focus();
+     jQuery("#velUp").val("");
+     jQuery("#velDown").val("");
+     jQuery("#decription").val("");
+     jQuery("#price").val("");
 }
 
 </script> 

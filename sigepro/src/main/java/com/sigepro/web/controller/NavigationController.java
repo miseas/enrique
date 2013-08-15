@@ -52,7 +52,27 @@ public class NavigationController {
         return model;
     }
 
-
+    @RequestMapping(value = "/addAbono")
+    public ModelAndView loadAddAbonoPage() {
+        ModelAndView model = new ModelAndView();
+        model.setViewName("addAbono");
+        return model;
+    }
+    
+    @RequestMapping(value = "/listAbonos")
+    public ModelAndView loadListAbonosPage() {
+        ModelAndView model = new ModelAndView();
+        model.setViewName("listAbonos");
+        return model;
+    }
+    
+    @RequestMapping(value = "/assignClientAbono")
+    public ModelAndView loadLassignClientAbonoPage() {
+        ModelAndView model = new ModelAndView();
+        model.setViewName("assignClientAbono");
+        return model;
+    }
+    
 //    @RequestMapping(value = "/alerts")
 //    public ModelAndView loadAlertsPage() {
 //        System.out.println("NavigationController.loadAlertsPage()");

@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 30-jun-2013 19:41:32 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.sigepro.web.model.pojo.ClienteAbono" table="CLIENTE_ABONO" schema="SIGEPRODB" catalog="PUBLIC">
+        <composite-id name="id" class="com.sigepro.web.model.pojo.ClienteAbonoId">
+            <key-property name="idcliente" type="java.lang.Integer">
+                <column name="IDCLIENTE" />
+            </key-property>
+            <key-property name="idabono" type="java.lang.Integer">
+                <column name="IDABONO" />
+            </key-property>
+        </composite-id>
+        <property name="alta" type="date">
+            <column name="ALTA" length="10" />
+        </property>
+        <property name="baja" type="date">
+            <column name="BAJA" length="10" />
+        </property>
+    </class>
+</hibernate-mapping>

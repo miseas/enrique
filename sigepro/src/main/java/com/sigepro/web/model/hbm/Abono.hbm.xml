@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 30-jun-2013 19:41:32 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.sigepro.web.model.pojo.Abono" table="ABONO" schema="SIGEPRODB" catalog="PUBLIC">
+        <id name="idabono" type="java.lang.Integer">
+            <column name="IDABONO" />
+            <generator class="increment" />
+        </id>
+        <property name="nombre" type="string">
+            <column name="NOMBRE" length="25" />
+        </property>
+        <property name="descripcion" type="string">
+            <column name="DESCRIPCION" length="100" />
+        </property>
+        <property name="minbajada" type="java.lang.Double">
+            <column name="MINBAJADA" precision="64" scale="0" />
+        </property>
+        <property name="maxbajada" type="java.lang.Double">
+            <column name="MAXBAJADA" precision="64" scale="0" />
+        </property>
+        <property name="minsubida" type="java.lang.Double">
+            <column name="MINSUBIDA" precision="64" scale="0" />
+        </property>
+        <property name="maxsubida" type="java.lang.Double">
+            <column name="MAXSUBIDA" precision="64" scale="0" />
+        </property>
+        <property name="precio" type="java.lang.Double">
+            <column name="PRECIO" precision="64" scale="0" />
+        </property>
+        <property name="multiTipo" type="java.lang.Integer">
+            <column name="MULTI_TIPO" />
+        </property>
+    </class>
+</hibernate-mapping>

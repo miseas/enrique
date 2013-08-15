@@ -97,7 +97,7 @@
                   <li class="divider"></li>
                   <li class=""><a href="listClient.htm">Buscar</a></li>
                   <li class="divider"></li>
-                  <li class="disabled"><a href="#">Otro</a></li>
+                  <li class=""><a href="assignClientAbono.htm">Asignar Abono</a></li>
                 </ul>
                </li>
 			  <li class="dropdown">
@@ -105,9 +105,9 @@
                 <ul class="dropdown-menu">
                   <li class="nav-header">Operaciones</li>
                   <li class="divider"></li>
-                  <li><a href="addClient.htm">Crear</a></li>
+                  <li><a href="addAbono.htm">Crear</a></li>
                   <li class="divider"></li>
-                  <li class=""><a href="listClient.htm">Buscar</a></li>
+                  <li class=""><a href="listAbonos.htm">Buscar</a></li>
                   <li class="divider"></li>
                   <li class="disabled"><a href="#">Otro</a></li>
                 </ul>

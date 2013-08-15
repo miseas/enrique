@@ -59,7 +59,7 @@
 	    border: 2px solid #DDDDDD;
 	    border-radius: 4px 0 4px 0;
 	    color: #FFFFFF; 
-	    content: "Editar Cliente";
+	    content: "Asignar Abono";
 	    font-size: 15px;
 	    font-weight: bold;
 	    left: -1px;
@@ -190,10 +190,9 @@
 						<input type="text" class="" id="apellidoSearch" name="apellidoSearch" />
 				</div>
 				<div class="span3">    
-					<label for="localidadC"><strong>Localidad</strong></label> 
-						<select id="localidadCSearch" name="localidadC" class="">
-						</select>
-			    </div>
+					<label for="localidadC"><strong>Localidad</strong></label>
+						<input type="text" class="" id="localidadSearch" name="localidadSearch" />
+				</div>
 				<div class="span3">    
 					<label for="cuitSearch"><strong>CUIT/DNI</strong></label>
 						<input type="text" class="" id="cuitSearch" name="cuitSearch" />
@@ -209,94 +208,42 @@
 		  </div>
       </div>
       </div><!--/row-->
-           <hr>
+<!--            <hr> -->
      <div class="row-fluid">
      <div class="span12 thumbnail">
 		  <div class="row-fluid">
 <!-- 		  Tabla -->
 		     		<div style="" align="center">
 			    		<div style="height: 1px" ></div>
-	  						 <table style="text-align: center;font-size: 18px" align="center" id="listClientTable">
+	  						 <table style="text-align: center;font-size: 16px" align="center" id="listClientTable">
 	             			 </table>	
 	             		<div id="listClientTableGrid"></div>
               		</div>
-		  </div>
-     <div class="editClientDiv" style="display: none;">
-     <div class="row-fluid">
-			<br>
-			<div class="bs-docs-example">
- 	  		 <form id="editClientForm" action="" method="post">
- 	  		 <input type="hidden" class="" id="idClientEdit" name="idClientEdit" /> 
-	         <div class="row-fluid">
-	        	<div class="span4">    
-					<label for="nombreC"><strong>Nombre</strong></label>
-						<input type="text" class="" id="nombreC" name="nombreC" />
-					<label for="apellidoC"><strong>Apellido</strong></label>
-						<input type="text" class="" id="apellidoC" name="apellidoC" />
-					<label for="direccionC"><strong>Dirección</strong></label>
-						<input type="text" class="span12" id="direccionC" name="direccionC" />
-				</div>
-				<div class="span4">    
-					<label for="localidadC"><strong>Localidad</strong></label>
-					<div class="input-prepend">
-						<span class="add-on"><i class="icon-map-marker"></i></span>
-<!-- 						<input type="text" class="" id="localidadC" name="localidadC" /> -->
-						<select id="localidadC" name="localidadC">
-						</select>
-					</div>
-					<label for="emailC"><strong>Correo electrónico</strong></label>
-					 <div class="input-prepend">
-					 <span class="add-on"><i class="icon-envelope"></i></span>
-						<input type="text" class="" id="emailC" name="emailC" />
-						</div>
-				 <div id="phone-container">
-					<div class="" id="phone-form" >
-					<label for="telC"><strong>Teléfono</strong></label>
-						<div class="form-search input-prepend">
-						<span class="add-on">#</span>
-						<input type="text" class="" id="telC-1" name="telC" /><button type="button" style="display: none" id="removeBtn" class="btn btn-mini btn-danger"><i class="icon-remove icon-white"></i></button>
-						</div>   
-						<span id="helpB" class="help-block"><a id="addNumberBtn" class="btn btn-mini btn-info" ><i class="icon-plus icon-white"></i> Agregar otro Nro de Teléfono</a></span>
-					</div>
-					</div> 
-				</div>	
-				<div class="span4">		 
-				   <div class="row-fluid">
-				     <div class="span4">
-				     <label for="typeId"><strong>Tipo ID</strong></label>
-						<select id="typeId" name="typeId" class="span10">
-						</select>
-					</div>	
-				    <div class="span5">
-					<label for="cuitC"><strong>Número Documento</strong></label>
-						<input type="text" class="" id="cuitC" name="cuitC" />
-					</div>	
-					</div>	
-					<label for="clientState"><strong>Estado</strong></label>
-						<select id="clientState"  name="clientState">
-						</select>
-		            <label for="clientNum"><strong>Número Cliente</strong></label>
-						<input type="text" class="" id="clientNum" name="clientNum" />
-				</div>	
-				</div>		
-				<div class="row-fluid">	 
-					<div class="span7">							 
-						<label for="comentC"><strong>Comentario</strong></label>
-					  		<textarea name="comentC" id="comentC" rows="3" class="input-block-level"></textarea>
-					</div>
-				</div>
-				<div class="row-fluid">	 
-				<div class="pull-right">			
-		               <button type="button" onclick="jQuery('#editClientForm').submit()" class="btn btn-primary">Guardar</button>
-		               <button type="button" onclick="cancelEdit();" class="btn" >Cancelar</button>	
-				</div>
-				</div>
-
-        </form>
+		  </div><!-- end row -->
+         <div class="assignClientAbonoDiv" style="display: none;">
+	    <div class="bs-docs-example">
+	     <div class="row-fluid">
+		     <div class="span4">
+				<div style="" align="center">
+					    		<div style="height: 1px" ></div>
+			  						 <table style="text-align: center" align="center" id="listAbonoTable">
+			             			 </table>	
+			             		<div id="listAbonoTableGrid"></div>
+		        </div>
+			 </div>
+			  <div class="span8">
+			  
+			   <div class="row-fluid" id="baseClient" style="margin-bottom: 10px;">
+			   <div class="span12">
+				<div class="tableContainer" align="center">
+		        </div>
+		        </div>
+		       </div>
+		       
+			 </div>
+			</div> 
+		</div><!-- end row -->
         </div>
-		  </div>
-	</div>	
-      </div>
       </div>
       <hr>
 
@@ -306,12 +253,6 @@
         <p class="muted credit">Creada por <a href="#">[Matias Iseas]</a>.</p>
       </div>
     </div>
-   	<div id="dialogSendEmail" style="display: none" align="" title="Enviar email" >
-	<p style="margin:0px;">Destinatario: <input class="text2" type="text" id="toEmail" /> </p>
-	<p style="margin:0px;">Asunto: <input class="text2" type="text" id="subjectEmail" /> </p>
-	<p style="margin:10px 0px 0px 0px">Contenido:</p>
-	<textarea style="width: 500px" name="contentEmail" id="contentEmail" rows="8" cols="6"></textarea>
-	</div> 
 	<div id="dialogDeleteClient" style="display: none" align="" title="Eliminar cliente" >
 	<p style="margin:0px;"><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>Esta seguro de que desea eliminar el cliente? </p>
 	</div> 
@@ -320,6 +261,31 @@
 	</div> 
 	<div id="dialogSuccessOperation"  style="display: none" align="" title="Eliminar cliente" >
 	<p style="margin:0px;"><span class="ui-icon ui-icon-circle-check" style="float: left; margin: 0 7px 20px 0;"></span>Operacion realizada exitosamente!</p>
+	</div> 
+	<div id="dialogAsignAbono"  style="display: none" align="" title="Asignar Abono" >
+	 <div class="row-fluid">
+	        	<div class="span12">    
+	        	<div class="row-fluid">
+		        	<div class="span6">
+						<label for="fechaAlta"><strong>Fecha Alta</strong></label>
+							<input type="text" alt="dateP" id="fechaAlta" name="fechaAlta" style="width: 100px" />
+					</div>	
+					<div class="span6">
+						<label for="clientState"><strong>Estado</strong></label>
+							<select id="clientState">
+							<option value="0">Nuevo</option>
+							<option value="-1">Otro...</option>
+							</select>
+					</div>		
+				</div>
+				<div class="row-fluid">
+						<div class="span12">
+					<label for="note"><strong>Nota</strong></label>
+					  <textarea name="note" id="note" rows="3" class="input-block-level"></textarea>
+					 </div> 
+				</div>		
+				</div>
+	 </div>	
 	</div> 
     <!-- Le javascript
     ================================================== -->
@@ -334,33 +300,6 @@
 <script type="text/javascript">
 jQuery(function() {
 cleanScreenSearch();
-
-jQuery.ajax({
-    url: '<c:url value="/loadAllCatAddClient.htm" />',
-    type: "GET",
-    dataType: "json",
-    contentType: "application/json",
-    data:"", 
-    success: function(resp){                                       
-     var options = $("#localidadCSearch");
-     $.each(resp.localidades, function() {
-    	     options.append($("<option />").val(this.idlocalidad).text(this.descripcion));
-     });   	 
-     var options = $("#localidadC");
-   	 $.each(resp.localidades, function() {
-   	     options.append($("<option />").val(this.idlocalidad).text(this.descripcion));
-   	 });
-   	 var options = $("#typeId");
-   	 $.each(resp.typeID, function() {
-   	     options.append($("<option />").val(this.iddnitipo).text(this.descripcion));
-   	 });
-   	 var options = $("#clientState");
-   	 $.each(resp.estadoCli, function() {
-   	     options.append($("<option />").val(this.idestadocli).text(this.descripcion));
-   	 });
-    }
-  });
-  
 jQuery("#editClientForm").validate({
 		focusInvalid:false,
 	    rules: {
@@ -393,14 +332,12 @@ jQuery("#editClientForm").validate({
   		var cuitNew = jQuery("#cuitC").val();
   		var puntuaNew = 1;
   		var comentNew = jQuery("#comentC").val();
-  		var clientStateID = jQuery("#clientState").val();
+  		var cuentaCNew = jQuery("#ccC").val();
   		var idClient = jQuery("#idClientEdit").val();
-  		var clientNum = jQuery("#clientNum").val();
-  		var typeId = jQuery("#typeId").val();
 
-  		var newClient = {'idcliente':idClient,'nombre':nombreNew,'apellido':apellidoNew,'direccion':direccionNew,"iddnitipo":typeId,
+  		var newClient = {'idcliente':idClient,'nombre':nombreNew,'apellido':apellidoNew,'direccion':direccionNew,
   					    'localidadId':localidadNew,'email':emailNew,'telefono':telNew+"@@"+telNew2+"@@"+telNew3,
-  						'notas':comentNew,'estadoCliId':clientStateID,'puntuacion':puntuaNew, 'cuit':cuitNew,'numerocli':clientNum};		  		 
+  						'notas':comentNew,'ccNro':cuentaCNew,'puntuacion':puntuaNew, 'cuit':cuitNew};		  		 
   		 
         jQuery.ajax({
              url: '<c:url value="/editClient.htm" />',
@@ -429,7 +366,7 @@ jQuery("#searchButton").click(function(){
 	 var lastName = jQuery("#apellidoSearch").val();
 	 var cuit = jQuery("#cuitSearch").val();
 	 var score = "";
-      jQuery("#listClientTable").jqGrid('setGridParam',{url:"<c:url value="/loadListClientsByParameter.htm" />?name="+name+"&lastName="+lastName+"&cuit="+cuit+"&score="+score,page:1}).trigger('reloadGrid');
+     jQuery("#listClientTable").jqGrid('setGridParam',{url:"<c:url value="/loadListClientsByParameter.htm" />?name="+name+"&lastName="+lastName+"&cuit="+cuit+"&score="+score,page:1}).trigger('reloadGrid');
 });
 
 jQuery("#clearSearchButton").click(function(){
@@ -443,24 +380,9 @@ jQuery("#listClientTable").jqGrid({
 	 datatype: "json", 
 	 width : 1158,
 	 height : 200,
-	 colNames : ['Operación','','<fmt:message key="message.cli.nombre"/>',  '<fmt:message key="message.cli.apellido"/>',
-	             '<fmt:message key="message.cli.direc"/>', '<fmt:message key="message.cli.localidad"/>','','','','','','CUIT/DNI','','','','','','' ],
+	 colNames : ['','<fmt:message key="message.cli.nombre"/>',  '<fmt:message key="message.cli.apellido"/>',
+	             '<fmt:message key="message.cli.direc"/>', '<fmt:message key="message.cli.localidad"/>','','','','CUIT/DNI','','','','' ],
 		colModel : [ 
-		        	{name: 'myac',
-						 width:77, 
-						 fixed:true, 
-						 sortable:false, 
-						 resize:false, 
-							search: false,
-							formatter:function(){
-								return "<div style='margin-left: 7px;'>"+
-								'<div onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onmouseover="jQuery(this).addClass(\'ui-state-hover\');"  class="ui-pg-div ui-inline-edit" style="float: left; cursor: pointer; display: block;" title="Enviar mail a..."><span op="email" class="ui-icon ui-icon-mail-closed"></span></div>'+											
-								'<div onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onmouseover="jQuery(this).addClass(\'ui-state-hover\');"  class="ui-pg-div ui-inline-edit" style="float: left; cursor: pointer; display: block;margin-left: 4px;margin-right: 4px;" title="Modificar fila seleccionada"><span op="edit" class="ui-icon ui-icon-pencil"></span></div>'+											
-								'<div onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onmouseover="jQuery(this).addClass(\'ui-state-hover\');"  class="ui-pg-div ui-inline-edit" style="float: left; cursor: pointer; display: block;" title="Eliminar fila seleccionada"><span op="delete" class="ui-icon ui-icon-trash"></span></div>'+											
-								"</div>";
-								}
-
-					},
 		{
 			name : 'idcliente',
 			index : 'idcliente',
@@ -530,34 +452,6 @@ jQuery("#listClientTable").jqGrid({
 			width : 1,
 			hidden:true
 		},
-		 {
-			name : 'estadoCliId',
-			index : 'estadoCliId',
-			align: 'center',
-			width : 1,
-			hidden:true
-		},
-		 {
-			name : 'iddnitipo',
-			index : 'iddnitipo',
-			align: 'center',
-			width : 1,
-			hidden:true
-		},
-		 {
-			name : 'numerocli',
-			index : 'numerocli',
-			align: 'center',
-			width : 1,
-			hidden:true
-		},
-		 {
-			name : 'localidadId',
-			index : 'localidadId',
-			align: 'center',
-			width : 1,
-			hidden:true
-		},
 		{
 			name : 'dummy',
 			index : 'dummy',
@@ -574,7 +468,7 @@ jQuery("#listClientTable").jqGrid({
 	  pager: '#listClientTableGrid',
 	  pgbuttons: false,
 	  pginput:false,
-	  rownumbers : true,
+	  rownumbers : false,
 	  rowList: {},
 	  jsonReader : {
          root: "rows",
@@ -582,7 +476,7 @@ jQuery("#listClientTable").jqGrid({
          total: "total",
          records: "records",
          repeatitems: false,
-         id: "id"
+         id: "idcliente"
      },				
      beforeSelectRow: function(rowid, e) {
 			 var iCol = jQuery.jgrid.getCellIndex(e.target);
@@ -622,50 +516,257 @@ jQuery("#listClientTable").jqGrid({
 	  caption:'<fmt:message key="message.cli.titulo"/>', 
 	  editurl: "dummy.htm"
 	  });
+	  
+jQuery("#listClientTable").jqGrid('navGrid','#listClientTableGrid',{
+	add : false,
+	refresh : false,
+	edit : false,
+	del : false,
+	search:false
+},{}).navButtonAdd('#listClientTableGrid',{
+	   caption:'Asignar Abono', 
+	   buttonicon:"icon-exchange icon-large", 
+	   onClickButton: function(){ 			   
+		   var selected = jQuery("#listClientTable").jqGrid('getGridParam','selarrrow');
+		   if (selected.length>=1){
+				jQuery('#listClientTable').jqGrid('setGridState','hidden');	
+				jQuery('.assignClientAbonoDiv').show();
+				var tableNames=" ";
+				jQuery.each(selected, function(num,id){
+					var baseClient = jQuery('#baseClient').clone(true);
+					baseClient.attr("id","baseClient-"+id);
+					baseClient.insertAfter('#baseClient');
+					baseClient.find(".tableContainer").html("<table id='tableClient"+id+"' class='scroll'></table><div id='tableClientPager"+id+"' class='scroll'></div>");
+					var row = jQuery('#listClientTable').jqGrid('getRowData',id);
+					createJqGridClient(id,row);
+					tableNames = tableNames+",#tableClient"+id;
+				});
+				jQuery("#listAbonoTable").jqGrid('gridDnD',{connectWith:tableNames,dropbyname:true,ondrop:function(event,object,data){createDialogAsign(event,object,data);}});
+				jQuery('#baseClient').hide();
+		   }
+		   else{
+			   alert("Selecciona antes!");   
+		   }
+		  	
+	   }, 
+	   position:"first"
+	});	  
 
-$("#gview_listClientTable").css("font-size","14px");
+$("#gview_listClientTable").css("font-size","12px");
+$(".icon-exchange").removeClass("ui-icon");
+$(".icon-exchange").parent().css("font-size","12px");
 
-
-
-
-jQuery("#dialogSendEmail").dialog({
-	autoOpen: false,
-	width: 550,
-	modal:true,
-	buttons: {
-		"Cerrar": function() {
-			jQuery( this ).dialog( "close" );
+jQuery("#listAbonoTable").jqGrid({
+	 url: '<c:url value="/loadlistAbonos.htm"/>',
+	 datatype: "json", 
+	 width : 400,
+	 height : 200,
+	 colNames : ['','Nombre','Vel. Bajada (kbps)','Vel. Subida (kbps)','Precio','','' ],
+		colModel : [ 
+		{
+			name : 'idabono',
+			index : 'idabono',
+			width : 1,
+			hidden:true					
 		},
-		"Enviar": function() {
-			jQuery(".ui-dialog-buttonset button").hide();
-			jQuery(".ui-dialog-buttonset").append("<div class='ui-loadingBar' style='width: 260px; height: 40px;'></div>");
-			var toEmail = jQuery("#toEmail").val();
-			var subjectEmail = jQuery("#subjectEmail").val();
-			var contentEmail = jQuery("#contentEmail").val();
-			var emailData = {"toEmail":toEmail.split(";"),"subject":subjectEmail,"content":contentEmail};
-			
-	         jQuery.ajax({
-                 url: '<c:url value="/sendEmailClient.htm" />',
-                 type: "POST",
-                 dataType: "json",
-                 contentType: "application/json",
-                 data: JSON.stringify( emailData ), 
-                 success: function(resp){                                       
-                			jSuccess("Operacion realizada exitosamente", "Enviar Email",function(){
-                				jQuery("#dialogSendEmail").dialog( "close" );
-                				jQuery(".ui-dialog-buttonset div").hide();
-        						jQuery(".ui-dialog-buttonset button").show();
-                			},["Aceptar"]);
-                	                                
-                 }
-               });
+		{
+			name : 'nombre',
+			index : 'nombre',
+			align: 'center',
+			width : 180
 		}
-	},
-	resizable: false,
-	draggable: false,
-	close: function() {
-	}
-});	 	
+		, {
+			name : 'maxbajada',
+			index : 'maxbajada',
+			align: 'center',
+			width : 180
+		}, {
+			name : 'maxsubida',
+			index : 'maxsubida',
+			align: 'center',
+			width : 200
+		}, {
+			name : 'precio',
+			index : 'precio',
+			align: 'center',
+			formatter:'currency',
+			formatoptions:{prefix:"$"},
+			width : 100
+		}, {
+			name : 'descripcion',
+			index : 'descripcion',
+			align: 'center',
+			width : 1,
+			hidden:true
+		},
+		{
+			name : 'dummy',
+			index : 'dummy',
+			align: 'center',
+			width : 1,
+			hidden:true,
+			editable:true
+		}],
+		ondblClickRow: function(id ){},
+	  rowNum:10, 
+	  rowList:[10,20,30],
+// 	  multiselect: true,
+	  sortable: true,
+	  pager: '#listAbonoTableGrid',
+	  pgbuttons: false,
+	  pginput:false,
+	  rownumbers : true,
+	  rowList: {},
+	  jsonReader : {
+        root: "rows",
+        page: "page",
+        total: "total",
+        records: "records",
+        repeatitems: false,
+        id: "id"
+    },				
+    beforeSelectRow: function(rowid, e) {
+			 var iCol = jQuery.jgrid.getCellIndex(e.target);
+			 if(iCol == 2){
+			 	if(e.target.attributes.op.value=="edit"){		 		
+					 var row = jQuery('#listAbonoTable').jqGrid('getRowData',rowid);										 
+					 updateAbono(row);		
+		             return false;
+		            }
+			 	if(e.target.attributes.op.value=="delete"){
+			 		 var idabono = jQuery('#listAbonoTable').jqGrid('getCell',rowid,"idabono");
+			 		 jQuery.data(document.body,"clientData",{"idabono":idabono});
+			 		 jQuery("#dialogDeleteClient" ).dialog("open");
+			 		 //delClient(idCliente);
+			 		return false;
+		            }
+			 	}
+		       //return true;    // allow select the row
+           //  return false;   // not allow select the row
+			 // prevent row selection if one click on the button
+			 return (iCol != 2)? true: false;
+        
+    },
+	  onSelectRow:function(){//alert("asdasd")
+		  },
+	  viewrecords: true, 
+	  sortorder: "desc", 
+	  caption:'Abonos', 
+	  editurl: "dummy.htm"
+	  });
+
+
+function createJqGridClient(id,row){
+	 jQuery("#tableClient"+id).jqGrid({ 
+		   url:'<c:url value="/listPagoOC.htm"/>?idocompra', 
+		   caption:row.nombre+" "+row.apellido, 
+		   datatype: "local", 
+		   afterInsertRow:function(rowid){ jQuery.data(document.body,"rowIdAbonoAdded",rowid);},
+		   colNames: ['','Nombre','Fecha Alta','Fecha Baja','Nota','Operación'], 
+		   colModel: [ 	{name : 'idabono',index : 'idabono', key:true, width: 1,hidden:true},
+		             {name:"nombre",index:"nombre",width:100,editable:true}, 
+		             {name:"fechaAlta",index:"fechaAlta",align:"center",width:100,editable:true}, 
+		             {name:"fechaBaja",index:"fechaBaja",width:100,align:"center",editable:true},
+		             {name:"nota",index:"nota",width:250,align:"center",editable:true},
+			         {name: 'operacion',
+						 width:67, 
+						 fixed:true, 
+						 sortable:false, 
+						 resize:false, 
+						 search: false,
+						 formatter:function(){
+								return "<div style='margin-left: 7px;'>"+
+								'<div onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onmouseover="jQuery(this).addClass(\'ui-state-hover\');"  class="ui-pg-div ui-inline-edit" style="float: left; cursor: pointer; display: block;margin-left: 4px;margin-right: 4px;" title="Modificar fila seleccionada"><span op="edit" class="ui-icon ui-icon-pencil"></span></div>'+
+								'<div onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onmouseover="jQuery(this).addClass(\'ui-state-hover\');"  class="ui-pg-div ui-inline-edit" style="float: left; cursor: pointer; display: block;margin-left:2px;margin-right:2px" title="Generar reporte"><span op="report" class="ui-icon ui-icon-document"></span></div>'+	
+								'<div onmouseout="jQuery(this).removeClass(\'ui-state-hover\')" onmouseover="jQuery(this).addClass(\'ui-state-hover\');"  class="ui-pg-div ui-inline-edit" style="float: left; cursor: pointer; display: block;" title="Eliminar fila seleccionada"><span op="delete" class="ui-icon ui-icon-trash"></span></div>'+											
+								"</div>";
+								}
+
+					 } ],
+		  rowNum:20, 
+		  pager: "tableClientPager"+id, 
+// 		  sortname: 'idpago', 
+		  sortorder: "asc", 
+	      height : 80,	           	
+	      beforeSelectRow: function (rowid, e) {
+ 			 var iCol = jQuery.jgrid.getCellIndex(e.target);
+			 if(iCol == 5){
+			 	if(e.target.attributes.op.value=="report"){
+			 		var rowData = jQuery("#tableClient"+id).jqGrid('getRowData',rowid); 
+	        	     jQuery("#dialogLoading" ).dialog("open");
+		              window.location.href = "<%=request.getContextPath()%>/generateReport.htm?cliId="+id;
+		            }
+			 	if(e.target.attributes.op.value=="edit"){
+			 		var rowData = jQuery("#listOCTable").jqGrid('getRowData',rowid); 
+			 		//updateOC(rowData);
+		            }
+			 	if(e.target.attributes.op.value=="delete"){
+			 		// var idocompra = jQuery('#listOCTable').jqGrid('getCell',rowid,"idocompra");
+			 		// delOrdenCompra(idocompra);
+			 		alert("eliminar o dar fecha de baja?");
+			 		return false;
+		            }
+			 	}
+			 
+			 // prevent row selection if one click on the button
+			 return (iCol >= 9)? false: true;
+          }, 
+		  editurl: "dummy.htm",
+		  jsonReader : {
+		        root: "rows",
+		        page: "page",
+		        total: "total",
+		        records: "records",
+		        repeatitems: false,
+		        id: "idabono"
+		    },	
+		  pgbuttons: false,
+		  pginput:false,
+		  onSelectRow: function(id){ 
+// 			  if(id && id!==lastsel){
+// 									  jQuery("#"+subgrid_table_id).jqGrid('restoreRow',lastsel); 
+// 									  jQuery("#"+subgrid_table_id).jqGrid('editRow',id,true,null,null,'',{},function(rowid){createEditButton();},null,function(){ createEditButton(); } ); 
+// 									  lastsel=id;
+// 			  	} 
+		  },
+		  });
+// 	 var mydata3 = [ {idabono:"333",nombre:"Otro",fechaAlta:"test12",fechaBaja:'One2',nota:'One2'}]; 
+	 
+// 	 for (var i = 0; i <= mydata3.length; i++) { 
+// 		 jQuery("#tableClient"+id).jqGrid('addRowData',i + 1, mydata3[i]); 
+//      }
+}
+
+
+function createDialogAsign(event,object,data){
+	
+	 //get the id of the inserted row
+	 var idRow = jQuery.data(document.body,"rowIdAbonoAdded");
+	 var idTable = jQuery("table tr[id="+idRow+"]").parent().parent().attr("id");
+	 var arrayAbonoId = jQuery("#"+idTable).jqGrid('getCol','idabono');
+	 
+	 
+	 var counter=0;
+	 for(var i=0;arrayAbonoId.length>i;i++){
+		 if(arrayAbonoId[i]==data.idabono){
+			 counter++;
+		 } 
+	 }
+	 if(counter==2){
+		 alert("ya tiene el abono!");
+		 jQuery("#"+idTable).jqGrid('delRowData',idRow);	
+		 return;
+	 }
+	 jQuery("#"+idTable).jqGrid('setCell',idRow,"fechaAlta",$.datepicker.formatDate('dd/mm/yy', new Date()));
+		 	 
+	 	
+	 
+
+	
+	jQuery("#dialogAsignAbono").dialog( "option", "title", "Asignar Abono: "+data.nombre );
+	jQuery("#dialogAsignAbono").dialog( "open" );
+	
+}
 
 jQuery("#dialogDeleteClient").dialog({
 	autoOpen: false,
@@ -716,6 +817,46 @@ jQuery("#dialogSuccessOperation").dialog({
 	close: function() {
 	}
 });	 
+
+jQuery("#dialogAsignAbono").dialog({
+	autoOpen: false,
+	width: 550,
+	modal:true,
+	buttons: {
+		"Cerrar": function() {
+			jQuery( this ).dialog( "close" );
+		},
+		"Asignar": function() {
+// 			jQuery(".ui-dialog-buttonset button").hide();
+// 			jQuery(".ui-dialog-buttonset").append("<div class='ui-loadingBar' style='width: 260px; height: 40px;'></div>");
+// 			var toEmail = jQuery("#toEmail").val();
+// 			var subjectEmail = jQuery("#subjectEmail").val();
+// 			var contentEmail = jQuery("#contentEmail").val();
+// 			var emailData = {"toEmail":toEmail.split(";"),"subject":subjectEmail,"content":contentEmail};
+			                				jQuery("#dialogAsignAbono").dialog( "close" );
+
+// 	         jQuery.ajax({
+//                  url: '<c:url value="/sendEmailClient.htm" />',
+//                  type: "POST",
+//                  dataType: "json",
+//                  contentType: "application/json",
+//                  data: JSON.stringify( emailData ), 
+//                  success: function(resp){                                       
+//                 			jSuccess("Operacion realizada exitosamente", "Enviar Email",function(){
+//                 				jQuery("#dialogSendEmail").dialog( "close" );
+//                 				jQuery(".ui-dialog-buttonset div").hide();
+//         						jQuery(".ui-dialog-buttonset button").show();
+//                 			},["Aceptar"]);
+                	                                
+//                  }
+//                });
+		}
+	},
+	resizable: false,
+	draggable: false,
+	close: function() {
+	}
+});	 	
 
 jQuery("#nombreSearch" ).autocomplete({
 	source: function( request, response ) {
@@ -773,35 +914,21 @@ jQuery("#apellidoSearch" ).autocomplete({
 	}
 });
 
-
-$("#addNumberBtn").click(function(){
-	var idLastNum = jQuery('#phone-container input').last().attr("id");
-	var counter = parseInt(idLastNum.split("-")[1]);
-	var phoneForm = jQuery('#phone-form').clone(true);
-	if (counter==1){
-		jQuery('#helpB').hide();
-	}else{
-		$("#phone-form-"+(counter-1)).find('#helpB').hide();
-		$("#phone-form-"+(counter-1)).find("#removeBtn").hide();
-		if (counter<2){
-			phoneForm.find('#helpB').show();
-		}
-	}
-	phoneForm.find("label").html("<strong>"+phoneForm.find("label").text()+" "+(counter+1)+"</strong>");
-	phoneForm.find("#removeBtn").show();
-	phoneForm.find("input").attr("id","telC-"+(counter+1)).val("");
-	phoneForm.attr("id","phone-form-"+counter);
-	phoneForm.insertAfter('#phone-container div:last-child');
-});
-
-$("#removeBtn").click(function(){
-	var idSelecNum = $(this).prev().attr("id");
-	var counter = parseInt(idSelecNum.split("-")[1]);
-	jQuery('#phone-form-'+(counter-1)).remove();		
-	jQuery('#phone-container div:last-child').find('#helpB').show();
-	$("#phone-form-"+(counter-2)).find("#removeBtn").show();
-});
-
+jQuery("input[alt=dateP]").datepicker({
+	 showButtonPanel: true,
+	 dateFormat: "dd/mm/yy",
+	 showOn: "button",
+	 buttonImage: "css/images/calendar.gif",
+	 buttonImageOnly: true,
+	 dayNames: [ "Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado" ],
+	 dayNamesMin: [ "Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa" ],
+	 monthNames: [ "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" ], 
+	 altField: "#actualDate" ,
+	 closeText: "Cerrar", 
+	 currentText: "Hoy"
+	 });
+	 
+	 
 });
 //Other functions
 
@@ -825,11 +952,6 @@ function updateClient(row){
 	jQuery("#comentC").val(row.notas);
 	jQuery("#ccC").val(row.ccNro);
 	jQuery("#cuitC").val(row.cuit);
-	
-	jQuery("#clientState").val(row.estadoCliId);
-	jQuery("#typeId").val(row.iddnitipo);
-	jQuery("#clientNum").val(row.numerocli);
-
 	jQuery("#idClientEdit").val(row.idcliente);
 	jQuery(".editClientDiv").show();
 		
@@ -863,28 +985,7 @@ function cleanScreenSearch(){
 		 jQuery("#localidadSearch").val("");
 		 jQuery("#nombreSearch").focus();
 }
-function cleanScreenEdit(){
-	 jQuery(".editClientDiv").hide();			 
-     jQuery("#nombreC").val("");
- 	 jQuery("#apellidoC").val("");
-	 jQuery("#direccionC").val("");
-	 jQuery("#localidadC").val(0);
-	 jQuery("#emailC").val("");
-	 jQuery("#telC-1").val("");
-	 jQuery("#phone-form-1").remove();
-	 jQuery("#phone-form-2").remove();
-	 jQuery("#cuitC").val("");
-	 jQuery("#comentC").val("");
-	 jQuery("#nombreC").focus();
-	 jQuery("#listClientTable").trigger('reloadGrid');
 
-}
-function cancelEdit(){
-	jQuery("div .ui-inline-cancel").trigger("click");
-	jQuery(".editClientDiv").hide();
-	jQuery('#listClientTable').jqGrid('setGridState','visible');	
-	cleanScreenEdit();
-}	
 
 function capitaliseFirstLetter(string)
 {

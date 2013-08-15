@@ -14,6 +14,9 @@
         <many-to-one name="localidad" class="com.sigepro.web.model.pojo.Localidad" lazy="false" fetch="select">
             <column name="IDLOCALIDAD" />
         </many-to-one>
+        <many-to-one name="catDnitipo" class="com.sigepro.web.model.pojo.CatDnitipo" fetch="select">
+            <column name="DNI_TIPO" />
+        </many-to-one>
         <property name="nombre" type="string">
             <column name="NOMBRE" length="100" />
         </property>
@@ -49,6 +52,9 @@
         </property>
         <property name="cuit" type="string">
             <column name="CUIT" length="30" />
+        </property>
+        <property name="numerocli" type="string">
+            <column name="NUMEROCLI" length="40" />
         </property>
     </class>
 </hibernate-mapping>

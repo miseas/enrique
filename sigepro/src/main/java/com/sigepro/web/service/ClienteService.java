@@ -2,8 +2,10 @@ package com.sigepro.web.service;
 
 
 import java.util.List;
+import java.util.Map;
 
 import com.sigepro.web.model.dto.ClienteDTO;
+import com.sigepro.web.model.dto.ReportData;
 
 public interface ClienteService {
 
@@ -18,5 +20,9 @@ public interface ClienteService {
     List<ClienteDTO> listClientsByParameters(String name, String lastName, String cuit, String score, String fieldOrder, String order);
 
 	Integer loadClientLastId();
+	
+	Map<String,Object> loadAllAddClientCat();
+
+	ReportData loadCPForReport(Integer ocId);
 
 }

@@ -8,6 +8,7 @@ public class ClienteDTO {
 	private String direccion;
 	private Integer localidadId;
 	private String localidad;
+	private Integer iddnitipo;
 	private String email;
 	private String telefono;
 	private String telefono2;
@@ -19,6 +20,7 @@ public class ClienteDTO {
 	private String cuit;
 	private String estadoCliId;
 	private String estadoCli;
+	private String numerocli;
 
 	
 	public Integer getIdcliente() {
@@ -124,6 +126,19 @@ public class ClienteDTO {
 	public void setTelefono3(String telefono3) {
 		this.telefono3 = telefono3;
 	}
+	public Integer getIddnitipo() {
+		return iddnitipo;
+	}
+	public void setIddnitipo(Integer iddnitipo) {
+		this.iddnitipo = iddnitipo;
+	}
+	public String getNumerocli() {
+		return numerocli;
+	}
+	public void setNumerocli(String numerocli) {
+		this.numerocli = numerocli;
+	}
+	
 	
 	
 }

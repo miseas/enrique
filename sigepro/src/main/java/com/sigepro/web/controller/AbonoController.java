@@ -17,8 +17,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.sigepro.web.model.dto.ClienteDTO;
-import com.sigepro.web.service.ClienteService;
+import com.sigepro.web.model.dto.AbonoDTO;
+import com.sigepro.web.model.dto.PageResult;
+import com.sigepro.web.service.AbonoService;
 
 import fr.xebia.audit.Audited;
 
@@ -39,34 +40,37 @@ public class AbonoController {
 	Logger LOG = LoggerFactory.getLogger(AbonoController.class);
 
     @Autowired
-    ClienteService clientService;
-//    @Autowired
-//    EmailSenderService emailSenderService;
+    AbonoService abonoService;
 
-    @Audited(message = "Accion: Busqueda inical de Abonos")
-    @RequestMapping(value = "/searchAbono", method = RequestMethod.POST)
+    @Audited(message = "Accion: Busqueda inical de Abono en Listado")
+    @RequestMapping(value = "/loadlistAbonos", method = RequestMethod.GET)
     public @ResponseBody
-    Object[] searchAbono(@RequestParam(value = "nameStartWith", required = false, defaultValue = "") String name,
-            @RequestParam(value = "maxRows", required = false, defaultValue = "5") int maxRows) {
-        List<ClienteDTO> listClients = new ArrayList<ClienteDTO>();
+    PageResult loadlistClients(@RequestParam(value = "sidx", required = false, defaultValue = "") String fieldName,
+  		  @RequestParam(value = "sord", required = false, defaultValue = "") String order) {
+    	LOG.info("ClientController.listClients()");
+        List<AbonoDTO> listAbonos = new ArrayList<AbonoDTO>();
+        PageResult pageResult = new PageResult();
         try {
-            listClients = clientService.listClientsByName(name,"","", maxRows);
+            listAbonos = abonoService.listAbonosByName("",fieldName,order,20);
+            pageResult.setPage("1");
+            pageResult.setTotal("1");
+            pageResult.setRecords(listAbonos.size() + "");
+            pageResult.setRows(listAbonos);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return listClients.toArray();
+        return pageResult;
     }
-    
     
     @Audited(message = "Accion: Agregar Abono")
     @RequestMapping(value = "/addNewAbono", method = RequestMethod.POST)
     public @ResponseBody
-    Integer saveNewAbono(@RequestBody ClienteDTO newCliente) {
-    	LOG.info("ClientController.saveNewClient()");
+    Integer saveNewAbono(@RequestBody AbonoDTO abonoDTO) {
+    	LOG.info("AbonoController.saveNewAbono()");
         Integer returnNewId = -1;
         try {
-        	returnNewId = clientService.saveClient(newCliente);
+        	returnNewId = abonoService.saveAbono(abonoDTO);
         } catch (Exception e) {
             e.printStackTrace();
             return -1;
@@ -75,13 +79,28 @@ public class AbonoController {
         return 	returnNewId;
     }
 
-    
-    @RequestMapping(value = "/editClient", method = RequestMethod.POST)
+    // @Audited(message = "Accion: Eliminar alertas")
+    @RequestMapping(value = "/delAbono", method = RequestMethod.GET)
     public @ResponseBody
-    boolean editClient(@RequestBody ClienteDTO newCliente) {
+    boolean deleteAbono(@RequestParam(value = "idAbono", required = false, defaultValue = "") Integer idAbono) {
+    	LOG.info("AbonoController.deleteClient()");
+        try {
+        	abonoService.deleteAbonoById(idAbono);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+
+        return true;
+    }
+    
+    
+    @RequestMapping(value = "/editAbono", method = RequestMethod.POST)
+    public @ResponseBody
+    boolean editAbono(@RequestBody AbonoDTO abono) {
     	LOG.info("ClientController.editClient()");
         try {
-            clientService.saveorUpdateClient(newCliente);
+            abonoService.saveorUpdateAbono(abono);
         } catch (Exception e) {
             e.printStackTrace();
             return false;

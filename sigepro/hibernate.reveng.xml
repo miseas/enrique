@@ -2,7 +2,10 @@
 <!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd" >
 
 <hibernate-reverse-engineering>
+  <table-filter match-catalog="PUBLIC" match-schema="SIGEPRODB" match-name="ABONO"/>
+  <table-filter match-catalog="PUBLIC" match-schema="SIGEPRODB" match-name="CAT_DNITIPO"/>
+  <table-filter match-catalog="PUBLIC" match-schema="SIGEPRODB" match-name="CAT_LOCALIDAD"/>
   <table-filter match-catalog="PUBLIC" match-schema="SIGEPRODB" match-name="CLIENTE"/>
+  <table-filter match-catalog="PUBLIC" match-schema="SIGEPRODB" match-name="CLIENTE_ABONO"/>
   <table-filter match-catalog="PUBLIC" match-schema="SIGEPRODB" match-name="ESTADO_CLI"/>
-  <table-filter match-catalog="PUBLIC" match-schema="SIGEPRODB" match-name="LOCALIDAD"/>
 </hibernate-reverse-engineering>
