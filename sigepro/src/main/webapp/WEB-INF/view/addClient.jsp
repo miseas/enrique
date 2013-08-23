@@ -119,6 +119,28 @@
                   <li class="disabled"><a href="#">Otro</a></li>
                 </ul>
                </li>
+               <li class="dropdown">
+               <a href="#" data-target="#" class="dropdown-toggle" data-toggle="dropdown">Incidencia<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li class="nav-header">Operaciones</li>
+                  <li class="divider"></li>
+                  <li><a href="addIncidencia.htm">Crear</a></li>
+                  <li class="divider"></li>
+                  <li class=""><a href="listIncidencia.htm">Buscar</a></li>      
+                  <li class="divider"></li>
+                  <li class="disabled"><a href="">Historial</a></li>
+                </ul>
+               </li>
+               <li class="dropdown">
+               <a href="#" data-target="#" class="dropdown-toggle" data-toggle="dropdown">Agenda<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li class="nav-header">Operaciones</li>
+                  <li class="divider"></li>
+                  <li><a href="agenda.htm">Ver e imprimir</a></li>
+                  <li class="divider"></li>
+                  <li class="disabled"><a href="">Otro</a></li>
+                </ul>
+               </li>
                </sec:authorize>
               <li><a href="#contact">Contacto</a></li>
             </ul>
@@ -166,11 +188,11 @@
 				</div>
 				<div class="span4">    
 					<label for="localidadC"><strong>Localidad</strong></label>
-					<div class="input-prepend">
-						<span class="add-on"><i class="icon-map-marker icon-large"></i></span>
-<!-- 						<input type="text" class="" id="localidadC" name="localidadC" /> -->
+					<div class="input-append">
+<!-- 						<span class="add-on"><i class="icon-map-marker icon-large"></i></span> -->
 						<select id="localidadC" name="localidadC">
-						</select>
+						</select> 
+					     <button class="btn" id="createMapModal" type="button"><i class="icon-map-marker icon-large"></i> Mapa</button>												
 					</div>
 					<label for="emailC"><strong>Correo electrónico</strong></label>
 					 <div class="input-prepend">
@@ -227,6 +249,21 @@
 
       <hr>
 
+	 <div id="modalMap" class="modal hide fade modal-client" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+		<h3 id="myModalLabel">Seleccionar Ubicación en el Mapa</h3>
+		</div>
+	 <div class="modal-body" style="height: 380px">	
+<!--          <div class="row-fluid"> -->
+		<div id="map_canvas" style="width: 100%; height: 100%">
+		</div><!-- 		</div>	 -->
+       </div>
+        <div class="modal-footer">
+		<button class="btn" data-dismiss="modal" onclick="jQuery('#modalMap').modal('hide');"  aria-hidden="true">Cerrar</button>
+		<button class="btn btn-primary"  id="saveCoordinationBtn" >Guardar</button>
+		</div> 
+	</div>
     </div><!--/.fluid-container-->
   <div id="footer">
       <div class="container">
@@ -239,6 +276,9 @@
 	<div id="dialogSuccessOperation"  style="display: none" align="" title="Guardar cliente" >
 	<p style="margin:0px;"><span class="ui-icon ui-icon-circle-check" style="float: left; margin: 0 7px 20px 0;"></span>Operacion realizada exitosamente!</p>
 	</div> 
+	<div id="dialogErrorOperationMap" class="" style="display: none" align="" title="" >
+	<p style="margin:0px;"><i class="icon-warning-sign icon-large" style="float: left; margin: 12px 12px 27px 0;"></i>Para usar esta opción, antes debes escribir la dirección y la localidad</p>
+	</div> 
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
@@ -246,9 +286,12 @@
 <script src="js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/jquery-ui-1.8.16.custom.min.js"></script>
 <script type="text/javascript" src="js/jquery.bt.min.js" ></script>  
-<script type="text/javascript" src="js/jquery.validate.js" ></script>  
+<script type="text/javascript" src="js/jquery.validate.js" ></script> 
+<script type="text/javascript" src="js/googleMapInfo.js" charset="UTF-8"  ></script> 
 <script type="text/javascript">
 jQuery(function() {
+locationInfoWMessage = "Esta bien esta ubicación?<br>Sino es asi, <strong>arrastre el marcador</strong> a la ubicación deseada.";
+
 	cleanScreenAdd();
 	jQuery("#nombreC").focus();
 	
@@ -336,9 +379,9 @@ jQuery(function() {
 	         
 });
 	
-	jQuery("#dialogErrorOperation").dialog({
+	jQuery("#dialogErrorOperation,#dialogErrorOperationMap").dialog({
 		autoOpen: false,
-		height: 170,
+		height: 180,
 		modal:true,
 		buttons: {
 			"Ok": function() {
@@ -394,6 +437,31 @@ jQuery(function() {
 		jQuery('#phone-container div:last-child').find('#helpB').show();
 		$("#phone-form-"+(counter-2)).find("#removeBtn").show();
 	});
+	
+	$("#createMapModal").click(function(){
+		var direccion = jQuery("#direccionC").val();
+		var localidad = jQuery("#localidadC option:selected").text();
+		if (localidad=="" || direccion==""){
+			jQuery("#dialogErrorOperationMap").dialog("option","title","Error al buscar en el mapa");
+     		jQuery("#dialogErrorOperationMap").dialog("open");
+     		return;
+		}	 
+		loadGMScript(callBackFindDir);
+		jQuery( "#modalMap" ).modal( "show" );
+		
+	});	 
+	
+	$("#saveCoordinationBtn").click(function(){
+		var location =returnMarkerPosition();
+		jQuery.data(document.body,"clientLocation",{"latitude":location.jb,"longitude":location.kb} );
+		jQuery( "#modalMap" ).modal( "hide" );	 
+	});
+
+	function callBackFindDir(){
+		var direccion = jQuery("#direccionC").val(); 
+		var localidad = jQuery("#localidadC option:selected").text();
+	    createLocationRequest(direccion+", "+localidad+", Argentina");
+	}
 
 });
 //Other functions

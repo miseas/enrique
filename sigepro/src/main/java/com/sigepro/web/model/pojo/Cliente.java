@@ -1,6 +1,8 @@
 package com.sigepro.web.model.pojo;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 // Generated 30-jun-2013 19:41:32 by Hibernate Tools 3.4.0.CR1
 
@@ -26,6 +28,7 @@ public class Cliente implements java.io.Serializable {
 	private String telefono2;
 	private String telefono3;
 	private String numerocli;
+	private Set<Incidencia> incidencias = new HashSet<Incidencia>(0);
 
 	public Cliente() {
 	}
@@ -191,6 +194,14 @@ public class Cliente implements java.io.Serializable {
 
 	public void setNumerocli(String numerocli) {
 		this.numerocli = numerocli;
+	}
+
+	public Set<Incidencia> getIncidencias() {
+		return incidencias;
+	}
+
+	public void setIncidencias(Set<Incidencia> incidencias) {
+		this.incidencias = incidencias;
 	}
 	
 	

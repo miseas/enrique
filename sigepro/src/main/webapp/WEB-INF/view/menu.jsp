@@ -1,87 +1,56 @@
-<div id="buttons">
-	<div class="container">		
-		<div class="span-24 last">
-			
-			<ul id="sddm">
-			    <li><a href="#" 
-			        onmouseover="mopen('m1')" 
-			        onmouseout="mclosetime()">Visita</a>
-			        <div id="m1" 
-			            onmouseover="mcancelclosetime()" 
-			            onmouseout="mclosetime()">
-			        <a href="#">Sub1</a>
-			        <a href="#">Sub2</a>
-			        <a href="#">Sub3</a>
-			        </div>
-			    </li>
-			    <li><a href="#" 
-			        onmouseover="mopen('m2')" 
-			        onmouseout="mclosetime()">Orden de compra</a>
-			        <div id="m2" 
-			            onmouseover="mcancelclosetime()" 
-			            onmouseout="mclosetime()">
-			        <a href="<%=request.getContextPath()%>/ordenCompra.htm">Nueva</a>
-			        <a href="<%=request.getContextPath()%>/ordenCompraBuscar.htm">Buscar</a>
-			        <a href="<%=request.getContextPath()%>/ordenCompraPagos.htm">Pagos</a>
-			        </div>
-			    </li>
-			    <li><a href="#" 
-			        onmouseover="mopen('m3')" 
-			        onmouseout="mclosetime()">Presupuesto</a>
-			        <div id="m3" 
-			            onmouseover="mcancelclosetime()" 
-			            onmouseout="mclosetime()">
-			        <a href="#">Sub1</a>
-			        <a href="#">Sub2</a>
-			        <a href="#">Sub3</a>
-			        </div>
-			    </li>
-			    <li><a href="#" 
-			        onmouseover="mopen('m4')" 
-			        onmouseout="mclosetime()">Cliente</a>
-			        <div id="m4" 
-			            onmouseover="mcancelclosetime()" 
-			            onmouseout="mclosetime()">
-						<a href="<%=request.getContextPath()%>/listClient.htm">Listado</a>
-						<a href="<%=request.getContextPath()%>/addClient.htm">Agregar</a>
-			        </div>
-			    </li>
-			    <li><a href="#" 
-			        onmouseover="mopen('m5')" 
-			        onmouseout="mclosetime()">Proveedor</a>
-			        <div id="m5" 
-			            onmouseover="mcancelclosetime()" 
-			            onmouseout="mclosetime()">
-						<a href="<%=request.getContextPath()%>/listProv.htm">Listado</a>
-						<a  href="<%=request.getContextPath()%>/addprov.htm">Agregar</a>
-			        </div>
-			    </li>
-			    <li><a href="#" 
-			        onmouseover="mopen('m6')" 
-			        onmouseout="mclosetime()">Caja</a>
-			        <div id="m6" 
-			            onmouseover="mcancelclosetime()" 
-			            onmouseout="mclosetime()">
-			        <a href="#">Sub1</a>
-			        <a href="#">Sub2</a>
-			        <a href="#">Sub3</a>
-			        </div>
-			    </li>
-			    <li><a href="#" 
-			        onmouseover="mopen('m7')" 
-			        onmouseout="mclosetime()">Pedidos</a>
-			        <div id="m7" 
-			            onmouseover="mcancelclosetime()" 
-			            onmouseout="mclosetime()">
-			        <a href="#">Sub1</a>
-			        <a href="#">Sub2</a>
-			        <a href="#">Sub3</a>
-			        </div>
-			    </li>
-			    
-			</ul>
-			<div style="clear:both"></div>
-			
-		</div>
-	</div>
-</div>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="#">SigePRO</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+            <li class="divider-vertical"></li>
+            <sec:authorize ifAnyGranted="ROLE_USER,ROLE_ADMIN">
+              <li ><a href="login.htm">Inicio</a></li>
+              <li class=" active dropdown">
+               <a href="#" data-target="#" class="dropdown-toggle" data-toggle="dropdown">Clientes <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li class="nav-header">Operaciones</li>
+                  <li class="divider"></li>
+                  <li><a href="addClient.htm" >Agregar</a></li>
+                  <li class="divider"></li>
+                  <li class=""><a href="listClient.htm">Buscar</a></li>
+                  <li class="divider"></li>
+                  <li class=""><a href="assignClientAbono.htm">Asignar Abono</a></li>
+                </ul>
+               </li>
+               <li class="dropdown">
+               <a href="#" data-target="#" class="dropdown-toggle" data-toggle="dropdown">Abonos<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li class="nav-header">Operaciones</li>
+                  <li class="divider"></li>
+                  <li><a href="addAbono.htm">Crear</a></li>
+                  <li class="divider"></li>
+                  <li class=""><a href="listAbonos.htm">Buscar</a></li>
+                  <li class="divider"></li>
+                  <li class="disabled"><a href="#">Otro</a></li>
+                </ul>
+               </li>
+               </sec:authorize>
+              <li><a href="#contact">Contacto</a></li>
+            </ul>
+             <div lang="alreadyLoggued" class="pull-right" style="" id="templatemo_main">
+					<p class="navbar-text pull-left">
+             		 Logueado como 
+             		 	 <sec:authorize ifAnyGranted="ROLE_USER,ROLE_ADMIN">
+						 <strong><sec:authentication property="principal.username"/></strong>
+						 </sec:authorize>
+           			 </p>
+           			 <button type="button" onclick="javascript:window.location.href='logout'" style="margin-left: 10px;" class="btn btn-primary pull-right">
+						 Salir<i style="margin-left:5px" class="icon-share"></i>
+			         </button>
+				</div>		        
+	       </div><!--/.nav-collapse -->
+          </div>
+        </div>
+      </div>

@@ -15,7 +15,7 @@
             <column name="IDLOCALIDAD" />
         </many-to-one>
         <many-to-one name="catDnitipo" class="com.sigepro.web.model.pojo.CatDnitipo" fetch="select">
-            <column name="DNI_TIPO" />
+            <column name="IDDNITIPO" />
         </many-to-one>
         <property name="nombre" type="string">
             <column name="NOMBRE" length="100" />
@@ -35,7 +35,7 @@
         <property name="telefono2" type="string">
             <column name="TELEFONO2" length="25" />
         </property>
-                <property name="telefono3" type="string">
+        <property name="telefono3" type="string">
             <column name="TELEFONO3" length="25" />
         </property>
         <property name="notas" type="string">
@@ -56,5 +56,11 @@
         <property name="numerocli" type="string">
             <column name="NUMEROCLI" length="40" />
         </property>
+         <set name="incidencias" table="INCIDENCIA" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="IDTIPOINCIDENCIA" />
+            </key>
+            <one-to-many class="com.sigepro.web.model.pojo.Incidencia" />
+        </set>
     </class>
 </hibernate-mapping>

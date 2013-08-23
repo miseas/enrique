@@ -64,9 +64,9 @@
 
 <body>
 
-	<jsp:include flush="true" page="header.jsp">
-		<jsp:param name="left" value="1" />
-	</jsp:include>
+<%-- 	<jsp:include flush="true" page="header.jsp"> --%>
+<%-- 		<jsp:param name="left" value="1" /> --%>
+<%-- 	</jsp:include> --%>
 
 
 
@@ -98,9 +98,9 @@
 
 
 
-	<jsp:include flush="true" page="footer.jsp">
-		<jsp:param name="left" value="1" />
-	</jsp:include>
+<%-- 	<jsp:include flush="true" page="footer.jsp"> --%>
+<%-- 		<jsp:param name="left" value="1" /> --%>
+<%-- 	</jsp:include> --%>
 
 </body>
 

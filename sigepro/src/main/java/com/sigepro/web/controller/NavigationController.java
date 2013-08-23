@@ -73,6 +73,29 @@ public class NavigationController {
         return model;
     }
     
+    
+    @RequestMapping(value = "/addIncidencia")
+    public ModelAndView loadAddIncidenciaPage() {
+        ModelAndView model = new ModelAndView();
+        model.setViewName("addIncidencia");
+        return model;
+    }
+    
+    @RequestMapping(value = "/listIncidencia")
+    public ModelAndView loadListIncidenciaPage() {
+        ModelAndView model = new ModelAndView();
+        model.setViewName("listIncidencia");
+        return model;
+    }
+    
+    
+    @RequestMapping(value = "/agenda")
+    public ModelAndView loadAgendaPage() {
+        ModelAndView model = new ModelAndView();
+        model.setViewName("/agenda");
+        return model;
+    }
+    
 //    @RequestMapping(value = "/alerts")
 //    public ModelAndView loadAlertsPage() {
 //        System.out.println("NavigationController.loadAlertsPage()");

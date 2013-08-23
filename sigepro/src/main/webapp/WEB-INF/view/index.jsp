@@ -112,6 +112,28 @@
                   <li class="disabled"><a href="#">Otro</a></li>
                 </ul>
                </li>
+               <li class="dropdown">
+               <a href="#" data-target="#" class="dropdown-toggle" data-toggle="dropdown">Incidencia<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li class="nav-header">Operaciones</li>
+                  <li class="divider"></li>
+                  <li><a href="addIncidencia.htm">Crear</a></li>
+                  <li class="divider"></li>
+                  <li class=""><a href="listIncidencia.htm">Buscar</a></li>
+                  <li class="divider"></li>
+                  <li class="disabled"><a href="">Historial</a></li>
+                </ul>
+               </li>
+               <li class="dropdown">
+               <a href="#" data-target="#" class="dropdown-toggle" data-toggle="dropdown">Agenda<b class="caret"></b></a>
+                 <ul class="dropdown-menu">
+                  <li class="nav-header">Operaciones</li>
+                  <li class="divider"></li>
+                  <li><a href="agenda.htm">Ver e imprimir</a></li>
+                  <li class="divider"></li>
+                  <li class="disabled"><a href="">Otro</a></li>
+                </ul>
+               </li>
                </sec:authorize>
               <li><a href="#contact">Contacto</a></li>
             </ul>

@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 15-ago-2013 0:47:31 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.sigepro.web.model.pojo.Incidencia" table="INCIDENCIA" schema="SIGEPRODB" >
+        <id name="idincidencia" type="java.lang.Long">
+            <column name="IDINCIDENCIA" />
+            <generator class="increment" />
+        </id>
+        <many-to-one name="tipoInc" class="com.sigepro.web.model.pojo.TipoInc" fetch="select">
+            <column name="IDTIPOINCIDENCIA" />
+        </many-to-one>
+        <many-to-one name="estadoInc" class="com.sigepro.web.model.pojo.EstadoInc" fetch="select">
+            <column name="IDESTADOINC" />
+        </many-to-one>
+        <many-to-one name="cliente" class="com.sigepro.web.model.pojo.Cliente" fetch="select">
+            <column name="IDCLIENTE" />
+        </many-to-one>
+        <property name="fechaInicio" type="timestamp">
+            <column name="FECHA_INICIO" length="26" />
+        </property>
+        <property name="fechaCierre" type="timestamp">
+            <column name="FECHA_CIERRE" length="26" />
+        </property>
+        <property name="fechaUltMod" type="timestamp">
+            <column name="FECHA_ULT_MOD" length="26" />
+        </property>
+        <property name="descripcion" type="string">
+            <column name="DESCRIPCION" length="200" />
+        </property>
+          <property name="titulo" type="string">
+            <column name="TITULO" length="100" />
+        </property>
+        <set name="visitas" table="VISITA" inverse="true" lazy="false" fetch="select">
+            <key>
+                <column name="IDINCIDENCIA" />
+            </key>
+            <one-to-many class="com.sigepro.web.model.pojo.Visita" />
+        </set>
+    </class>
+</hibernate-mapping>

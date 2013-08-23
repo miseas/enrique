@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 24-jul-2013 23:20:54 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.sigepro.web.model.pojo.Visita" table="VISITA" schema="SIGEPRODB">
+        <id name="idvisita" type="java.lang.Long">
+            <column name="IDVISITA" />
+            <generator class="increment" />
+        </id>
+        <many-to-one name="incidencia" class="com.sigepro.web.model.pojo.Incidencia" fetch="select">
+            <column name="IDINCIDENCIA" />
+        </many-to-one>
+        <property name="titulo" type="string">
+            <column name="TITULO" length="100" />
+        </property>
+        <property name="descripcion" type="string">
+            <column name="DESCRIPCION" length="200" />
+        </property>
+        <property name="inicia" type="timestamp">
+            <column name="INICIA" length="26" />
+        </property>
+        <property name="termina" type="timestamp">
+            <column name="TERMINA" length="26" />
+        </property>
+        <property name="diacompleto" type="java.lang.Boolean">
+            <column name="DIACOMPLETO" />
+        </property>
+        <property name="direccion" type="string">
+            <column name="DIRECCION" length="150" />
+        </property>
+        <property name="estado"  type="java.lang.Integer">
+            <column name="ESTADO"  />
+        </property>
+    </class>
+</hibernate-mapping>

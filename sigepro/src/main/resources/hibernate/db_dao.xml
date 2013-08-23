@@ -19,7 +19,11 @@
     		
     	<bean id="abonoDAO" parent="hibernateDaoSupport"
     		class="com.sigepro.web.dao.impl.AbonoDAOImpl" />
-    
-    
+
+    	<bean id="incidenciaDAO" parent="hibernateDaoSupport"
+    		class="com.sigepro.web.dao.impl.IncidenciaDAOImpl" />
+    		    
+    	<bean id="visitaDAO" parent="hibernateDaoSupport"
+    		class="com.sigepro.web.dao.impl.VisitaDAOImpl" />    
 	
 </beans>
