@@ -149,6 +149,8 @@ public class AgendaController {
         return listVisits.toArray();
     }
     
+
+    
 //  @Audited(message = "Accion: Ver historial pedidos")
 //  @RequestMapping(value = "/loadListClientsByParameter", method = RequestMethod.GET)
 //  public @ResponseBody

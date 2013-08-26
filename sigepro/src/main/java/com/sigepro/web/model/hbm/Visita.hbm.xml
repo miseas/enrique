@@ -29,8 +29,11 @@
         <property name="direccion" type="string">
             <column name="DIRECCION" length="150" />
         </property>
-        <property name="estado"  type="java.lang.Integer">
-            <column name="ESTADO"  />
-        </property>
+        <many-to-one name="estadoVis" class="com.sigepro.web.model.pojo.EstadoVis" fetch="select">
+            <column name="IDESTADOVIS" />
+        </many-to-one>
+<!--         <property name="estado"  type="java.lang.Integer"> -->
+<!--             <column name="ESTADO"  /> -->
+<!--         </property> -->
     </class>
 </hibernate-mapping>

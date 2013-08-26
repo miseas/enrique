@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.dao.DataAccessException;
 
 import com.sigepro.web.model.dto.VisitaDTO;
+import com.sigepro.web.model.pojo.EstadoVis;
 import com.sigepro.web.model.pojo.Visita;
 
 
@@ -23,6 +24,8 @@ public interface VisitaDAO extends DAO{
      List<VisitaDTO> getFullListVisitDTO(final int maxResult);
 
      List<VisitaDTO> loadVisitListById(String listIdVisita) throws DataAccessException;
+
+     public List<EstadoVis> loadAllEstadoVisita() throws DataAccessException;
 
 
 }

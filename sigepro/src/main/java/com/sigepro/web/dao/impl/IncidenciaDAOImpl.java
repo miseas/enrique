@@ -24,7 +24,9 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import com.sigepro.web.dao.IncidenciaDAO;
 import com.sigepro.web.model.dto.IncidenciaDTO;
 import com.sigepro.web.model.dto.VisitaDTO;
+import com.sigepro.web.model.pojo.EstadoInc;
 import com.sigepro.web.model.pojo.Incidencia;
+import com.sigepro.web.model.pojo.TipoInc;
 
 
 /**
@@ -155,7 +157,7 @@ public class IncidenciaDAOImpl extends HibernateDaoSupport implements Incidencia
             public Object doInHibernate(Session session) throws HibernateException, SQLException {
 
                 Query query = session.createQuery(
-                        "select new com.decorart.web.model.dto.VisitaDTO(V.idvisita,C.idcliente,C.nombre,C.apellido,V.titulo,V.descripcion,V.inicia,V.termina,V.direccion,V.diacompleto,V.estado) "
+                        "select new com.decorart.web.model.dto.VisitaDTO(V.idvisita,C.idcliente,C.nombre,C.apellido,V.titulo,V.descripcion,V.inicia,V.termina,V.direccion,V.diacompleto,V.estadovis.idestadovis) "
                                 + " FROM Visita as V, Cliente as C" + " WHERE V.cliente.idcliente=C.idcliente order by C.idcliente").setMaxResults(
                         maxResult);
 
@@ -184,5 +186,30 @@ public class IncidenciaDAOImpl extends HibernateDaoSupport implements Incidencia
     public void deleteIncidencia(Incidencia incidencia) throws DataAccessException {
     	LOG.info("deleteIncidencia()");
         getHibernateTemplate().delete(incidencia);
+    }
+    
+    
+    @SuppressWarnings("unchecked")
+    public List<TipoInc> loadAllTipoIncidencia() throws DataAccessException {
+
+        List<TipoInc> lstResults = getHibernateTemplate().find(
+                "select T from TipoInc as T");
+
+        if (lstResults.isEmpty()) {
+            return null;
+        } else
+            return lstResults;
+    }
+    
+    @SuppressWarnings("unchecked")
+    public List<EstadoInc> loadAllEstadoIncidencia() throws DataAccessException {
+
+        List<EstadoInc> lstResults = getHibernateTemplate().find(
+                "select T from EstadoInc as T");
+
+        if (lstResults.isEmpty()) {
+            return null;
+        } else
+            return lstResults;
     }
 }

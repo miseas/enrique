@@ -11,11 +11,15 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.jfree.util.Log;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,10 +31,12 @@ import com.sigepro.web.model.dto.IncidenciaData;
 import com.sigepro.web.model.dto.VisitaDTO;
 import com.sigepro.web.model.pojo.Cliente;
 import com.sigepro.web.model.pojo.EstadoInc;
+import com.sigepro.web.model.pojo.EstadoVis;
 import com.sigepro.web.model.pojo.Incidencia;
 import com.sigepro.web.model.pojo.TipoInc;
 import com.sigepro.web.model.pojo.Visita;
 import com.sigepro.web.service.IncidenciaService;
+import com.sigepro.web.transformer.Transformer;
 
 
 
@@ -53,7 +59,10 @@ public class IncidenciaServiceImpl implements IncidenciaService {
 	Logger LOG = LoggerFactory.getLogger(IncidenciaServiceImpl.class);
 	private SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy");
 
-
+	@Autowired
+	@Qualifier("visitaTransformer")
+	Transformer<Visita, VisitaDTO> visitaTransformer;
+	
     private IncidenciaDAO getIncidenciaDAO() {
         return DAOLocator.getInstance().lookup(IncidenciaDAO.class.getName());
     }
@@ -83,7 +92,7 @@ public class IncidenciaServiceImpl implements IncidenciaService {
         incidencia.setTitulo(incidenciaDTO.getTitulo());
   
   
-        Long visitaId =getIncidenciaDAO().saveIncidencia(incidencia);
+        Long incidenciaId =getIncidenciaDAO().saveIncidencia(incidencia);
         
         if (visitaDTO.getFechaInicia()!=null && !visitaDTO.getFechaInicia().isEmpty()){
 	        Visita visita =  new Visita();
@@ -107,15 +116,85 @@ public class IncidenciaServiceImpl implements IncidenciaService {
 	        visita.setTitulo(visitaDTO.getTitulo());
 			visita.setIncidencia(incidencia);      
 			visita.setDireccion(visitaDTO.getDireccion());
-			visita.setEstado(Integer.parseInt(visitaDTO.getEstado()));
+			EstadoVis estadoVis = new EstadoVis();
+			estadoVis.setIdestadovis(Integer.parseInt(visitaDTO.getEstadoId()));
+			visita.setEstadoVis(estadoVis);
 	        getVisitaDAO().saveVisita(visita);
         }
         
-        return visitaId;
+        return incidenciaId;
 
     }
     
+    public Long updateIncidencia(IncidenciaData incidenciaData) throws ParseException {
 
+    	IncidenciaDTO incidenciaDTO = incidenciaData.getIncidencia();
+    	VisitaDTO visitaDTO = incidenciaData.getVisita();		
+    	
+        Incidencia incidencia = getIncidenciaDAO().loadIncidenciaById(incidenciaDTO.getIdincidencia());
+        
+        incidencia.setDescripcion(incidenciaDTO.getDescripcion());
+        EstadoInc estadoInc = new EstadoInc();
+        estadoInc.setIdestadoinc(incidenciaDTO.getIdestadoinc());
+		incidencia.setEstadoInc(estadoInc);
+        
+        TipoInc tipoInc = new TipoInc();
+        tipoInc.setIdtipoincidencia(incidenciaDTO.getIdtipoincidencia());
+		incidencia.setTipoInc(tipoInc);
+        incidencia.setTitulo(incidenciaDTO.getTitulo());
+  
+        Long incidenciaId =getIncidenciaDAO().saveIncidencia(incidencia);
+        
+        if ((visitaDTO.getFechaInicia()!=null && !visitaDTO.getFechaInicia().isEmpty()) || visitaDTO.getIdvisita()!=null ){
+	       
+        	Visita visita =  new Visita();
+        	if (visitaDTO.getIdvisita()!=null && !visitaDTO.getIdvisita().isEmpty() ){
+        		visita = getVisitaDAO().loadVisitaById(Long.parseLong(visitaDTO.getIdvisita()));
+        	}
+        	try {
+        		Integer estadoIdV = Integer.parseInt(visitaDTO.getEstadoId());
+        		if (estadoIdV>9){ //visita cancelada
+        			EstadoVis estadoVis = new EstadoVis();
+        			estadoVis.setIdestadovis(estadoIdV);
+        			visita.setEstadoVis(estadoVis);
+        			visita.setDescripcion(visitaDTO.getDescripcion());
+        	        getVisitaDAO().saveVisita(visita);
+        	        return incidenciaId;
+        		}
+			} catch (NumberFormatException e) {
+				LOG.warn("El estado de la visita no se puedo obtener!");
+			}
+        	 
+        	
+	        
+	        DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+	        Date inicialTime = null;
+			try {
+				inicialTime = df.parse(visitaDTO.getFechaInicia()+" "+visitaDTO.getHoraInicia());
+			
+	        if (visitaDTO.getDiacompleto()==null || !visitaDTO.getDiacompleto()){
+		        Date endTime = df.parse(visitaDTO.getFechaTermina()+" "+visitaDTO.getHoraTermina());
+		        visita.setTermina(endTime);
+	        }
+	        
+			} catch (ParseException e) {
+				Log.error(e.getMessage());
+			}
+	        visita.setDescripcion(incidenciaDTO.getDescripcion());
+	        visita.setDiacompleto(visitaDTO.getDiacompleto());
+	        visita.setInicia(inicialTime);
+	        visita.setTitulo(visitaDTO.getTitulo());
+			visita.setIncidencia(incidencia);      
+			visita.setDireccion(visitaDTO.getDireccion());
+			EstadoVis estadoVis = new EstadoVis();
+			estadoVis.setIdestadovis(Integer.parseInt(visitaDTO.getEstadoId()));
+			visita.setEstadoVis(estadoVis);
+	        getVisitaDAO().saveVisita(visita);
+        }
+        
+        return incidenciaId;
+
+    }
 
     public List<IncidenciaDTO> listIncidenciasByParameters(String clientId, String fechaIni, Integer typeIncidencia, Integer stateIncidencia, String fieldSort, String sort) {
     	  List<IncidenciaDTO> resultList = new ArrayList<IncidenciaDTO>();
@@ -154,6 +233,45 @@ public class IncidenciaServiceImpl implements IncidenciaService {
         getIncidenciaDAO().deleteIncidencia(delIncidencia);
 
     }
+    
+	public Map<String,Object> loadAllAddIncidenciaCat(){
+		LOG.info("loadAllAddIncidenciaCat");
+		Map<String,Object> mapElements = new HashMap<String, Object>();
+        try {
+        	List<EstadoInc> estadoInc = getIncidenciaDAO().loadAllEstadoIncidencia();
+        	List<TipoInc> tipoInc = getIncidenciaDAO().loadAllTipoIncidencia();
+        	List<EstadoVis> estadoVisita = getVisitaDAO().loadAllEstadoVisita();
+        	mapElements.put("estadoI", estadoInc);
+        	mapElements.put("tipoI", tipoInc);
+        	mapElements.put("estadoV", estadoVisita);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return mapElements;
+
+	}
+	
+	
+	public VisitaDTO loadVisitDTOByIncidencia(Long incidenciaId) {
+		VisitaDTO visitaDTO = new VisitaDTO();
+
+		try {
+			Incidencia incidencia = getIncidenciaDAO().loadIncidenciaById(incidenciaId);
+			//TODO
+			for (Visita visita : incidencia.getVisitas()) {
+				if (visita.getEstadoVis().getIdestadovis()==0){
+					visitaDTO = visitaTransformer.transform(visita);
+				}
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			LOG.error("Ninguna visita fue asignada aun o no encontrada");
+		}
+
+		return visitaDTO;
+	}
 
 //	public Integer loadClientLastId(){
 //		Integer lastId= -1;
@@ -168,23 +286,7 @@ public class IncidenciaServiceImpl implements IncidenciaService {
 //
 //	}
 //	
-//	public Map<String,Object> loadAllAddClientCat(){
-//		LOG.info("loadAllAddClientCat");
-//		Map<String,Object> mapElements = new HashMap<String, Object>();
-//        try {
-//        	List<Localidad> localidades = getClientDAO().loadAllLocalidades();
-//        	List<CatDnitipo> typeDni = getClientDAO().loadAllTypeDni();
-//        	List<EstadoCli> clientState = getClientDAO().loadAllClientState();
-//        	mapElements.put("localidades", localidades);
-//        	mapElements.put("typeID", typeDni);
-//        	mapElements.put("estadoCli", clientState);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//
-//        return mapElements;
-//
-//	}
+
 	
 //	public ReportData loadCPForReport(Integer ocId){
 //        ReportData reportData = null;

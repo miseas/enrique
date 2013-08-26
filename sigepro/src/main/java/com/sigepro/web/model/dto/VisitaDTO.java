@@ -34,7 +34,7 @@ public class VisitaDTO {
 	private String horaTermina;
 	private String direccion;
 	private Boolean diacompleto;	
-	private String estado;
+	private String estadoId;
 	
 	public VisitaDTO() {
 		super();
@@ -59,7 +59,7 @@ public class VisitaDTO {
 		this.horaTermina = timeFormat.format(fechaTermina);
 		this.direccion = direccion;
 		this.diacompleto = diacompleto;
-		this.estado=estado+"";
+		this.estadoId=estado+"";
 	}
 	
 	public VisitaDTO(Long idvisita, String clienteNombre,String clienteApellido,
@@ -78,7 +78,7 @@ public class VisitaDTO {
 		this.horaTermina = timeFormat.format(fechaTermina);
 		this.direccion = direccion;
 		this.diacompleto = diacompleto;
-		this.estado=estado+"";
+		this.estadoId=estado+"";
 	}
 	
 	public String getIdvisita() {
@@ -148,12 +148,12 @@ public class VisitaDTO {
 		this.clienteNombre = clienteNombre;
 	}
 
-	public String getEstado() {
-		return estado;
+	public String getEstadoId() {
+		return estadoId;
 	}
 
-	public void setEstado(String estado) {
-		this.estado = estado;
+	public void setEstado(String estadoId) {
+		this.estadoId = estadoId;
 	}
 	
 	

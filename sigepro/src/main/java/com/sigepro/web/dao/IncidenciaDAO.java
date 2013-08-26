@@ -6,7 +6,9 @@ import java.util.List;
 import org.springframework.dao.DataAccessException;
 
 import com.sigepro.web.model.dto.IncidenciaDTO;
+import com.sigepro.web.model.pojo.EstadoInc;
 import com.sigepro.web.model.pojo.Incidencia;
+import com.sigepro.web.model.pojo.TipoInc;
 
 public interface IncidenciaDAO extends DAO{
 
@@ -18,5 +20,8 @@ public interface IncidenciaDAO extends DAO{
 
     void deleteIncidencia(Incidencia incidencia) throws DataAccessException;
 
+    List<TipoInc> loadAllTipoIncidencia() throws DataAccessException;
+
+    List<EstadoInc> loadAllEstadoIncidencia() throws DataAccessException;
 
 }

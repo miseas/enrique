@@ -54,13 +54,11 @@
 	<bean id="abonoTransformer" class="com.sigepro.web.transformer.AbonoTransformer">
 	</bean>
 	
-<!-- 	<bean id="ordenCompraTransformer" class="com.decorart.web.transformer.OrdenCompraTransformer"> -->
-<!-- 	</bean> -->
+	<bean id="visitaTransformer" class="com.sigepro.web.transformer.VisitaTransformer">
+	</bean>
 	
 <!-- 	<bean id="productOCTransformer" class="com.decorart.web.transformer.ProductOCTransformer"> -->
 <!-- 	</bean> -->
 	
-<!-- 	<bean id="pagoOCTransformer" class="com.decorart.web.transformer.PagoOCTransformer"> -->
-<!-- 	</bean> -->
 
 </beans>

@@ -11,13 +11,13 @@ public class Visita implements java.io.Serializable {
 
 	private Long idvisita;
 	private Incidencia incidencia;
+	private EstadoVis estadoVis;
 	private String titulo;
 	private String descripcion;
 	private Date inicia;
 	private Date termina;
 	private String direccion;
 	private Boolean diacompleto;
-	private Integer estado;
 
 	public Visita() {
 	}
@@ -102,13 +102,14 @@ public class Visita implements java.io.Serializable {
 		this.direccion = direccion;
 	}
 
-	public Integer getEstado() {
-		return estado;
+	public EstadoVis getEstadoVis() {
+		return estadoVis;
 	}
 
-	public void setEstado(Integer estado) {
-		this.estado = estado;
+	public void setEstadoVis(EstadoVis estadoVis) {
+		this.estadoVis = estadoVis;
 	}
+
 
 	
 }

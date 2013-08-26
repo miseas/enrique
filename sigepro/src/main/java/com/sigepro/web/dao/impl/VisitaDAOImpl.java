@@ -23,6 +23,7 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.sigepro.web.dao.VisitaDAO;
 import com.sigepro.web.model.dto.VisitaDTO;
+import com.sigepro.web.model.pojo.EstadoVis;
 import com.sigepro.web.model.pojo.Visita;
 
 
@@ -117,7 +118,7 @@ public class VisitaDAOImpl extends HibernateDaoSupport implements VisitaDAO {
 		    			}
 
 		                Query query = session.createQuery(
-		                        "select new com.decorart.web.model.dto.VisitaDTO(V.idvisita,C.idcliente,C.nombre,C.apellido,V.titulo,V.descripcion,V.inicia,V.termina,V.direccion,V.diacompleto,V.estado) "
+		                        "select new com.decorart.web.model.dto.VisitaDTO(V.idvisita,C.idcliente,C.nombre,C.apellido,V.titulo,V.descripcion,V.inicia,V.termina,V.direccion,V.diacompleto,V.estadoVis.idestadovis) "
 		                                + " FROM Visita as V, Cliente as C" + " WHERE V.cliente.idcliente=C.idcliente "+finalQuery+" order by C.idcliente");
 
 		                List result = query.list();
@@ -139,7 +140,7 @@ public class VisitaDAOImpl extends HibernateDaoSupport implements VisitaDAO {
             public Object doInHibernate(Session session) throws HibernateException, SQLException {
 
                 Query query = session.createQuery(
-                        "select new com.sigepro.web.model.dto.VisitaDTO(V.idvisita,C.idcliente,C.nombre,C.apellido,V.titulo,V.descripcion,V.inicia,V.termina,V.direccion,V.diacompleto,V.estado) "
+                        "select new com.sigepro.web.model.dto.VisitaDTO(V.idvisita,C.idcliente,C.nombre,C.apellido,V.titulo,V.descripcion,V.inicia,V.termina,V.direccion,V.diacompleto,V.estadoVis.idestadovis) "
                                 + " FROM Visita as V, Cliente as C, Incidencia as I" + " WHERE I.cliente.idcliente=C.idcliente and I.idincidencia=V.incidencia.idincidencia order by C.idcliente");
                 if (maxResult!=-1){
                 	query.setMaxResults(
@@ -175,7 +176,7 @@ public class VisitaDAOImpl extends HibernateDaoSupport implements VisitaDAO {
             public Object doInHibernate(Session session) throws HibernateException, SQLException {
 
                 Query query = session.createQuery(
-                        "select new com.decorart.web.model.dto.VisitaDTO(V.idvisita,C.nombre,C.apellido,V.titulo,V.descripcion,V.inicia,V.termina,V.direccion,V.diacompleto,V.estado) "
+                        "select new com.decorart.web.model.dto.VisitaDTO(V.idvisita,C.nombre,C.apellido,V.titulo,V.descripcion,V.inicia,V.termina,V.direccion,V.diacompleto,V.estadoVis.idestadovis) "
                                 + " FROM Visita as V, Cliente as C" + " WHERE V.cliente.idcliente=C.idcliente and V.idvisita in ("+listIdVisita+") order by C.idcliente");
                 
 
@@ -190,6 +191,19 @@ public class VisitaDAOImpl extends HibernateDaoSupport implements VisitaDAO {
             return null;
         } else
             return listResult;
+    }
+    
+    
+    @SuppressWarnings("unchecked")
+    public List<EstadoVis> loadAllEstadoVisita() throws DataAccessException {
+
+        List<EstadoVis> lstResults = getHibernateTemplate().find(
+                "select T from EstadoVis as T");
+
+        if (lstResults.isEmpty()) {
+            return null;
+        } else
+            return lstResults;
     }
     
     

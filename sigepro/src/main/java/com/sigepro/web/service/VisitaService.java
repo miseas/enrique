@@ -35,8 +35,6 @@ public interface VisitaService {
 
     List<VisitaDTO> loadVisitsForReport(String listVisitId);
     
-   List<VisitaDTO> listClientsByParameters(String clientId, String fechaIni, String timeIni, String fechaTer, String timeTer, String direction);
-
-
+    List<VisitaDTO> listClientsByParameters(String clientId, String fechaIni, String timeIni, String fechaTer, String timeTer, String direction);
 
 }

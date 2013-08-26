@@ -568,7 +568,7 @@ $(document).ready(function() {
   		  		
   		var newVisita = {'idvisita':idVisita, 'clienteId':clientId,'titulo':"",'descripcion':descripcion,
   					    'fechaInicia':fechaInicia,'fechaTermina':fechaInicia,'horaInicia':tiempoInicio,
-  						'horaTermina':tiempoFin,'diacompleto':todoDia, 'direccion':directionVisit,'estado':puntualCheck};		  		 
+  						'horaTermina':tiempoFin,'diacompleto':todoDia, 'direccion':directionVisit,'estadoId':puntualCheck};		  		 
   		 
         jQuery.ajax({
              url: urlServ,
@@ -818,7 +818,7 @@ function loadAllVisits(){
 			         'start':new Date(yearI,parseInt(monthI)-1,dayI,hourI,minI),
 			         'end': new Date(yearI,parseInt(monthI)-1,dayI,hourF,minF),
 			         'allDay':visit.diacompleto,
-			         'color':visit.estado=='1'?"red":""
+			         'color':visit.estadoId=='100'?"red":""
 			         };    
         		sourceVisits.push(source);
         	});

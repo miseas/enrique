@@ -165,7 +165,7 @@ public class ClientController {
       return pageResult;
   }
     
-   // @Audited(message = "Accion: Eliminar alertas")
+    @Audited(message = "Accion: Eliminar Cliente")
     @RequestMapping(value = "/delClient", method = RequestMethod.GET)
     public @ResponseBody
     boolean deleteClient(@RequestParam(value = "idClient", required = false, defaultValue = "") Integer idClient) {
@@ -180,6 +180,19 @@ public class ClientController {
         return true;
     }
     
+    @RequestMapping(value = "/loadClientById", method = RequestMethod.GET)
+    public @ResponseBody
+    ClienteDTO loadClientById(@RequestParam(value = "idClient", required = false, defaultValue = "") Integer idClient) {
+    	LOG.info("ClientController.loadClientById()");
+    	ClienteDTO clienteDTO = null;
+        try {
+        	clienteDTO = clientService.loadClientById(idClient);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return clienteDTO;
+    }
     
     // @Audited(message = "Accion: Eliminar alertas")
     @RequestMapping(value = "/loadLastClientId", method = RequestMethod.GET)
@@ -196,7 +209,6 @@ public class ClientController {
     }
     
     
-    @Audited(message = "Accion: Busqueda inical de clientes en Listado")
     @RequestMapping(value = "/loadAllCatAddClient", method = RequestMethod.GET)
     public @ResponseBody
     Map<String, Object> loadAllCat() {

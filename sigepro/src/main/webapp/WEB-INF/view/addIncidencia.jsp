@@ -161,6 +161,8 @@
                   <li><a href="addIncidencia.htm">Crear</a></li>
                   <li class="divider"></li>
                   <li class=""><a href="listIncidencia.htm">Buscar</a></li>
+                  <li class="divider"></li>
+                  <li class="disabled"><a href="">Historial</a></li>
                 </ul>
                </li>
                <li class="dropdown">
@@ -573,7 +575,7 @@ $("#createNewIncidencia").click(function(){
 	var newIncidencia = {idtipoincidencia:incidenciaTypeId,idestadoinc:incidenciaEstado,idcliente:clientData.idcliente,fechaInicio:fechaInicioNew,descripcion:desc,
 						 titulo:causaOtra};
 	var newVisita = {clienteId:clientData.idcliente,titulo:"Mantenimiento",descripcion:"",fechaInicia:dateStart,fechaTermina:dateStart,horaInicia:timeStart,
-					 horaTermina:timeEnd,direccion:directionVisit,estado:"0"};
+					 horaTermina:timeEnd,direccion:directionVisit,estadoId:"0"};
 	
 	jQuery.ajax({
         url: '<c:url value="/addNewIncidencia.htm" />',
@@ -942,12 +944,6 @@ function openModal(event) {
 	$("#dialogTimeStart").html($.fullCalendar.formatDate( event.start, "HH:mm" ));
 	$("#dialogTimeEnd").html($.fullCalendar.formatDate( event.end, "HH:mm" ));
 	$("#dialogDesc").html(event.description);
-    if (event.color=='red'){ 
-	$("#dialogPuntual").attr('checked', true);
-    }
-    else{
-    	$("#dialogPuntual").attr('checked', false);	
-    }
 	$("#eventContent").dialog({ 
 		modal: true,
 		width:330,
@@ -1058,7 +1054,7 @@ function loadAllVisits(){
 			         'start':new Date(yearI,parseInt(monthI)-1,dayI,hourI,minI),
 			         'end': new Date(yearI,parseInt(monthI)-1,dayI,hourF,minF),
 			         'allDay':visit.diacompleto,
-			         'color':visit.estado=='1'?"red":""
+			         'color':visit.estadoId=='100'?"red":""
 			         };    
         		sourceVisits.push(source);
         	});

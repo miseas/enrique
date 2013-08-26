@@ -24,5 +24,8 @@ public interface ClienteService {
 	Map<String,Object> loadAllAddClientCat();
 
 	ReportData loadCPForReport(Integer ocId);
+	
+    ClienteDTO loadClientById(Integer clientId);
+
 
 }

@@ -177,6 +177,13 @@ public class ClienteServiceImpl implements ClienteService {
         getClientDAO().deleteClient(cliente);
 
     }
+    
+    
+    public ClienteDTO loadClientById(Integer clientId) {
+		LOG.info("loadClientById");
+        Cliente client = getClientDAO().loadClientById(clientId);        
+        return clientTransformer.transform(client);
+    }
 
 	public Integer loadClientLastId(){
 		Integer lastId= -1;

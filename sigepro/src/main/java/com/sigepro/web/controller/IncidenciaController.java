@@ -5,7 +5,9 @@
 package com.sigepro.web.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.sigepro.web.model.dto.IncidenciaDTO;
 import com.sigepro.web.model.dto.IncidenciaData;
 import com.sigepro.web.model.dto.PageResult;
+import com.sigepro.web.model.dto.VisitaDTO;
 import com.sigepro.web.service.IncidenciaService;
 
 import fr.xebia.audit.Audited;
@@ -79,6 +82,23 @@ public class IncidenciaController {
 
         return 	returnNewId;
     }
+    
+    @Audited(message = "Accion: Editar Incidencia")
+    @RequestMapping(value = "/updateIncidencia", method = RequestMethod.POST)
+    public @ResponseBody
+    Long updateIncidencia(@RequestBody IncidenciaData data) {
+    	LOG.info("IncidenciaController.updateIncidencia()");
+        Long returnNewId = -1l;
+        try {
+        	returnNewId = incidenciaService.updateIncidencia(data);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1l;
+        }
+
+        return 	returnNewId;
+    }
+    
 
     @Audited(message = "Accion: Busqueda de Incidencia")
     @RequestMapping(value = "/searchIncidenciaList", method = RequestMethod.GET)
@@ -119,7 +139,35 @@ public class IncidenciaController {
 
         return true;
     }
+     
+     @RequestMapping(value = "/loadAllCatAddIncidencia", method = RequestMethod.GET)
+     public @ResponseBody
+     Map<String, Object> loadAllCat() {
+     	LOG.info("IncidenciaController.loadAllCat()");
+         Map<String, Object> catalogs = new HashMap<String, Object>();
+         try {
+             catalogs = incidenciaService.loadAllAddIncidenciaCat();
+         } catch (Exception e) {
+             e.printStackTrace();
+         }
+
+         return catalogs;
+     }
     
+     @Audited(message = "Accion: Cargar una Visita de Incidencia")
+     @RequestMapping(value = "/loadVisitByIncId", method = RequestMethod.GET)
+     public @ResponseBody
+     VisitaDTO loadVisit(@RequestParam(value = "iId", required = false, defaultValue = "-1") Long idincidencia) {
+     	
+         VisitaDTO visitaDTO = null;
+         try {
+         	visitaDTO = incidenciaService.loadVisitDTOByIncidencia(idincidencia);
+         } catch (Exception e) {
+             e.printStackTrace();
+         }
+
+         return visitaDTO;
+     }
     
 //    @RequestMapping(value = "/editAbono", method = RequestMethod.POST)
 //    public @ResponseBody

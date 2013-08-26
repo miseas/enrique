@@ -59,7 +59,7 @@
 	    border: 2px solid #DDDDDD;
 	    border-radius: 4px 0 4px 0;
 	    color: #FFFFFF; 
-	    content: "Editar Cliente";
+	    content: "Editar Incidencia";
 	    font-size: 15px;
 	    font-weight: bold;
 	    left: -1px;
@@ -89,7 +89,8 @@
     <link href="css/validate.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" media="screen"	href="css/jquery-ui-1.8.16.custom.css" />
 <link rel="stylesheet" type="text/css" media="screen" href="css/ui.jqgrid.css" />
-
+<link href='css/fullcalendar.css' rel='stylesheet' />
+<link href='css/fullcalendar.print.css' rel='stylesheet' media='print' />
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
       <script src="../assets/js/html5shiv.js"></script>
@@ -209,21 +210,14 @@
 				</div>
 				<div class="span2">				
 				<label for="typeIncidencia"><strong>Tipo de incidencia</strong></label>
-						<select id="typeIncidencia" name="typeIncidencia" class="span10">
+						<select id="typeIncidenciaSearch" name="typeIncidenciaSearch" class="span10">
 						<option value="-1">Todos</option>
-						<option value="1">Mantenimiento</option>
-						<option value="2">Otra</option>
 				</select>
 				</div>
 				<div class="span2">    
 					<label for="apellidoC"><strong>Estado Incidecia</strong></label>
-						<select id="stateIncidencia" name="stateIncidencia" class="span10">
+						<select id="stateIncidenciaSearch" name="stateIncidenciaSearch" class="span10">
 						<option value="-1">Todos</option>
-						<option value="0">Sin iniciar</option>
-						<option value="1">Iniciada</option>
-						<option value="2">Cerrada</option>
-						<option value="3">Reabierta</option>
-						<option value="4">Pausada</option>
 						</select>
 				</div>
 				<div class="span2">
@@ -248,101 +242,112 @@
 <!-- 		  Tabla -->
 		     		<div style="" align="center">
 			    		<div style="height: 1px" ></div>
-	  						 <table style="text-align: center;font-size: 16px" align="center" id="listClientTable">
+	  						 <table style="text-align: center;font-size: 16px" align="center" id="listIncidenciaTable">
 	             			 </table>	
-	             		<div id="listClientTableGrid"></div>
+	             		<div id="listIncidenciaTableGrid"></div>
               		</div>
 		  </div>
-     <div class="editClientDiv" style="display: none;">
-     <div class="row-fluid">
-			<br>
-			<div class="bs-docs-example">
- 	  		 <form id="editClientForm" action="" method="post">
- 	  		 <input type="hidden" class="" id="idClientEdit" name="idClientEdit" /> 
+     <div class="editIncidenciatDiv" style="display: none;">
+     <br>
+	 <div class="bs-docs-example">      
+      <div class="row-fluid">	 
+      <div class="span12">
+      <input type="hidden" class="" id="idIncidenciaEdit" name="idIncidenciaEdit" />  
+		  <div class="row-fluid" id="clientSelected" >
+ 	  		 <form id="" action="" class="">
 	         <div class="row-fluid">
-	        	<div class="span4">    
-					<label for="nombreC"><strong>Nombre</strong></label>
-						<input type="text" class="" id="nombreC" name="nombreC" />
-					<label for="apellidoC"><strong>Apellido</strong></label>
-						<input type="text" class="" id="apellidoC" name="apellidoC" />
-					<label for="direccionC"><strong>Dirección</strong></label>
-						<input type="text" class="span12" id="direccionC" name="direccionC" />
-				</div>
-				<div class="span4">    
-					<label for="localidadC"><strong>Localidad</strong></label>
-					<div class="input-prepend">
-						<span class="add-on"><i class="icon-map-marker"></i></span>
-<!-- 						<input type="text" class="" id="localidadC" name="localidadC" /> -->
-						<select id="localidadC" name="localidadC">
+	        	<div class="span3">    
+					<label for="typeIncidencia"><strong>Tipo de incidencia</strong></label>
+						<select id="typeIncidencia" name="typeIncidencia" class="">
 						</select>
-					</div>
-					<label for="emailC"><strong>Correo electrónico</strong></label>
-					 <div class="input-prepend">
-					 <span class="add-on"><i class="icon-envelope"></i></span>
-						<input type="text" class="" id="emailC" name="emailC" />
+				</div>
+			   <div class="span3">    
+					<label for="fechaIncStart"><strong>Fecha Inicio</strong></label>
+						<input type="text" class="span5" disabled="disabled" id="fechaIncStart" name="fechaIncStart" />
+					<label for="apellidoC"><strong>Estado Incidecia</strong></label>
+						<select id="stateIncidencia" name="stateIncidencia" class="span5">
+						</select>
+			   </div>
+			   <div class="span4" id="dataIncidenciaDiv" style="display: none"> 	
+			   <div id="options-1" style="display: none">
+			   			<label for="causaInc"><strong>Causa</strong></label>
+						<input type="text" class="span" id="causaInc" name="causaInc" />
+						<label for="fechaVisita"><strong>Visita</strong></label>
+						<div class="input-append" id="visitDiv">
+						<input type="text" class="span4" id="fechaVisita" name="fechaVisita" disabled="disabled" />
+						 <button class="btn" id="openVisitDialog" type="button" style="display: none"><i class="icon-calendar-empty" ></i> Crear visita</button>						
+					     <button class="btn" id="openVisitDialogChange" type="button" style="display: none"><i class="icon-calendar" ></i> Cambiar</button>
+					     <button class="btn btn-danger" id="cancelVisitDialog" type="button" style="display: none"><i class="icon-remove-sign" ></i> Cancelar</button>
 						</div>
-				 <div id="phone-container">
-					<div class="" id="phone-form" >
-					<label for="telC"><strong>Teléfono</strong></label>
-						<div class="form-search input-prepend">
-						<span class="add-on">#</span>
-						<input type="text" class="" id="telC-1" name="telC" /><button type="button" style="display: none" id="removeBtn" class="btn btn-mini btn-danger"><i class="icon-remove icon-white"></i></button>
-						</div>   
-						<span id="helpB" class="help-block"><a id="addNumberBtn" class="btn btn-mini btn-info" ><i class="icon-plus icon-white"></i> Agregar otro Nro de Teléfono</a></span>
-					</div>
-					</div> 
-				</div>	
-				<div class="span4">		 
-				   <div class="row-fluid">
-				     <div class="span4">
-				     <label for="typeId"><strong>Tipo ID</strong></label>
-						<select id="typeId" name="typeId" class="span10">
-						</select>
-					</div>	
-				    <div class="span5">
-					<label for="cuitC"><strong>Número Documento</strong></label>
-						<input type="text" class="" id="cuitC" name="cuitC" />
-					</div>	
-					</div>	
-					<label for="clientState"><strong>Estado</strong></label>
-						<select id="clientState"  name="clientState">
-						</select>
-		            <label for="clientNum"><strong>Número Cliente</strong></label>
-						<input type="text" class="" id="clientNum" name="clientNum" />
-				</div>	
-				</div>		
-				<div class="row-fluid">	 
-					<div class="span7">							 
-						<label for="comentC"><strong>Comentario</strong></label>
-					  		<textarea name="comentC" id="comentC" rows="3" class="input-block-level"></textarea>
-					</div>
-				</div>
-				<div class="row-fluid">	 
+			   </div>		
+					<label for="direccionC"><strong>Descripcion</strong></label>
+				<textarea name="comentC" id="comentC" rows="2" class="input-block-level"></textarea>
+		      </div>    
+			</div>		
+		    
+		<div class="row-fluid">	 
 				<div class="pull-right">			
-		               <button type="button" onclick="jQuery('#editClientForm').submit()" class="btn btn-primary">Guardar</button>
+		               <button type="button" onclick="" id="updateIncidenciaBtn" class="btn btn-primary">Guardar</button>
 		               <button type="button" onclick="cancelEdit();" class="btn" >Cancelar</button>	
 				</div>
 				</div>
-
         </form>
-        </div>
 		  </div>
-	</div>	
+      </div>
+      </div>
+      </div>
+      <!--/row-->    
+     </div> 
       </div>
       </div>
       <hr>
 
+<!-- calendar! -->
+<div id="dialogCalendarVisit" class="" style="display: none; padding: 0px !important;"  title="Crear Visita" >    
+	      <div class="row-fluid">
+	        	<div class="span12">
+	        	 <label for="directionVisit"><strong>Dirección</strong></label>
+				  <input type="text" class="span12" id="directionVisit" name="directionVisit" />
+	        	</div>
+	      </div>    	
+		<div class="row-fluid">
+      		 	<div class="span2">     
+					<label for="dateStart"><strong>Fecha</strong></label>
+						<input type="text" class="span12" id="dateStart" name="dateStart" />
+				</div>
+			    <div class="span2"> 			
+					<label for="timeStart"><strong>Hora inicio</strong></label>
+						<input type="text" class="span10" id="timeStart" name="timeStart" />		
+				</div>
+				<div class="span2">		  
+						<label for="timeEnd"><strong>Hora fin</strong></label>
+						<input type="text" class="span10" id="timeEnd" name="timeEnd" />
+				</div>
+		</div>  
+		  <div style="margin-bottom: -18px;" ></div>
+		<hr>
+	<div class="row-fluid">
+		 <div class="span8 offset2">	
+		<div id='calendar'></div>
+		</div>
+	</div>
+</div>
     </div><!--/.fluid-container-->
+    
   <div id="footer" >
       <div class="container">
         <p class="muted credit">Creada por <a href="#">[Matias Iseas]</a>.</p>
       </div>
     </div>
-   	<div id="dialogSendEmail" style="display: none" align="" title="Enviar email" >
-	<p style="margin:0px;">Destinatario: <input class="text2" type="text" id="toEmail" /> </p>
-	<p style="margin:0px;">Asunto: <input class="text2" type="text" id="subjectEmail" /> </p>
-	<p style="margin:10px 0px 0px 0px">Contenido:</p>
-	<textarea style="width: 500px" name="contentEmail" id="contentEmail" rows="8" cols="6"></textarea>
+   	<div id="dialogCancelVisita" style="display: none" align="" title="Cancelar Visita" >
+	    <div class="row-fluid">
+		 <div class="span12">
+			<p style="margin:0px;"><b>Causa de la cancelación</b>
+			<select class="" id="cancelVisitCause" ></select> </p>
+			<p style="margin:10px 0px 0px 0px"><b>Aclaración</b></p>
+			<textarea  class="span12" name="contentCancel" id="contentCancel" rows="3" cols="1"></textarea>
+		</div>
+		</div>
 	</div> 
 	<div id="dialogDeleteIncidencia" style="display: none" align="" title="Eliminar incidencia" >
 	<p style="margin:0px;"><span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>Esta seguro de que desea eliminar la incidencia? </p>
@@ -363,6 +368,8 @@
 <script src="js/jquery.jqGrid.min.js" type="text/javascript"></script>
 <script type="text/javascript" src="js/jquery.bt.min.js" ></script>  
 <script type="text/javascript" src="js/jquery.validate.js" ></script>  
+<script type="text/javascript" src='js/fullcalendar.min.js'></script>
+<script type="text/javascript" src='js/jquery-ui-timepicker-addon.js'></script>
 <script type="text/javascript">
 jQuery(function() {
 cleanScreenSearch();
@@ -393,67 +400,84 @@ jQuery.ajax({
     }
   });
   
-jQuery("#editClientForm").validate({
-		focusInvalid:false,
-	    rules: {
-	    	nombreC:{required: true},
-			apellidoC:{required: true},
-			emailC:{email:true},
-			cuitC:{digits:true}
-        },
-	    messages: {
-	    	nombreC: {required: "campo obligatorio"},
-	    	apellidoC: {required: "campo obligatorio"},
-	    	emailC:{email:"email incorrecto"},
-	    	cuitC:{digits:"campo numerico"}
-	    },
-  	submitHandler: function() { 	  	
-  		var nombreNew = jQuery("#nombreC").val();
-  		var apellidoNew = jQuery("#apellidoC").val();
-  		var direccionNew = jQuery("#direccionC").val();
-  		var localidadNew = jQuery("#localidadC").val();
-  		var emailNew = jQuery("#emailC").val();
-  		var telNew = jQuery("#telC-1").val();
-  		var telNew2 =" ";
- 		if (jQuery("#telC-2").length>0){
-  			telNew2 = jQuery("#telC-2").val();
-  		}
-  		var telNew3 =" ";
-  		if (jQuery("#telC-3").length>0){
-  				telNew3 = jQuery("#telC-3").val();
-  		}
-  		var cuitNew = jQuery("#cuitC").val();
-  		var puntuaNew = 1;
-  		var comentNew = jQuery("#comentC").val();
-  		var clientStateID = jQuery("#clientState").val();
-  		var idClient = jQuery("#idClientEdit").val();
-  		var clientNum = jQuery("#clientNum").val();
-  		var typeId = jQuery("#typeId").val();
+jQuery.ajax({
+    url: '<c:url value="/loadAllCatAddIncidencia.htm" />',
+    type: "GET",
+    dataType: "json",
+    contentType: "application/json",
+    data:"", 
+    success: function(resp){                                       
 
-  		var newClient = {'idcliente':idClient,'nombre':nombreNew,'apellido':apellidoNew,'direccion':direccionNew,"iddnitipo":typeId,
-  					    'localidadId':localidadNew,'email':emailNew,'telefono':telNew+"@@"+telNew2+"@@"+telNew3,
-  						'notas':comentNew,'estadoCliId':clientStateID,'puntuacion':puntuaNew, 'cuit':cuitNew,'numerocli':clientNum};		  		 
-  		 
-        jQuery.ajax({
-             url: '<c:url value="/editClient.htm" />',
-             type: "POST",
-             dataType: "json",
-             contentType: "application/json",
-             data: JSON.stringify( newClient ), 
-             success: function(resp){                                       
-              	 if(resp!=-1){ 
-              		jQuery("#dialogSuccessOperation").dialog( "option", "title", "Editar incidencia" );
-            		 jQuery("#dialogSuccessOperation").dialog("open");
-            		 cancelEdit();
-         	 	}
-         	 	else{
-           		 jQuery("#dialogErrorOperation").dialog("open");
-         	 	}     
-             }
-           });
-  		
-  	}
-	         
+     var options = $("#stateIncidenciaSearch");
+     $.each(resp.estadoI, function() {
+	     options.append($("<option />").val(this.idestadoinc).text(this.descripcion));
+ 	 });
+     var options = $("#typeIncidenciaSearch");
+   	 $.each(resp.tipoI, function() {
+   	     options.append($("<option />").val(this.idtipoincidencia).text(this.descripcion));
+   	 });
+   	 var options = $("#stateIncidencia");
+     $.each(resp.estadoI, function() {
+    	     options.append($("<option />").val(this.idestadoinc).text(this.descripcion));
+     });
+     var options = $("#typeIncidencia");
+   	 $.each(resp.tipoI, function() {
+   	     options.append($("<option />").val(this.idtipoincidencia).text(this.descripcion));
+   	 });
+     var options = $("#cancelVisitCause");
+   	 $.each(resp.estadoV, function() {
+   		 if (this.idestadovis>9){
+   	     options.append($("<option />").val(this.idestadovis).text(this.descripcion));
+   		 }
+   	 });
+    }
+  });  
+  
+$("#updateIncidenciaBtn").click(function(){
+	var clientData = jQuery.data(document.body,"clientData");
+	var idInc = $("#idIncidenciaEdit").val();
+	var incidenciaTypeId = $("#typeIncidencia option:selected").val();
+	var incidenciaEstado = $("#stateIncidencia option:selected").val();
+	//var fechaInicioNew = $("#fechaIncStart").val();
+	var desc = $("#comentC").val();
+	var causaOtra = $("#causaInc").val();
+
+	var directionVisit = $("#directionVisit").val();
+	var dateStart = $("#dateStart").val();
+	var timeStart = $("#timeStart").val();
+	var timeEnd = $("#timeEnd").val();
+
+
+	var updatedIncidencia = {idincidencia:idInc,idtipoincidencia:incidenciaTypeId,idestadoinc:incidenciaEstado,idcliente:clientData.idcliente,descripcion:desc,
+						 titulo:causaOtra};
+	var newVisita;
+	var canceledVisitData = jQuery.data(document.body,"visitCancelData");//,{"idEstadoV":idEstadoCancel,"contenctCancel":contentCancel,"idVisit":idVisit});
+	if (canceledVisitData!=null){
+		 newVisita = {descripcion:canceledVisitData.contenctCancel,idvisita:canceledVisitData.idVisit,estadoId:canceledVisitData.idEstadoV};
+	}
+	else{
+	 newVisita = {clienteId:clientData.idcliente,titulo:"Mantenimiento",descripcion:"",fechaInicia:dateStart,fechaTermina:dateStart,horaInicia:timeStart,
+					 horaTermina:timeEnd,direccion:directionVisit,estadoId:"0"};
+	}
+	
+	jQuery.ajax({
+        url: '<c:url value="/updateIncidencia.htm" />',
+        type: "POST",
+        dataType: "json",
+        contentType: "application/json",
+        data: JSON.stringify( {'incidencia':updatedIncidencia,'visita':newVisita} ), 
+        success: function(resp){     
+				if (resp!=-1){
+	           		jQuery("#dialogSuccessOperation").dialog( "option", "title", "Editar Incidencia" );
+           		    jQuery("#dialogSuccessOperation").dialog("open");
+				}
+				else{
+	           		jQuery("#dialogSuccessOperation").dialog( "option", "title", "Editar Incidencia" );
+					jQuery("#dialogErrorOperation").dialog("open");	
+				}
+         }
+      });
+       
 });
 
 jQuery("#searchButton").click(function(){
@@ -472,7 +496,7 @@ jQuery("#searchButton").click(function(){
 		 estadoI = "";
 	 }
 	 
-      jQuery("#listClientTable").jqGrid('setGridParam',{url:"<c:url value="/searchIncidenciaList.htm" />?cId="+cId+"&iniD="+iniD+"&tipoI="+tipoI+"&estadoI="+estadoI,page:1}).trigger('reloadGrid');
+      jQuery("#listIncidenciaTable").jqGrid('setGridParam',{url:"<c:url value="/searchIncidenciaList.htm" />?cId="+cId+"&iniD="+iniD+"&tipoI="+tipoI+"&estadoI="+estadoI,page:1}).trigger('reloadGrid');
 });
 
 jQuery("#clearSearchButton").click(function(){
@@ -480,9 +504,15 @@ jQuery("#clearSearchButton").click(function(){
 	 cancelEdit();
 });
 
+jQuery("#cancelVisitDialog").click(function(){
+	$("#dialogCancelVisita").dialog("open");
+	
+});
 
 
-jQuery("#listClientTable").jqGrid({
+
+
+jQuery("#listIncidenciaTable").jqGrid({
 	 url: '<c:url value="/searchIncidenciaList.htm"/>',
 	 datatype: "json", 
 	 width : 1158,
@@ -575,7 +605,7 @@ jQuery("#listClientTable").jqGrid({
 	  rowList:[10,20,30],
 	  multiselect: false,
 	  sortable: true,
-	  pager: '#listClientTableGrid',
+	  pager: '#listIncidenciaTableGrid',
 	  pgbuttons: false,
 	  pginput:false,
 	  rownumbers : true,
@@ -590,23 +620,14 @@ jQuery("#listClientTable").jqGrid({
      },				
      beforeSelectRow: function(rowid, e) {
 			 var iCol = jQuery.jgrid.getCellIndex(e.target);
-			 if(iCol == 2){
- 			 	if(e.target.attributes.op.value=="email"){		 
-					 var row = jQuery('#listClientTable').jqGrid('getRowData',rowid);	
-					 if (row.email=="" || row.email==null){
-							row.email="(Cliente sin email)";
-					}
-					 jQuery("#toEmail").val(row.email);
- 	        	     jQuery("#dialogSendEmail" ).dialog("open");
-		              return false;
-		            }
+			 if(iCol == 1){
 			 	if(e.target.attributes.op.value=="edit"){		 		
-					 var row = jQuery('#listClientTable').jqGrid('getRowData',rowid);										 
-					 updateClient(row);		
+					 var row = jQuery('#listIncidenciaTable').jqGrid('getRowData',rowid);										 
+					 updateIncidencia(row);		
 		             return false;
 		            }
 			 	if(e.target.attributes.op.value=="delete"){
-			 		 var idIncidencia = jQuery('#listClientTable').jqGrid('getCell',rowid,"idincidencia");
+			 		 var idIncidencia = jQuery('#listIncidenciaTable').jqGrid('getCell',rowid,"idincidencia");
 			 		 jQuery.data(document.body,"incidenciaID",{"idIncidencia":idIncidencia});
 			 		 jQuery("#dialogDeleteIncidencia" ).dialog("open");
 			 		 //delClient(idCliente);
@@ -616,7 +637,7 @@ jQuery("#listClientTable").jqGrid({
 		       //return true;    // allow select the row
             //  return false;   // not allow select the row
 			 // prevent row selection if one click on the button
-			 return (iCol != 2)? true: false;
+			 return (iCol != 1)? true: false;
          
      },
 	  onSelectRow:function(){//alert("asdasd")
@@ -627,49 +648,22 @@ jQuery("#listClientTable").jqGrid({
 	  editurl: "dummy.htm"
 	  });
 
-$("#gview_listClientTable").css("font-size","12px");
+$("#gview_listIncidenciaTable").css("font-size","12px");
 
 
-
-
-jQuery("#dialogSendEmail").dialog({
-	autoOpen: false,
-	width: 550,
-	modal:true,
-	buttons: {
-		"Cerrar": function() {
-			jQuery( this ).dialog( "close" );
-		},
-		"Enviar": function() {
-			jQuery(".ui-dialog-buttonset button").hide();
-			jQuery(".ui-dialog-buttonset").append("<div class='ui-loadingBar' style='width: 260px; height: 40px;'></div>");
-			var toEmail = jQuery("#toEmail").val();
-			var subjectEmail = jQuery("#subjectEmail").val();
-			var contentEmail = jQuery("#contentEmail").val();
-			var emailData = {"toEmail":toEmail.split(";"),"subject":subjectEmail,"content":contentEmail};
-			
-	         jQuery.ajax({
-                 url: '<c:url value="/sendEmailClient.htm" />',
-                 type: "POST",
-                 dataType: "json",
-                 contentType: "application/json",
-                 data: JSON.stringify( emailData ), 
-                 success: function(resp){                                       
-                			jSuccess("Operacion realizada exitosamente", "Enviar Email",function(){
-                				jQuery("#dialogSendEmail").dialog( "close" );
-                				jQuery(".ui-dialog-buttonset div").hide();
-        						jQuery(".ui-dialog-buttonset button").show();
-                			},["Aceptar"]);
-                	                                
-                 }
-               });
-		}
-	},
-	resizable: false,
-	draggable: false,
-	close: function() {
+$("#typeIncidencia").change(function() {
+	var value = $(this).find("option:selected").val();
+	$("div[id*=options-]").hide();
+	if (value!=-1){
+		$("#dataIncidenciaDiv").show();
+		$("#options-"+value).show();
 	}
-});	 	
+	else{
+		$("#dataIncidenciaDiv").hide();
+	}
+	
+});   
+
 
 jQuery("#dialogDeleteIncidencia").dialog({
 	autoOpen: false,
@@ -705,6 +699,32 @@ jQuery("#dialogErrorOperation").dialog({
 	}
 });	 	
 
+
+jQuery("#dialogCancelVisita").dialog({
+	autoOpen: false,
+	modal:true,
+	buttons: {
+		"Cancelar": function() {
+			jQuery( this ).dialog( "close" );
+		},
+		"Ok": function() {
+			$("#cancelVisitDialog").hide();
+	    	$("#openVisitDialogChange").hide();	    	
+	    	$("#openVisitDialog").show();
+			$("#fechaVisita").val("");
+			var idEstadoCancel = $("#cancelVisitCause option:selected").val();
+			var contentCancel = $("#contentCancel").val();
+			var idVisit = jQuery.data(document.body,"visitData").idvisita;
+			jQuery.data(document.body,"visitCancelData",{"idEstadoV":idEstadoCancel,"contenctCancel":contentCancel,"idVisit":idVisit});
+			jQuery( this ).dialog( "close" );
+		}
+	},
+	resizable: false,
+	draggable: false,
+	close: function() {
+	}
+});	 
+
 jQuery("#dialogSuccessOperation").dialog({
 	autoOpen: false,
 	height: 170,
@@ -712,7 +732,8 @@ jQuery("#dialogSuccessOperation").dialog({
 	buttons: {
 		"Ok": function() {
 			jQuery( this ).dialog( "close" );
-			 jQuery("#listClientTable").trigger('reloadGrid');
+			 jQuery("#listIncidenciaTable").trigger('reloadGrid');
+			 cancelEdit();
 		}
 	},
 	resizable: false,
@@ -757,7 +778,196 @@ jQuery("#nombreSearch" ).autocomplete({
 	}
 });
 
+$("#openVisitDialog").click(function(){
+	var client = jQuery.data(document.body,"clientData");
+	jQuery("#directionVisit").val(client.direccion);
+	//jQuery(".fc-header-right span:eq(1)").click();
+	jQuery("#dialogCalendarVisit").dialog("open");
+	jQuery(".fc-header-left span:eq(3)").click();
+	jQuery(".fc-header-left span:eq(2)").click();
+});
 
+
+$("#openVisitDialogChange").click(function(){
+	var visit = jQuery.data(document.body,"visitData", resp);
+
+	jQuery("#directionVisit").val(visit.direccion);
+	//jQuery(".fc-header-right span:eq(1)").click();
+	jQuery("#dialogCalendarVisit").dialog("open");
+	jQuery(".fc-header-left span:eq(3)").click();
+	jQuery(".fc-header-left span:eq(2)").click();
+});
+
+
+//calendar config 
+var date = new Date();
+var d = date.getDate();
+var m = date.getMonth();
+var y = date.getFullYear();
+
+$('#calendar').fullCalendar({
+	theme: true,
+	header: {
+		left: 'prev,next today',
+		center: 'title',
+		right: 'month,agendaWeek,agendaDay'
+	},
+	//editable: true,
+	allDayText:"Todo el día",
+	monthNames:[ "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" ],
+	monthNamesShort:["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic" ],
+	dayNames: [ "Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado" ],
+	dayNamesShort:[ "Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa" ],
+	buttonText: {
+		    prev:     '&lsaquo;', // <
+		    next:     '&rsaquo;', // >
+		    prevYear: '&laquo;',  // <<
+		    nextYear: '&raquo;',  // >>
+		    today:    'Hoy',
+		    month:    'Mes',
+		    week:     'Semana',
+		    day:      'Día'
+	},
+	viewDisplay: function(view) {
+	        //alert('El nuevo titulo de la vista es: ' + view.title);
+	 },
+	events: [
+	],
+	eventSources: [{
+	                   events: [ // put the array in the `events` property
+	                       {
+	           				title: 'Cumple Manu (Test)',
+	           				description: 'Visitar en el cumple',
+	        				start: new Date(y, m, d+2, 19, 0),
+	        				end: new Date(y, m, d+2, 22, 30),
+	        				allDay: false
+	                       }
+	                   ],
+	                   //color: 'black',     // an option!
+	                   textColor: 'yellow', // an option!
+	                   backgroundColor:'red',
+	                   editable:false
+	               }
+	           ],
+	eventClick: function(event) {
+					//alert(event.title);
+					//event.title = "CLICKED!";
+			       // $('#calendar').fullCalendar('updateEvent', event);
+					return false;
+				},
+	eventRender: function (event, element) { 
+		element.attr('href', 'javascript:void(0);'); 
+		$(element).click(function(){openModal(event);});
+	},
+	eventDrop: function(event, dayDelta, minuteDelta, allDay, revertFunc, jsEvent, ui, view ) { 
+		updateEventDateTime(event);
+	},
+	eventResize:function(  event, dayDelta, minuteDelta, revertFunc, jsEvent, ui, view  ) { 
+		updateEventDateTime(event);
+	}
+});
+
+function openModal(event) {
+	$("#dialogDirecVisit").html(event.direccion);
+	$("#dialogDateStart").html($.fullCalendar.formatDate( event.start, "dd/MM/yyyy" ));
+	$("#dialogTimeStart").html($.fullCalendar.formatDate( event.start, "HH:mm" ));
+	$("#dialogTimeEnd").html($.fullCalendar.formatDate( event.end, "HH:mm" ));
+	$("#dialogDesc").html(event.description);
+	$("#eventContent").dialog({ 
+		modal: true,
+		width:330,
+		draggable: false,
+		title: event.clientName,//+"-"+event.title,
+		closeOnEscape: true,
+		buttons: [
+				{
+				html: "<i class='icon-calendar-empty'></i> Cerrar",
+				click: function() {
+					$(this).dialog("close");
+					}
+				}
+	    ]
+		}); 
+}
+
+
+jQuery("#dialogCalendarVisit").dialog({
+	autoOpen: false,
+	height:500,
+	width:800,
+	modal:true,
+	buttons: [
+				{
+				html: "<i class='icon-calendar-empty'></i> Cancelar",
+				click: function() {
+					jQuery( this ).dialog( "close" );
+					}
+				},
+				{
+				html: "<i class='icon-edit' id='selectCliButton'></i> Crear Visita",
+				click: function() {
+					jQuery("#fechaVisita").val(jQuery("#dateStart").val());
+					jQuery( this ).dialog( "close" );
+				   }
+				}
+	    ],
+	resizable: false,
+	draggable: false,
+	close: function() {
+	}
+});	
+
+$( "#dateStart" ).datepicker({
+	 defaultDate: "+1d",
+	 changeMonth: true,
+	 numberOfMonths: 2,
+	 dateFormat: "dd/mm/yy",
+	 dayNames: [ "Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado" ],
+	 dayNamesMin: [ "Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa" ],
+	 monthNames: [ "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" ], 
+   monthNamesShort:["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic" ],
+	 closeText: "Cerrar", 
+	 currentText: "Hoy",
+	 onClose: function( selectedDate ) {
+	 $( "#dateEnd" ).datepicker( "option", "minDate", selectedDate );
+	 }
+	 });
+	 $( "#dateEnd" ).datepicker({
+	 defaultDate: "+1w",
+	 changeMonth: true,
+	 numberOfMonths: 2,
+	 dateFormat: "dd/mm/yy",
+	 dayNames: [ "Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado" ],
+	 dayNamesMin: [ "Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa" ],
+	 monthNames: [ "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" ], 
+   monthNamesShort:["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic" ],
+	 closeText: "Cerrar", 
+	 currentText: "Hoy"
+	 });
+	 
+	var startDateTextBox = $('#timeStart');
+	var endDateTextBox = $('#timeEnd');
+	
+	startDateTextBox.timepicker({
+		stepMinute: 15,
+		closeText:"Listo",
+		currentText:"Ahora",
+		timeOnlyTitle:"Elegir hora",
+		hourText:"Hora",
+		minuteText:"Minutos",
+		timeText:"Tiempo"
+		//controlType: myControl
+	});
+	endDateTextBox.timepicker({ 
+		stepMinute: 15,
+		closeText:"Listo",
+		currentText:"Ahora",
+		timeOnlyTitle:"Elegir hora",
+		hourText:"Hora",
+		minuteText:"Minutos",
+		timeText:"Tiempo"
+		//controlType: myControl
+	});
 
 jQuery("input[alt=dateP]").datepicker({
 	 showButtonPanel: true,
@@ -772,39 +982,127 @@ jQuery("input[alt=dateP]").datepicker({
 	 closeText: "Cerrar", 
 	 currentText: "Hoy"
 	 });	
-
+	 
+	 
+loadAllVisits();
 });
 //Other functions
-
-function updateClient(row){
-	jQuery('#listClientTable').jqGrid('setGridState','hidden');	
+function loadAllVisits(){
 	
-	jQuery("#nombreC").val(capitaliseFirstLetter(row.nombre));
-	jQuery("#apellidoC").val(capitaliseFirstLetter(row.apellido));
-	jQuery("#direccionC").val(row.direccion);
-	jQuery("#localidadC").val(row.localidadId);
-	jQuery("#emailC").val(row.email);
-	jQuery("#telC-1").val(row.telefono);
-	if(row.telefono2.length>1){
-		jQuery("#addNumberBtn").trigger("click");
-		jQuery("#telC-2").val(row.telefono2);
-	}
-	if(row.telefono3.length>1){
-		jQuery("#addNumberBtn").trigger("click");
-		jQuery("#telC-3").val(row.telefono3);
-	}
-	jQuery("#comentC").val(row.notas);
-	jQuery("#ccC").val(row.ccNro);
-	jQuery("#cuitC").val(row.cuit);
-	
-	jQuery("#clientState").val(row.estadoCliId);
-	jQuery("#typeId").val(row.iddnitipo);
-	jQuery("#clientNum").val(row.numerocli);
+    jQuery.ajax({
+        url: '<c:url value="/loadAllVisit.htm" />',
+        type: "GET",
+        dataType: "json",
+        contentType: "application/json",
+        data: "", 
+        success: function(resp){   
+        	var sourceVisits= [];
+        	$.each(resp, function(index,visit){
+    	  		var fechaIS = visit.fechaInicia.split("/");
+		  		var yearI =  fechaIS[2];
+		  		var monthI = fechaIS[1];
+		  		var dayI = fechaIS[0];
+		  		var tiempoIS = visit.horaInicia.split(":");
+		  		var hourI = tiempoIS[0];
+		  		var minI = tiempoIS[1];
+		  		if (visit.fechaTermina!=null){
+		  		var fechaFS = visit.fechaTermina.split("/");
+		  		var yearF =  fechaFS[2];
+		  		var monthF = fechaFS[1];
+		  		var dayF = fechaFS[0];
+		  		}
+		  		var tiempoFS = visit.horaTermina.split(":");
+		  		var hourF = tiempoFS[0];
+		  		var minF = tiempoFS[1];	
+        		var source={'id':visit.idvisita,
+        			 'title':capitaliseFirstLetter(visit.clienteNombre),
+        			 'clientName':capitaliseFirstLetter(visit.clienteNombre), 	
+        			 'clientId':visit.clienteId, 
+			         'description':visit.descripcion,
+			         'direccion':visit.direccion,
+			         'start':new Date(yearI,parseInt(monthI)-1,dayI,hourI,minI),
+			         'end': new Date(yearI,parseInt(monthI)-1,dayI,hourF,minF),
+			         'allDay':visit.diacompleto,
+			         'color':visit.estadoId=='100'?"red":""
+			         };    
+        		sourceVisits.push(source);
+        	});
+        	
+	  		$('#calendar').fullCalendar( 'addEventSource', sourceVisits );
+        }
+      });
+}
 
-	jQuery("#idClientEdit").val(row.idcliente);
-	jQuery(".editClientDiv").show();
-		
+function updateIncidencia(row){
+	$("#fechaVisita").val("");
+	if (row.idtipoincidencia==1){
+		loadVisita(row.idincidencia);
 	}
+	
+	jQuery('#listIncidenciaTable').jqGrid('setGridState','hidden');	
+	
+	jQuery("#nombreC").val(capitaliseFirstLetter(row.clienteNombre));
+	
+	//var clientData = jQuery.data(document.body,"clientData");
+	$("#typeIncidencia").val(row.idtipoincidencia).change();
+	$("#stateIncidencia").val(row.idestadoinc);
+	$("#fechaIncStart").val(row.fechaInicio);
+	$("#comentC").val(row.descripcion);
+	$("#causaInc").val(row.titulo);
+
+	//$("#directionVisit").val();
+	//$("#dateStart").val();
+    //$("#timeStart").val();
+	//$("#timeEnd").val();
+
+// 	jQuery("#comentC").val(row.notas);
+// 	jQuery("#ccC").val(row.ccNro);
+// 	jQuery("#cuitC").val(row.cuit);
+	
+// 	jQuery("#clientState").val(row.estadoCliId);
+
+ 	jQuery("#idIncidenciaEdit").val(row.idincidencia);
+	loadClientData(row.idcliente);
+	jQuery(".editIncidenciatDiv").show();
+	jQuery.data(document.body,"visitCancelData",null);
+	}
+function loadVisita(idInc){
+	
+	jQuery.ajax({
+	    url: '<c:url value="/loadVisitByIncId.htm" />',
+	    type: "GET",
+	    dataType: "json",
+	    contentType: "application/json",
+	    data:{"iId":idInc}, 
+	    success: function(resp){
+	    	$("#visitDiv > button").hide();
+	    	if(resp.idvisita==null){
+	    		$("#openVisitDialog").show();
+	    	}
+	       else{
+	    	   $("#openVisitDialogChange").show();
+	    	   $("#cancelVisitDialog").show();
+	           $("#fechaVisita").val(resp.fechaInicia);
+				jQuery.data(document.body,"visitData", resp);
+	        }
+	    }
+	  });
+}	
+
+function loadClientData(idCliente){
+	
+	jQuery.ajax({
+	    url: '<c:url value="/loadClientById.htm" />',
+	    type: "GET",
+	    dataType: "json",
+	    contentType: "application/json",
+	    data:{"idClient":idCliente}, 
+	    success: function(resp){
+	    	 jQuery.data(document.body,"clientData",resp);
+	    }
+	  });
+}	
+
 function delIncidencia(){
 	      var data =  jQuery.data(document.body,"incidenciaID");
 
@@ -838,25 +1136,19 @@ function cleanScreenSearch(){
 
 }
 function cleanScreenEdit(){
-	 jQuery(".editClientDiv").hide();			 
-     jQuery("#nombreC").val("");
- 	 jQuery("#apellidoC").val("");
-	 jQuery("#direccionC").val("");
-	 jQuery("#localidadC").val(0);
-	 jQuery("#emailC").val("");
-	 jQuery("#telC-1").val("");
-	 jQuery("#phone-form-1").remove();
-	 jQuery("#phone-form-2").remove();
-	 jQuery("#cuitC").val("");
-	 jQuery("#comentC").val("");
-	 jQuery("#nombreC").focus();
-	 jQuery("#listClientTable").trigger('reloadGrid');
+	 //jQuery(".editClientDiv").hide();			 
+	$("#nombreSearch").val("");
+	$("#fechaVisita").val("");
+	$("#comentC").val("");
+	$("#causaInc").val("");
+	 jQuery("#nombreSearch").focus();
+	 jQuery("#listIncidenciaTable").trigger('reloadGrid');
 
 }
 function cancelEdit(){
 	jQuery("div .ui-inline-cancel").trigger("click");
-	jQuery(".editClientDiv").hide();
-	jQuery('#listClientTable').jqGrid('setGridState','visible');	
+	jQuery(".editIncidenciatDiv").hide();
+	jQuery('#listIncidenciaTable').jqGrid('setGridState','visible');	
 	cleanScreenEdit();
 }	
 
