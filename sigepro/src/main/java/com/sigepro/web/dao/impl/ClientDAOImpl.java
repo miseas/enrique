@@ -14,7 +14,10 @@ import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Property;
 import org.hibernate.criterion.Restrictions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -70,7 +73,7 @@ public class ClientDAOImpl extends HibernateDaoSupport implements ClientDAO {
                 Query query = session.createQuery(
                         "select C "
                                 + " FROM Cliente as C" + " WHERE LOWER(C.nombre) LIKE '%" + name.toLowerCase()
-                                + "%'" + " or LOWER(C.apellido) LIKE '%" + name.toLowerCase()+ "%' order by "+orderBy+" "+sort).setMaxResults(maxResult);
+                                + "%'" + " order by "+orderBy+" "+sort).setMaxResults(maxResult);
 
                 List result = query.list();
                 return result;
@@ -219,6 +222,27 @@ public class ClientDAOImpl extends HibernateDaoSupport implements ClientDAO {
             return lstCliente.get(0);
     }
     
+    @SuppressWarnings("unchecked")
+    public String loadLastClientNum() throws DataAccessException {
+
+    	 List<Cliente> listResult =null;
+    	 
+    	HibernateCallback callback = new HibernateCallback() {
+
+               public Object doInHibernate(Session session) throws HibernateException, SQLException {
+
+            	DetachedCriteria maxId = DetachedCriteria.forClass(Cliente.class)
+            			    .setProjection( Projections.max("idcliente") );
+               	Criteria criteria = session.createCriteria(Cliente.class).add( Property.forName("idcliente").eq(maxId));
+               		   
+               return criteria.list();
+               }
+           };
+
+           listResult = (List<Cliente>) this.getHibernateTemplate().execute(callback);
+           
+           return listResult.get(0).getNumerocli();
+    }
     
     
     

@@ -126,7 +126,7 @@ public class NavigationController {
     }
 
 
-    @RequestMapping(value = "/contact")
+    @RequestMapping(value = "/contacto")
     public ModelAndView loadContactPage() {
         ModelAndView model = new ModelAndView();
         model.setViewName("contact");

@@ -135,7 +135,7 @@ public class IncidenciaDAOImpl extends HibernateDaoSupport implements Incidencia
 		    			}
 
 		                Query query = session.createQuery(
-		                        "select new com.sigepro.web.model.dto.IncidenciaDTO(I.idincidencia,I.tipoInc.idtipoincidencia, I.tipoInc.descripcion, I.estadoInc.idestadoinc,I.estadoInc.descripcion, C.idcliente,C.nombre,C.apellido,I.fechaInicio,I.fechaCierre,I.descripcion,I.titulo) "
+		                        "select new com.sigepro.web.model.dto.IncidenciaDTO(I.idincidencia,I.tipoInc.idtipoincidencia, I.tipoInc.descripcion, I.estadoInc.idestadoinc,I.estadoInc.descripcion, C.idcliente,C.nombre,I.fechaInicio,I.fechaCierre,I.descripcion,I.titulo) "
 		                                + " FROM Incidencia as I, Cliente as C" + " WHERE I.cliente.idcliente=C.idcliente "+finalQuery);
 
 		                List result = query.list();
@@ -157,7 +157,7 @@ public class IncidenciaDAOImpl extends HibernateDaoSupport implements Incidencia
             public Object doInHibernate(Session session) throws HibernateException, SQLException {
 
                 Query query = session.createQuery(
-                        "select new com.decorart.web.model.dto.VisitaDTO(V.idvisita,C.idcliente,C.nombre,C.apellido,V.titulo,V.descripcion,V.inicia,V.termina,V.direccion,V.diacompleto,V.estadovis.idestadovis) "
+                        "select new com.decorart.web.model.dto.VisitaDTO(V.idvisita,C.idcliente,C.nombre,V.titulo,V.descripcion,V.inicia,V.termina,V.direccion,V.diacompleto,V.estadovis.idestadovis) "
                                 + " FROM Visita as V, Cliente as C" + " WHERE V.cliente.idcliente=C.idcliente order by C.idcliente").setMaxResults(
                         maxResult);
 

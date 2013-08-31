@@ -135,7 +135,7 @@
                 </ul>
                </li>
                </sec:authorize>
-              <li><a href="#contact">Contacto</a></li>
+              <li><a href="contacto.htm">Contacto</a></li>
             </ul>
            <div lang="loginDivData" style="display: none" >
             <form class="navbar-form pull-right" action="j_spring_security_check" method="post">

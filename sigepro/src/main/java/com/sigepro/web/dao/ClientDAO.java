@@ -38,5 +38,6 @@ public interface ClientDAO extends DAO {
     
     List<EstadoCli> loadAllClientState() throws DataAccessException;
 
- 	
+    String loadLastClientNum() throws DataAccessException ;
+
 }

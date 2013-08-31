@@ -35,12 +35,13 @@ public class VisitaDTO {
 	private String direccion;
 	private Boolean diacompleto;	
 	private String estadoId;
+	private String tipoIncidencia;
 	
 	public VisitaDTO() {
 		super();
 	}
 	
-	public VisitaDTO(Long idvisita, Integer clienteId, String clienteNombre,String clienteApellido,
+	public VisitaDTO(Long idvisita, Integer clienteId, String clienteNombre,
 			String titulo, String descripcion, Date fechaInicia,
 			Date fechaTermina,
 			String direccion, Boolean diacompleto,Integer estado) {
@@ -48,7 +49,7 @@ public class VisitaDTO {
 		SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");		
 		this.idvisita = idvisita+"";
 		this.clienteId = clienteId+"";
-		this.clienteNombre = WordUtils.capitalize(clienteNombre)+" "+WordUtils.capitalize(clienteApellido);
+		this.clienteNombre = WordUtils.capitalize(clienteNombre);
 		this.titulo = titulo;
 		this.descripcion = descripcion;
 		this.fechaInicia = dateFormat.format(fechaInicia);
@@ -62,14 +63,13 @@ public class VisitaDTO {
 		this.estadoId=estado+"";
 	}
 	
-	public VisitaDTO(Long idvisita, String clienteNombre,String clienteApellido,
+	public VisitaDTO(Long idvisita, String clienteNombre,
 			String titulo, String descripcion, Date fechaInicia,
-			Date fechaTermina,
-			String direccion, Boolean diacompleto,Integer estado) {
+			Date fechaTermina,String direccion, Boolean diacompleto,Integer estado) {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("EEEE dd/MM/yyyy");		
 		SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");		
 		this.idvisita = idvisita+"";
-		this.clienteNombre = WordUtils.capitalize(clienteNombre)+" "+WordUtils.capitalize(clienteApellido);
+		this.clienteNombre = WordUtils.capitalize(clienteNombre);
 		this.titulo = titulo;
 		this.descripcion = descripcion;
 		this.fechaInicia = dateFormat.format(fechaInicia);
@@ -79,6 +79,30 @@ public class VisitaDTO {
 		this.direccion = direccion;
 		this.diacompleto = diacompleto;
 		this.estadoId=estado+"";
+	}
+	
+	
+	public VisitaDTO(Long idvisita, Integer clienteId, String clienteNombre,
+			String titulo, String descripcion, Date fechaInicia,
+			Date fechaTermina,
+			String direccion, Boolean diacompleto,Integer estado,String tipoIncidencia) {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");		
+		SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");		
+		this.idvisita = idvisita+"";
+		this.clienteId = clienteId+"";
+		this.clienteNombre = WordUtils.capitalize(clienteNombre);
+		this.titulo = titulo;
+		this.descripcion = descripcion;
+		this.fechaInicia = dateFormat.format(fechaInicia);
+		if (fechaTermina!=null){
+			this.fechaTermina = dateFormat.format(fechaTermina);
+		}
+		this.horaInicia = timeFormat.format(fechaInicia);
+		this.horaTermina = timeFormat.format(fechaTermina);
+		this.direccion = direccion;
+		this.diacompleto = diacompleto;
+		this.estadoId=estado+"";
+		this.tipoIncidencia = tipoIncidencia;
 	}
 	
 	public String getIdvisita() {
@@ -155,6 +179,15 @@ public class VisitaDTO {
 	public void setEstado(String estadoId) {
 		this.estadoId = estadoId;
 	}
+
+	public String getTipoIncidencia() {
+		return tipoIncidencia;
+	}
+
+	public void setTipoIncidencia(String tipoIncidencia) {
+		this.tipoIncidencia = tipoIncidencia;
+	}
+	
 	
 	
 	

@@ -35,7 +35,7 @@ public class IncidenciaDTO implements java.io.Serializable {
 	public IncidenciaDTO(Long idincidencia, Integer idtipoincidencia,
 			String descripcionTipoIncidencia, Integer idestadoinc,
 			String descripcionEstadoIncidencia, int idcliente,
-			String clienteNombre, String clienteApellido, Date fechaInicio, Date fechaCierre,
+			String clienteNombre, Date fechaInicio, Date fechaCierre,
 			String descripcion, String titulo) {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");		
 		this.idincidencia = idincidencia;
@@ -44,7 +44,7 @@ public class IncidenciaDTO implements java.io.Serializable {
 		this.idestadoinc = idestadoinc;
 		this.descripcionEstadoIncidencia = descripcionEstadoIncidencia;
 		this.idcliente = idcliente;
-		this.clienteNombre = WordUtils.capitalize(clienteNombre)+" "+WordUtils.capitalize(clienteApellido);
+		this.clienteNombre = WordUtils.capitalize(clienteNombre);
 		this.fechaInicio = dateFormat.format(fechaInicio);
 		if (fechaCierre!=null){
 		this.fechaCierre = dateFormat.format(fechaCierre);

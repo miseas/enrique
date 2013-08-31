@@ -18,14 +18,14 @@ public interface ClienteService {
     void saveorUpdateClient(ClienteDTO clientDTO);
 
     List<ClienteDTO> listClientsByParameters(String name, String lastName, String cuit, String score, String fieldOrder, String order);
-
-	Integer loadClientLastId();
 	
 	Map<String,Object> loadAllAddClientCat();
 
 	ReportData loadCPForReport(Integer ocId);
 	
     ClienteDTO loadClientById(Integer clientId);
+
+	String loadClientLastNum();
 
 
 }

@@ -100,10 +100,10 @@ public class VisitaDAOImpl extends HibernateDaoSupport implements VisitaDAO {
 		              		finalQuery = " and V.cliente.idcliente="+clientID;
 		              	}          	
 		    			if (initialDate!=null){
-		    				finalQuery = finalQuery+" and V.inicia<='"+dateFormat.format(initialDate)+"'" ;
+		    				finalQuery = finalQuery+" and V.inicia>='"+dateFormat.format(initialDate)+"'" ;
 		    				}
 		    			if (finalDate!=null){
-		    				finalQuery = finalQuery+" and V.termina>='"+dateFormat.format(finalDate)+"'";					
+		    				finalQuery = finalQuery+" and V.termina<='"+dateFormat.format(finalDate)+"'";					
 		              	}
 		    			if (!direction.isEmpty()){
 		    				finalQuery = finalQuery+" and direccion like '%"+direction+"%'";					
@@ -118,8 +118,8 @@ public class VisitaDAOImpl extends HibernateDaoSupport implements VisitaDAO {
 		    			}
 
 		                Query query = session.createQuery(
-		                        "select new com.decorart.web.model.dto.VisitaDTO(V.idvisita,C.idcliente,C.nombre,C.apellido,V.titulo,V.descripcion,V.inicia,V.termina,V.direccion,V.diacompleto,V.estadoVis.idestadovis) "
-		                                + " FROM Visita as V, Cliente as C" + " WHERE V.cliente.idcliente=C.idcliente "+finalQuery+" order by C.idcliente");
+		                        "select new com.sigepro.web.model.dto.VisitaDTO(V.idvisita,C.idcliente,C.nombre,V.titulo,V.descripcion,V.inicia,V.termina,V.direccion,V.diacompleto,V.estadoVis.idestadovis,T.descripcion) "
+		                                + " FROM Visita as V, Incidencia I, TipoInc T, Cliente as C" + " WHERE V.incidencia=I.idincidencia and I.tipoInc=T.idtipoincidencia and V.incidencia.cliente.idcliente=C.idcliente "+finalQuery+" order by C.idcliente");
 
 		                List result = query.list();
 		                return result;
@@ -140,7 +140,7 @@ public class VisitaDAOImpl extends HibernateDaoSupport implements VisitaDAO {
             public Object doInHibernate(Session session) throws HibernateException, SQLException {
 
                 Query query = session.createQuery(
-                        "select new com.sigepro.web.model.dto.VisitaDTO(V.idvisita,C.idcliente,C.nombre,C.apellido,V.titulo,V.descripcion,V.inicia,V.termina,V.direccion,V.diacompleto,V.estadoVis.idestadovis) "
+                        "select new com.sigepro.web.model.dto.VisitaDTO(V.idvisita,C.idcliente,C.nombre,V.titulo,V.descripcion,V.inicia,V.termina,V.direccion,V.diacompleto,V.estadoVis.idestadovis) "
                                 + " FROM Visita as V, Cliente as C, Incidencia as I" + " WHERE I.cliente.idcliente=C.idcliente and I.idincidencia=V.incidencia.idincidencia order by C.idcliente");
                 if (maxResult!=-1){
                 	query.setMaxResults(

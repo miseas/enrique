@@ -251,6 +251,16 @@
 						<input type="text" class="" id="nombreC" name="nombreC" />
 					<label for="direccionC"><strong>Dirección</strong></label>
 						<input type="text" class="span12" id="direccionC" name="direccionC" />
+					<div id="phone-container">
+					<div class="" id="phone-form" >
+					<label for="telC"><strong>Teléfono</strong></label>
+						<div class="form-search input-prepend">
+						<span class="add-on">#</span>
+						<input type="text" class="" id="telC-1" name="telC" /><button type="button" style="display: none" id="removeBtn" class="btn btn-mini btn-danger"><i class="icon-remove icon-white"></i></button>
+						</div>   
+						<span id="helpB" class="help-block"><a id="addNumberBtn" class="btn btn-mini btn-info" ><i class="icon-plus icon-white"></i> Agregar otro Nro de Teléfono</a></span>
+					</div>
+					</div> 
 				</div>
 				<div class="span4">    
 					<label for="localidadC"><strong>Localidad</strong></label>
@@ -265,18 +275,6 @@
 					 <span class="add-on"><i class="icon-envelope"></i></span>
 						<input type="text" class="" id="emailC" name="emailC" />
 						</div>
-				 <div id="phone-container">
-					<div class="" id="phone-form" >
-					<label for="telC"><strong>Teléfono</strong></label>
-						<div class="form-search input-prepend">
-						<span class="add-on">#</span>
-						<input type="text" class="" id="telC-1" name="telC" /><button type="button" style="display: none" id="removeBtn" class="btn btn-mini btn-danger"><i class="icon-remove icon-white"></i></button>
-						</div>   
-						<span id="helpB" class="help-block"><a id="addNumberBtn" class="btn btn-mini btn-info" ><i class="icon-plus icon-white"></i> Agregar otro Nro de Teléfono</a></span>
-					</div>
-					</div> 
-				</div>	
-				<div class="span4">		 
 				   <div class="row-fluid">
 				     <div class="span4">
 				     <label for="typeId"><strong>Tipo ID</strong></label>
@@ -287,7 +285,9 @@
 					<label for="cuitC"><strong>Número Documento</strong></label>
 						<input type="text" class="" id="cuitC" name="cuitC" />
 					</div>	
-					</div>	
+					</div>			
+				</div>	
+				<div class="span4">		 
 					<label for="clientState"><strong>Estado</strong></label>
 						<select id="clientState"  name="clientState">
 						</select>
@@ -439,10 +439,9 @@ jQuery("#editClientForm").validate({
 
 jQuery("#searchButton").click(function(){
 	 var name = jQuery("#nombreSearch").val();
-// 	 var lastName = jQuery("#apellidoSearch").val();
 	 var cuit = jQuery("#cuitSearch").val();
 	 var score = "";
-      jQuery("#listClientTable").jqGrid('setGridParam',{url:"<c:url value="/loadListClientsByParameter.htm" />?name="+name+"&lastName="+lastName+"&cuit="+cuit+"&score="+score,page:1}).trigger('reloadGrid');
+      jQuery("#listClientTable").jqGrid('setGridParam',{url:"<c:url value="/loadListClientsByParameter.htm" />?name="+name+"&cuit="+cuit+"&score="+score,page:1}).trigger('reloadGrid');
 });
 
 jQuery("#clearSearchButton").click(function(){

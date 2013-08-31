@@ -183,11 +183,11 @@ public class ClienteServiceImpl implements ClienteService {
         return clientTransformer.transform(client);
     }
 
-	public Integer loadClientLastId(){
-		Integer lastId= -1;
+	public String loadClientLastNum(){
+		String lastId= "-1";
         try {
-        	lastId = getClientDAO().loadLastClientId();
-			
+        	lastId = getClientDAO().loadLastClientNum();
+			 
         } catch (Exception e) {
             e.printStackTrace();
         }

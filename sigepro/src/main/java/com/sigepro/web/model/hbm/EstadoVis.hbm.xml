@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 15-ago-2013 0:47:31 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.sigepro.web.model.pojo.EstadoVis" table="ESTADO_VIS" schema="SIGEPRODB">
+        <id name="idestadovis" type="java.lang.Integer">
+            <column name="IDESTADOVIS" />
+            <generator class="increment" />
+        </id>
+        <property name="descripcion" type="string">
+            <column name="DESCRIPCION" length="100" />
+        </property>
+        <property name="notas" type="string">
+            <column name="NOTAS" length="100" />
+        </property>
+        <set name="visitas" table="VISITA" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="IDESTADOVIS" />
+            </key>
+            <one-to-many class="com.sigepro.web.model.pojo.Visita" />
+        </set>
+    </class>
+</hibernate-mapping>

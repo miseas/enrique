@@ -1000,7 +1000,10 @@ function openModal(event) {
 		timeOnlyTitle:"Elegir hora",
 		hourText:"Hora",
 		minuteText:"Minutos",
-		timeText:"Tiempo"
+		timeText:"Tiempo",
+		onClose: function( selectedHour ) {
+			$('#timeEnd').timepicker( "option", "hourMin", selectedHour.split(":")[0] );
+	    }
 		//controlType: myControl
 	});
 	endDateTextBox.timepicker({ 

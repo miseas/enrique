@@ -214,15 +214,15 @@
 			<div class="span2">
 						<label for="nombreSearch"><strong>Desde</strong></label>
 						<div class="form-inline">
-							<input type="text" class="span7" id="dateStart" name="dateStart" />
-							<input type="text" class="span5" id="timeStart" name="timeStart" />
+							<input type="text" class="span7" id="dateStartSearch" name="dateStartSearch" />
+							<input type="text" class="span5" id="timeStartSearch" name="timeStartSearch" />
 						</div>	
 			</div>
 			<div class="span2">
 						<label for="cuitSearch"><strong>Hasta</strong></label>
 						 <div class="form-inline">
-							<input type="text" class="span7" id="dateEnd" name="dateEnd" />	
-							<input type="text" class="span5" id="timeEnd" name="timeStart" />
+							<input type="text" class="span7" id="dateEndSearch" name="dateEndSearch" />	
+							<input type="text" class="span5" id="timeEndSearch" name="timeEndSearch" />
 						 </div>	
 									
 			</div>
@@ -251,11 +251,12 @@
                   <th>Hasta</th>
                   <th>Dirección</th>
                   <th>Descripción</th>
+                  <th>Incidencia</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td colspan="6" align="center">Sin resultados</td>
+                  <td colspan="7" align="center">Sin resultados</td>
                 </tr>
               </tbody>
             </table>
@@ -263,7 +264,7 @@
 	</div>
 		<div class="row-fluid">
 	   		<div class="pull-right" > 		
-    				<button class="btn disabled" type="button" id="addNewVisit"><i class="icon-calendar icon-large"></i> Imprimir Visitas</button>
+    				<button type="button" class="btn btn-primary disabled" id="printVisit" name="printVisit"><i class="icon-print"></i> Imprimir Visitas</button>
 	   		</div>
 		</div>
 </div>
@@ -294,13 +295,6 @@
 						<input type="text" class="span10" id="timeEnd" name="timeEnd" />
 				</div>
 			</div>
-			<div class="row-fluid">	
-				<div class="span4">
-				 <label class="checkbox">
-					<input id="puntualCheck" type="checkbox" value="true"/><strong> Puntual </strong>
-				</label>
-				</div>
-			</div>	
 		 <div class="row-fluid">	 
 					<div class="span12">							 
 						<label for="comentC"><strong>Descripción</strong></label>
@@ -311,7 +305,7 @@
         </form>
        </div>
 	</div>
-<div style="margin-bottom: -18px;" ></div>
+<div style="margin-bottom: -12px;" ></div>
 <hr></hr>
 <div class="row-fluid">
 	 <div class="span10 offset1">	
@@ -431,7 +425,7 @@ $(document).ready(function() {
 					},
 					success: function( data ) {
 						response( jQuery.map( data, function (elementOfArray, indexInArray){							
-							return  { value: capitaliseFirstLetter(elementOfArray.nombre) +" "+capitaliseFirstLetter(elementOfArray.apellido), 
+							return  { value: capitaliseFirstLetter(elementOfArray.nombre), 
 								idItem:elementOfArray.idcliente, itemDirec:elementOfArray.direccion, itemLocal:elementOfArray.localidad, 
 								itemTel:elementOfArray.telefono, itemCuit:elementOfArray.cuit, itemApellido:elementOfArray.apellido,
 								itemNombre:elementOfArray.nombre
@@ -457,74 +451,17 @@ $(document).ready(function() {
 		});
      
      
-  	jQuery("#addClientForm").validate({
- 		focusInvalid:false,
-	    rules: {
-	    	nombreC:{required: true},
-			apellidoC:{required: true},
-			emailC:{email:true},
-			cuitCC:{digits:true}
-        },
-	    messages: {
-	    	nombreC: {required: "campo obligatorio"},	
-	    	apellidoC: {required: "campo obligatorio"},
-	    	emailC:{email:"email incorrecto"},
-	    	cuitC:{digits:"campo numerico"}
-	    },
-  	submitHandler: function() { 	  	
-  		var nombreNew = jQuery("#nombreC").val();
-  		var apellidoNew = jQuery("#apellidoC").val();
-  		var direccionNew = jQuery("#direccionC").val();
-  		var localidadNew = jQuery("#localidadC").val();
-  		var emailNew = jQuery("#emailC").val();
-  		var telNew = jQuery("#telC-1").val();
-  		var telNew2 =" ";
-  		if (jQuery("#telC-2").length>0){
-  			telNew2 = jQuery("#telC-2").val();
-  		}
-  		var telNew3 =" ";
-  		if (jQuery("#telC-3").length>0){
-  				telNew3 = jQuery("#telC-3").val();
-  		}
-  		var cuitNew = jQuery("#cuitC").val();
-  		var puntuaNew = jQuery('#puntuacionStart input[name=score]').val();
-  		var comentNew = jQuery("#comentC").val();
-  		var cuentaCNew = jQuery("#ccC").val();
-  		  		
-  		var newClient = {'nombre':nombreNew,'apellido':apellidoNew,'direccion':direccionNew,
-  					    'localidad':localidadNew,'email':emailNew,'telefono':telNew+"@@"+telNew2+"@@"+telNew3,
-  						'notas':comentNew,'ccNro':cuentaCNew,'puntuacion':puntuaNew, 'cuit':cuitNew};		  		 
-  		 
-        jQuery.ajax({
-             url: '<c:url value="/addNewClient.htm" />',
-             type: "POST",
-             dataType: "json",
-             contentType: "application/json",
-             data: JSON.stringify( newClient ), 
-             success: function(resp){   
-            	 	if(resp!=-1){ 
-            			jSuccess("Operacion realizada exitosamente", "Guardar",function(){
-            				jQuery("#nombreCSearch").val(capitaliseFirstLetter(newClient.nombre)+" "+capitaliseFirstLetter(newClient.apellido));
-            				jQuery.data(document.body,"clientData",{"idcliente":resp,"direccion":newClient.direccion,
-								"localidad":newClient.localidad,"telefono":newClient.telNew,
-								"cuit":newClient.cuit,"apellido":newClient.apellido,"nombre":newClient.nombre} );
-            				cleanScreenAdd();
-            		  		jQuery("#myModal").modal( "hide" );
-            		  		jQuery( "#addNewVisit" ).removeClass("disabled");
-            			},["Aceptar"]);
-            	 	}
-            	 	else{
-            	 		jAlert("Error al realizar la operación", "Error al Guardar",function(){
-            				//cleanScreenAdd();
-            			},["Aceptar"]);
-            	 	}          	                                
-             }
-           });
-  		
-  	}
-	         
-	});	 
-     
+     $("#clearSearchButton").click(function(){
+    		
+    		jQuery.data(document.body,"clientData",null);
+    		$("#nombreCSearch").val("");
+    		 $("#dateStartSearch").val("");
+    		 $("#timeStartSearch").val("");
+    		 $("#dateEndSearch").val("");
+    		 $("#timeEndSearch").val("");
+    		 $("#direcSearch").val("");
+    		
+    	});
      
  	jQuery("#addVisitForm").validate({
  		focusInvalid:false,
@@ -544,13 +481,13 @@ $(document).ready(function() {
   		var tiempoInicio = jQuery("#timeStart").val();
   		var tiempoFin = jQuery("#timeEnd").val();
   		var directionVisit = jQuery("#directionVisit").val();
-  		var puntualCheck = jQuery("#puntualCheck").prop('checked');
-  		if (puntualCheck){
-  			puntualCheck = 1;
-  		}
-  		else{
-  			puntualCheck = 0;
-  		}
+//   		var puntualCheck = jQuery("#puntualCheck").prop('checked');
+//   		if (puntualCheck){
+//   			puntualCheck = 1;
+//   		}
+//   		else{
+//   			puntualCheck = 0;
+//   		}
   		var todoDia = false;
   		
   		var cliente = jQuery.data(document.body,"clientData");
@@ -566,9 +503,9 @@ $(document).ready(function() {
   			clientId = cliente.idcliente;
   		}
   		  		
-  		var newVisita = {'idvisita':idVisita, 'clienteId':clientId,'titulo':"",'descripcion':descripcion,
+  		var newVisita = {'idvisita':idVisita, 'clienteId':clientId,'descripcion':descripcion,
   					    'fechaInicia':fechaInicia,'fechaTermina':fechaInicia,'horaInicia':tiempoInicio,
-  						'horaTermina':tiempoFin,'diacompleto':todoDia, 'direccion':directionVisit,'estadoId':puntualCheck};		  		 
+  						'horaTermina':tiempoFin,'diacompleto':todoDia, 'direccion':directionVisit};		  		 
   		 
         jQuery.ajax({
              url: urlServ,
@@ -587,7 +524,7 @@ $(document).ready(function() {
             	 			clientName = cliente.nombre +" "+ cliente.apellido;
             	 		}
             	 		
-            			jSuccess("Operacion realizada exitosamente", "Guardar",function(){
+            	 		jQuery("#dialogSuccessOperation").dialog("open");
             				jQuery("#visitEditID").val("");
             				jQuery("#dialogAddVisit").dialog("close");
             				cleanScreenVisit();
@@ -615,23 +552,96 @@ $(document).ready(function() {
             		  			       	 'direccion':directionVisit,
             		  			         'start':new Date(yearI,parseInt(monthI)-1,dayI,hourI,minI),
             		  			         'end': new Date(yearI,parseInt(monthI)-1,dayI,hourF,minF),
-            		  			         'allDay':todoDia,
-            		  			         'color':puntualCheck==1?"red":""
+            		  			         'allDay':todoDia
             		  			         }
             		  		            ];
-            		  		$('#calendar').fullCalendar( 'addEventSource', source );
-            			},["Aceptar"]);
+            		  	  $('#calendar').fullCalendar( 'addEventSource', source );
+            			
             	 	}
             	 	else{
-            	 		jAlert("Error al realizar la operación", "Error al Guardar",function(){
-            			},["Aceptar"]);
+    					jQuery("#dialogErrorOperation").dialog("open");	
             	 	}          	                                
              }
            });
   		
   	}	         
 	});	     
+ 	
+ 	
+ 	$("#searchButton").click(function(){
+ 		
+ 		var clientData = jQuery.data(document.body,"clientData");
+ 		var clientId="";
+ 		if (clientData!=null){
+ 			clientId = clientData.idcliente;
+ 		}	
+ 		var fechaI = $("#dateStartSearch").val();
+ 		var horaI = $("#timeStartSearch").val();
+ 		var fechaT = $("#dateEndSearch").val();
+ 		var horaT = $("#timeEndSearch").val();
+ 		var direction = $("#direcSearch").val();
+ 		 
+ 		$.ajax({
+ 			url: '<c:url value="/searchVisitList.htm" />',
+ 			dataType: "json",
+ 			type: "GET",
+ 			data: {
+ 				cId: clientId,
+ 				iniD: fechaI,
+ 				iniT: horaI,
+ 				endD: fechaT,
+ 				endT: horaT,
+ 				dir: direction
+ 			},
+ 			success: function( data ) {
+ 				loadVisitResult(data);
+ 			}
+ 		});
+ 		
+ 		
+ 	});
      
+ 	var listVisitId="";
+ 	function loadVisitResult(listVisits){
+ 		$("#tableVisit tbody tr").remove();
+ 		
+ 	    listVisitId="";
+ 	    if (listVisits.length!=0){
+ 			jQuery("#printVisit" ).removeClass("disabled");
+ 			$.each(listVisits,function(index, visit){		
+ 			 var newRow = $("<tr></tr>");
+ 			 var counter = $("<td>"+(index+1)+"</td>");
+ 			 var newName = $("<td>"+visit.clienteNombre+"</td>");
+ 			 var newDateI = $("<td>"+visit.fechaInicia+" - "+visit.horaInicia+"</td>");
+ 			 var newDateE = $("<td>"+visit.fechaTermina+" - "+visit.horaTermina+"</td>");
+ 			 var newDesc = $("<td>"+visit.descripcion+"</td>");
+ 			 var newDir = $("<td>"+visit.direccion+"</td>");
+ 			 var newTipoI = $("<td>"+visit.tipoIncidencia+"</td>");
+ 			 newRow.append(counter).append(newName).append(newDateI).append(newDateE).append(newDir).append(newDesc).append(newTipoI);
+ 			 $("#tableVisit").append(newRow);
+ 			 listVisitId=listVisitId+","+visit.idvisita;
+ 			});
+ 	    }
+ 	    else{
+ 	    	jQuery("#printVisit" ).addClass("disabled");
+ 	    	var newRow = $("<tr></tr>");
+ 			var noResult = $("<td colspan='6'>Sin resultados</td>");
+ 			newRow.append(noResult);
+ 			 $("#tableVisit").append(newRow);
+ 	    }
+ 	}
+
+
+ 	$("#printVisit").click(function(){
+ 		 if ($(this).hasClass('disabled')){
+ 			 return;
+ 		 }
+ 		if (listVisitId!=""){
+ 		var listId =listVisitId.slice(1,listVisitId.length);
+ 		//window.location.href = "<%=request.getContextPath()%>/generateVisiReport.htm?visitId="+listId;
+ 		alert("Tipo de reporte?");
+ 		}
+ 	}); 	
      
 // 	calendar config 
 	var date = new Date();
@@ -700,7 +710,37 @@ $(document).ready(function() {
 		}
 	});
 	
-	
+	 $( "#dateStartSearch" ).datepicker({
+		 defaultDate: "+1d",
+		 changeMonth: true,
+		 numberOfMonths: 2,
+		 dateFormat: "dd/mm/yy",
+		 dayNames: [ "Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado" ],
+		 dayNamesMin: [ "Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa" ],
+		 monthNames: [ "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" ], 
+	     monthNamesShort:["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic" ],
+		 closeText: "Cerrar", 
+		 currentText: "Hoy",
+		 onClose: function( selectedDate ) {
+		 $( "#dateEndSearch" ).datepicker( "option", "minDate", selectedDate );
+		 }
+		 });
+		 $( "#dateEndSearch" ).datepicker({
+		 defaultDate: "+1w",
+		 changeMonth: true,
+		 numberOfMonths: 2,
+		 dateFormat: "dd/mm/yy",
+		 dayNames: [ "Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado" ],
+		 dayNamesMin: [ "Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa" ],
+		 monthNames: [ "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" ], 
+	     monthNamesShort:["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic" ],
+		 closeText: "Cerrar", 
+		 currentText: "Hoy",
+		 onClose: function( selectedDate ) {
+		 $( "#dateStartSearch" ).datepicker( "option", "maxDate", selectedDate );
+		 }
+		 });
+		 
 	 $( "#dateStart" ).datepicker({
 		 defaultDate: "+1d",
 		 changeMonth: true,
@@ -732,9 +772,33 @@ $(document).ready(function() {
 		 }
 		 });
       	 
-      
-	var startDateTextBox = $('#timeStart');
-	var endDateTextBox = $('#timeEnd');
+     
+	  var startDateTextBox = $('#timeStartSearch');
+	  var endDateTextBox = $('#timeEndSearch');
+
+			startDateTextBox.timepicker({
+				stepMinute: 15,
+				closeText:"Listo",
+				currentText:"Ahora",
+				timeOnlyTitle:"Elegir hora",
+				hourText:"Hora",
+				minuteText:"Minutos",
+				timeText:"Tiempo"
+				//controlType: myControl
+			});
+			endDateTextBox.timepicker({ 
+				stepMinute: 15,
+				closeText:"Listo",
+				currentText:"Ahora",
+				timeOnlyTitle:"Elegir hora",
+				hourText:"Hora",
+				minuteText:"Minutos",
+				timeText:"Tiempo"
+				//controlType: myControl
+			});
+			
+	 startDateTextBox = $('#timeStart');
+	 endDateTextBox = $('#timeEnd');
 
 	startDateTextBox.timepicker({
 		stepMinute: 15,
@@ -743,7 +807,10 @@ $(document).ready(function() {
 		timeOnlyTitle:"Elegir hora",
 		hourText:"Hora",
 		minuteText:"Minutos",
-		timeText:"Tiempo"
+		timeText:"Tiempo",
+		onClose: function( selectedHour ) {
+			$('#timeEnd').timepicker( "option", "hourMin", selectedHour.split(":")[0] );
+	    }
 		//controlType: myControl
 	});
 	endDateTextBox.timepicker({ 
@@ -777,6 +844,39 @@ $(document).ready(function() {
 			close: function() {
 			}
 		});	 		
+		
+		
+		jQuery("#dialogErrorOperation").dialog({
+			autoOpen: false,
+			height: 170,
+			modal:true,
+			buttons: {
+				"Ok": function() {
+					jQuery( this ).dialog( "close" );
+				}
+			},
+			resizable: false,
+			draggable: false,
+			close: function() {
+			}
+		});	 	
+
+		jQuery("#dialogSuccessOperation").dialog({
+			autoOpen: false,
+			height: 170,
+			modal:true,
+			buttons: {
+				"Ok": function() {
+					jQuery( this ).dialog( "close" );
+					cleanIncidenciaForm();
+				}
+			},
+			resizable: false,
+			draggable: false,
+			close: function() {
+			}
+		});	 
+
 	 	
 		loadAllVisits();
 });//end jquery load
@@ -847,12 +947,12 @@ function openModal(event) {
 		title: event.clientName,//+"-"+event.title,
 		closeOnEscape: true,
 		buttons: [
-				{
-				html: "<i class='icon-calendar-empty'></i> Borrar",
-				click: function() {
-					delVisit(event.id);
-					}
-				},
+// 				{
+// 				html: "<i class='icon-calendar-empty'></i> Borrar",
+// 				click: function() {
+// 					delVisit(event.id);
+// 					}
+// 				},
 				{
 				html: "<i class='icon-edit'></i> Editar",
 				click: function() {
@@ -954,12 +1054,12 @@ function editVisit(event){
   	 jQuery("#timeStart").val($.fullCalendar.formatDate( event.start, "HH:mm" ));
   	 jQuery("#timeEnd").val($.fullCalendar.formatDate( event.end, "HH:mm" ));
   	 jQuery("#directionVisit").val(event.direccion);
-     if (event.color=='red'){ 
-  	 jQuery("#puntualCheck").attr('checked', true);
-     }
-     else{
-      jQuery("#puntualCheck").attr('checked', false); 
-     }
+//      if (event.color=='red'){ 
+//   	 jQuery("#puntualCheck").attr('checked', true);
+//      }
+//      else{
+//       jQuery("#puntualCheck").attr('checked', false); 
+//      }
 	 jQuery("#visitEditID").val(event.id);
 	 jQuery("#clientIdVisit").val(event.clientId);
 	 jQuery("#clientNameVisit").val(capitaliseFirstLetter(event.clientName));

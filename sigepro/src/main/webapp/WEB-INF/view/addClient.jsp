@@ -180,9 +180,19 @@
 	         <div class="row-fluid">
 	        	<div class="span4">    
 					<label for="nombreC"><strong>Nombre</strong></label>
-						<input type="text" class="" id="nombreC" name="nombreC" />
+						<input type="text" class="span12" id="nombreC" name="nombreC" />
 					<label for="direccionC"><strong>Dirección</strong></label>
 						<input type="text" class="span12" id="direccionC" name="direccionC" />
+				    <div id="phone-container">
+						<div class="" id="phone-form" >
+						<label for="telC"><strong>Teléfono</strong></label>
+							<div class="form-search input-prepend">
+							<span class="add-on">#</span>
+							<input type="text" class="" id="telC-1" name="telC" /><button type="button" style="display: none" id="removeBtn" class="btn btn-mini btn-danger"><i class="icon-remove icon-white icon-large"></i></button>
+							</div>   
+							<span id="helpB" class="help-block"><a id="addNumberBtn" class="btn btn-mini btn-info" ><i class="icon-plus icon-white"></i> Agregar otro Nro de Teléfono</a></span>
+						</div>
+					</div> 
 				</div>
 				<div class="span4">    
 					<label for="localidadC"><strong>Localidad</strong></label>
@@ -196,20 +206,8 @@
 					 <div class="input-prepend">
 					 <span class="add-on"><i class="icon-envelope icon-large"></i></span>
 						<input type="text" class="" id="emailC" name="emailC" />
-						</div>
-				 <div id="phone-container">
-					<div class="" id="phone-form" >
-					<label for="telC"><strong>Teléfono</strong></label>
-						<div class="form-search input-prepend">
-						<span class="add-on">#</span>
-						<input type="text" class="" id="telC-1" name="telC" /><button type="button" style="display: none" id="removeBtn" class="btn btn-mini btn-danger"><i class="icon-remove icon-white icon-large"></i></button>
-						</div>   
-						<span id="helpB" class="help-block"><a id="addNumberBtn" class="btn btn-mini btn-info" ><i class="icon-plus icon-white"></i> Agregar otro Nro de Teléfono</a></span>
-					</div>
-					</div> 
-				</div>	
-				<div class="span4">	
-				    <div class="row-fluid">
+					 </div>
+					<div class="row-fluid">
 				     <div class="span4">
 				     <label for="typeId"><strong>Tipo ID</strong></label>
 						<select id="typeId" name="typeId" class="span10">
@@ -220,6 +218,8 @@
 						<input type="text" class="" id="cuitC" name="cuitC" />
 					</div>	
 					</div>	
+				</div>	
+				<div class="span4">	
 					<label for="clientState"><strong>Estado Inicial</strong></label>
 						<select id="clientState"  name="clientState">
 						</select>
@@ -363,7 +363,7 @@ locationInfoWMessage = "Esta bien esta ubicación?<br>Sino es asi, <strong>arras
             	 if(resp!=-1){ 
             		 jQuery("#dialogSuccessOperation").dialog("open");
          				cleanScreenAdd();
-         				//loadLastClientId();
+         				loadLastClientId();
          	 	}
          	 	else{
            		 jQuery("#dialogErrorOperation").dialog("open");
@@ -373,7 +373,20 @@ locationInfoWMessage = "Esta bien esta ubicación?<br>Sino es asi, <strong>arras
   		
   	}
 	         
-});
+  });
+	
+	function loadLastClientId(){
+	    jQuery.ajax({
+	        url: '<c:url value="/loadLastClientNum.htm" />',
+	        type: "GET",
+	        dataType: "json",
+	        contentType: "application/json",
+	        data: "", 
+	        success: function(resp){                                       
+	       			jQuery("#clientNum").val(resp+1);        
+	        }
+	      });
+	}
 	
 	jQuery("#dialogErrorOperation,#dialogErrorOperationMap").dialog({
 		autoOpen: false,
@@ -382,6 +395,7 @@ locationInfoWMessage = "Esta bien esta ubicación?<br>Sino es asi, <strong>arras
 		buttons: {
 			"Ok": function() {
 				jQuery( this ).dialog( "close" );
+				jQuery("#nombreC").focus();
 			}
 		},
 		resizable: false,
@@ -459,6 +473,7 @@ locationInfoWMessage = "Esta bien esta ubicación?<br>Sino es asi, <strong>arras
 	    createLocationRequest(direccion+", "+localidad+", Argentina");
 	}
 
+	loadLastClientId();
 });
 //Other functions
 function cleanScreenAdd(){

@@ -195,12 +195,12 @@ public class ClientController {
     }
     
     // @Audited(message = "Accion: Eliminar alertas")
-    @RequestMapping(value = "/loadLastClientId", method = RequestMethod.GET)
+    @RequestMapping(value = "/loadLastClientNum", method = RequestMethod.GET)
     public @ResponseBody
     Integer loadLastClientId() {
         Integer lastId = -1;
         try {
-        	lastId = clientService.loadClientLastId();
+        	lastId = Integer.parseInt(clientService.loadClientLastNum());
         } catch (Exception e) {
             e.printStackTrace();
         }

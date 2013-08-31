@@ -162,10 +162,16 @@ public class VisitaServiceImpl implements VisitaService {
 			Date endTime = null;
 			Integer clientIdNum = null;
 			try {
+				if (timeIni.contentEquals("")){
+					timeIni="00:00";
+				}
 				inicialTime = df.parse(fechaIni + " " + timeIni);
+				if (timeTer.contentEquals("")){
+					timeTer="23:00";
+				}
 				endTime = df.parse(fechaTer + " " + timeTer);
 			} catch (ParseException e) {
-				Log.error(e.getMessage());
+				LOG.error(e.getMessage());
 			}
 			if (clientId != null && !clientId.isEmpty()) {
 				clientIdNum = Integer.parseInt(clientId);
