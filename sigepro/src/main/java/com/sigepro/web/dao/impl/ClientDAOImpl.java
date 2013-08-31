@@ -49,6 +49,12 @@ public class ClientDAOImpl extends HibernateDaoSupport implements ClientDAO {
         getHibernateTemplate().saveOrUpdate(cliente);
         return cliente.getIdcliente();
     }
+    
+    public Integer saveNewClient(Cliente cliente) throws DataAccessException {
+    	LOG.info("ClientDAOImpl.saveNewClient()");
+        getHibernateTemplate().save(cliente);
+        return cliente.getIdcliente();
+    }
 
     public List<Cliente> getClientsByName(final String name, final String fieldSort, final String sort, final int maxResult) throws DataAccessException {
 

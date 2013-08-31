@@ -16,7 +16,6 @@ public class Cliente implements java.io.Serializable {
 	private EstadoCli estadoCli;
 	private CatDnitipo catDnitipo;
 	private String nombre;
-	private String apellido;
 	private String direccion;
 	private String email;
 	private String telefono;
@@ -28,6 +27,7 @@ public class Cliente implements java.io.Serializable {
 	private String telefono2;
 	private String telefono3;
 	private String numerocli;
+	private String cp;
 	private Set<Incidencia> incidencias = new HashSet<Incidencia>(0);
 
 	public Cliente() {
@@ -39,7 +39,7 @@ public class Cliente implements java.io.Serializable {
 	}
 
 	public Cliente(int idcliente, Localidad localidad, EstadoCli estadoCli,
-			String nombre, String apellido, String direccion, String email,
+			String nombre, String direccion, String email,
 			String telefono, String notas, String ccNro, Integer puntuacion,
 			Date fechaAgregado, String cuit, String telefono2,
 			String telefono3) {
@@ -47,7 +47,6 @@ public class Cliente implements java.io.Serializable {
 		this.localidad = localidad;
 		this.estadoCli = estadoCli;
 		this.nombre = nombre;
-		this.apellido = apellido;
 		this.direccion = direccion;
 		this.email = email;
 		this.telefono = telefono;
@@ -90,14 +89,6 @@ public class Cliente implements java.io.Serializable {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
-	}
-
-	public String getApellido() {
-		return this.apellido;
-	}
-
-	public void setApellido(String apellido) {
-		this.apellido = apellido;
 	}
 
 	public String getDireccion() {
@@ -202,6 +193,14 @@ public class Cliente implements java.io.Serializable {
 
 	public void setIncidencias(Set<Incidencia> incidencias) {
 		this.incidencias = incidencias;
+	}
+
+	public String getCp() {
+		return cp;
+	}
+
+	public void setCp(String cp) {
+		this.cp = cp;
 	}
 	
 	

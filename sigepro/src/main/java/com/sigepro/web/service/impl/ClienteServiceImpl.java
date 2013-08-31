@@ -63,7 +63,6 @@ public class ClienteServiceImpl implements ClienteService {
         Cliente cliente =  new Cliente();
         cliente.setNumerocli(clientDTO.getNumerocli());
         cliente.setNombre(clientDTO.getNombre().toLowerCase());
-        cliente.setApellido(clientDTO.getApellido().toLowerCase());
         cliente.setCcNro(clientDTO.getCcNro());
         cliente.setCuit(clientDTO.getCuit());
         cliente.setDireccion(clientDTO.getDireccion());
@@ -105,7 +104,6 @@ public class ClienteServiceImpl implements ClienteService {
         }
         cliente.setNumerocli(clientDTO.getNumerocli());
         cliente.setNombre(clientDTO.getNombre().toLowerCase());
-        cliente.setApellido(clientDTO.getApellido().toLowerCase());
         cliente.setCcNro(clientDTO.getCcNro());
         if (clientDTO.getCuit()!=null && !clientDTO.getCuit().isEmpty()){
         cliente.setCuit(clientDTO.getCuit());

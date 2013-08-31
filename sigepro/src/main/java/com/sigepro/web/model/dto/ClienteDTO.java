@@ -4,7 +4,6 @@ public class ClienteDTO {
 	
 	private Integer idcliente;
 	private String nombre;
-	private String apellido;
 	private String direccion;
 	private Integer localidadId;
 	private String localidad;
@@ -34,13 +33,6 @@ public class ClienteDTO {
 	}
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
-	}
-	
-	public String getApellido() {
-		return apellido;
-	}
-	public void setApellido(String apellido) {
-		this.apellido = apellido;
 	}
 	public String getDireccion() {
 		return direccion;

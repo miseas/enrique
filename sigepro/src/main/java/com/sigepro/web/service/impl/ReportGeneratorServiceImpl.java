@@ -77,9 +77,9 @@ public class ReportGeneratorServiceImpl implements ReportGeneratorService {
 //          pars.put("ACTUALDATE", sim.format(date));
 		pars.put("TOTALSUM", reportData.getTotalPriceOrder());
 		String nombre = reportData.getClient().getNombre();
-		if ( reportData.getClient().getApellido()!=null){
-			nombre= nombre+" "+reportData.getClient().getApellido();
-		}
+//		if ( reportData.getClient().getApellido()!=null){
+//			nombre= nombre+" "+reportData.getClient().getApellido();
+//		}
 		pars.put("NOMBRE", nombre.toUpperCase());
 		pars.put("DIRECCION", reportData.getClient().getDireccion());
 		pars.put("LOCALIDAD", reportData.getClient().getLocalidad());

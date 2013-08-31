@@ -73,7 +73,7 @@ public class GenerateReportController {
     	//loading tmp data from session        
      	ReportData reportData = clientService.loadCPForReport(cliId);
         if (reportData != null) {
-    		String reportName = "ContratoAbono_"+reportData.getClient().getApellido()+"-"+reportData.getNumPresupuesto();
+    		String reportName = "ContratoAbono_"+reportData.getClient().getNombre()+"-"+reportData.getNumPresupuesto();
             ByteArrayOutputStream baos = reportGeneratorService.generateReport(reportData);
 		    response.setHeader("Content-Disposition", "attachment; filename=\"" + reportName + ".pdf\"");
 		    //response.setContentType("application/pdf");

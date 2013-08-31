@@ -15,7 +15,6 @@ public class ClienteTransformer implements Transformer<Cliente,ClienteDTO> {
 	public ClienteDTO transform(Cliente target) {
 		ClienteDTO clienteDTO = new ClienteDTO();
 		clienteDTO.setNombre(WordUtils.capitalize(target.getNombre()));
-		clienteDTO.setApellido(WordUtils.capitalize(target.getApellido()));
 		SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");		
 		clienteDTO.setFechaAgregado(df.format(target.getFechaAgregado()));
 		if (target.getCuit()!=null){

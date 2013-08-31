@@ -13,6 +13,8 @@ import com.sigepro.web.model.pojo.Localidad;
 public interface ClientDAO extends DAO {
 
     Integer saveClient(Cliente cliente) throws DataAccessException;
+    
+    Integer saveNewClient(Cliente cliente) throws DataAccessException;
 
     List<Cliente> getClientsByName(final String name, final String fieldSort, final String sort, final int maxResult) throws DataAccessException;
 

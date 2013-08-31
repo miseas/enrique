@@ -208,10 +208,6 @@
 						<input type="text" class="" id="nombreSearch" name="nombreSearch" />
 				</div>
 				<div class="span3">    
-					<label for="apellidoSearch"><strong>Apellido</strong></label>
-						<input type="text" class="" id="apellidoSearch" name="apellidoSearch" />
-				</div>
-				<div class="span3">    
 					<label for="localidadC"><strong>Localidad</strong></label> 
 						<select id="localidadCSearch" name="localidadC" class="">
 						</select>
@@ -253,8 +249,6 @@
 	        	<div class="span4">    
 					<label for="nombreC"><strong>Nombre</strong></label>
 						<input type="text" class="" id="nombreC" name="nombreC" />
-					<label for="apellidoC"><strong>Apellido</strong></label>
-						<input type="text" class="" id="apellidoC" name="apellidoC" />
 					<label for="direccionC"><strong>Dirección</strong></label>
 						<input type="text" class="span12" id="direccionC" name="direccionC" />
 				</div>
@@ -387,19 +381,16 @@ jQuery("#editClientForm").validate({
 		focusInvalid:false,
 	    rules: {
 	    	nombreC:{required: true},
-			apellidoC:{required: true},
 			emailC:{email:true},
 			cuitC:{digits:true}
         },
 	    messages: {
 	    	nombreC: {required: "campo obligatorio"},
-	    	apellidoC: {required: "campo obligatorio"},
 	    	emailC:{email:"email incorrecto"},
 	    	cuitC:{digits:"campo numerico"}
 	    },
   	submitHandler: function() { 	  	
   		var nombreNew = jQuery("#nombreC").val();
-  		var apellidoNew = jQuery("#apellidoC").val();
   		var direccionNew = jQuery("#direccionC").val();
   		var localidadNew = jQuery("#localidadC").val();
   		var emailNew = jQuery("#emailC").val();
@@ -420,7 +411,7 @@ jQuery("#editClientForm").validate({
   		var clientNum = jQuery("#clientNum").val();
   		var typeId = jQuery("#typeId").val();
 
-  		var newClient = {'idcliente':idClient,'nombre':nombreNew,'apellido':apellidoNew,'direccion':direccionNew,"iddnitipo":typeId,
+  		var newClient = {'idcliente':idClient,'nombre':nombreNew,'direccion':direccionNew,"iddnitipo":typeId,
   					    'localidadId':localidadNew,'email':emailNew,'telefono':telNew+"@@"+telNew2+"@@"+telNew3,
   						'notas':comentNew,'estadoCliId':clientStateID,'puntuacion':puntuaNew, 'cuit':cuitNew,'numerocli':clientNum};		  		 
   		 
@@ -448,7 +439,7 @@ jQuery("#editClientForm").validate({
 
 jQuery("#searchButton").click(function(){
 	 var name = jQuery("#nombreSearch").val();
-	 var lastName = jQuery("#apellidoSearch").val();
+// 	 var lastName = jQuery("#apellidoSearch").val();
 	 var cuit = jQuery("#cuitSearch").val();
 	 var score = "";
       jQuery("#listClientTable").jqGrid('setGridParam',{url:"<c:url value="/loadListClientsByParameter.htm" />?name="+name+"&lastName="+lastName+"&cuit="+cuit+"&score="+score,page:1}).trigger('reloadGrid');
@@ -465,7 +456,7 @@ jQuery("#listClientTable").jqGrid({
 	 datatype: "json", 
 	 width : 1158,
 	 height : 200,
-	 colNames : ['Operación','','<fmt:message key="message.cli.nombre"/>',  '<fmt:message key="message.cli.apellido"/>',
+	 colNames : ['Operación','','<fmt:message key="message.cli.nombre"/>',
 	             '<fmt:message key="message.cli.direc"/>', '<fmt:message key="message.cli.localidad"/>','','','','','','CUIT/DNI','','','','','','' ],
 		colModel : [ 
 		        	{name: 'myac',
@@ -493,14 +484,9 @@ jQuery("#listClientTable").jqGrid({
 			name : 'nombre',
 			index : 'nombre',
 			align: 'center',
-			width : 180
-		}
-		, {
-			name : 'apellido',
-			index : 'apellido',
-			align: 'center',
-			width : 180
-		}, {
+			width : 250
+		},
+		 {
 			name : 'direccion',
 			index : 'direccion',
 			align: 'center',
@@ -767,33 +753,33 @@ jQuery("#nombreSearch" ).autocomplete({
 	}
 });
 
-jQuery("#apellidoSearch" ).autocomplete({
-	source: function( request, response ) {
-		$.ajax({
-			url: '<c:url value="/searchClientByName.htm" />',
-			dataType: "json",
-			type: "POST",
-			data: {
-				featureClass: "P",
-				style: "full",
-				maxRows: 12,
-				nameStartWith: request.term
-			},
-			success: function( data ) {
-				response( jQuery.map( data, function (elementOfArray, indexInArray){							
-					return  { value:capitaliseFirstLetter(elementOfArray.apellido)};											
-				}));						
-			}
-		});
-	},
-	minLength: 1,
-	select: function(event, ui){
-	},
-	open: function() {
-	},
-	close: function() {
-	}
-});
+// jQuery("#apellidoSearch" ).autocomplete({
+// 	source: function( request, response ) {
+// 		$.ajax({
+// 			url: '<c:url value="/searchClientByName.htm" />',
+// 			dataType: "json",
+// 			type: "POST",
+// 			data: {
+// 				featureClass: "P",
+// 				style: "full",
+// 				maxRows: 12,
+// 				nameStartWith: request.term
+// 			},
+// 			success: function( data ) {
+// 				response( jQuery.map( data, function (elementOfArray, indexInArray){							
+// 					return  { value:capitaliseFirstLetter(elementOfArray.apellido)};											
+// 				}));						
+// 			}
+// 		});
+// 	},
+// 	minLength: 1,
+// 	select: function(event, ui){
+// 	},
+// 	open: function() {
+// 	},
+// 	close: function() {
+// 	}
+// });
 
 
 $("#addNumberBtn").click(function(){
@@ -831,7 +817,6 @@ function updateClient(row){
 	jQuery('#listClientTable').jqGrid('setGridState','hidden');	
 	
 	jQuery("#nombreC").val(capitaliseFirstLetter(row.nombre));
-	jQuery("#apellidoC").val(capitaliseFirstLetter(row.apellido));
 	jQuery("#direccionC").val(row.direccion);
 	jQuery("#localidadC").val(row.localidadId);
 	jQuery("#emailC").val(row.email);
@@ -880,7 +865,6 @@ function delClient(){
 
 function cleanScreenSearch(){
 	 jQuery("#nombreSearch").val("");
-	  	 jQuery("#apellidoSearch").val("");
 		 jQuery("#cuitSearch").val("");		 
 		 jQuery("#localidadSearch").val("");
 		 jQuery("#nombreSearch").focus();
@@ -888,7 +872,6 @@ function cleanScreenSearch(){
 function cleanScreenEdit(){
 	 jQuery(".editClientDiv").hide();			 
      jQuery("#nombreC").val("");
- 	 jQuery("#apellidoC").val("");
 	 jQuery("#direccionC").val("");
 	 jQuery("#localidadC").val(0);
 	 jQuery("#emailC").val("");

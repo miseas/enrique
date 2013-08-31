@@ -20,9 +20,6 @@
         <property name="nombre" type="string">
             <column name="NOMBRE" length="100" />
         </property>
-        <property name="apellido" type="string">
-            <column name="APELLIDO" length="100" />
-        </property>
         <property name="direccion" type="string">
             <column name="DIRECCION" length="100" />
         </property>
@@ -55,6 +52,9 @@
         </property>
         <property name="numerocli" type="string">
             <column name="NUMEROCLI" length="40" />
+        </property>
+        <property name="cp" type="string">
+            <column name="CP" length="25" />
         </property>
          <set name="incidencias" table="INCIDENCIA" inverse="true" lazy="true" fetch="select">
             <key>

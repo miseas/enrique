@@ -181,8 +181,6 @@
 	        	<div class="span4">    
 					<label for="nombreC"><strong>Nombre</strong></label>
 						<input type="text" class="" id="nombreC" name="nombreC" />
-					<label for="apellidoC"><strong>Apellido</strong></label>
-						<input type="text" class="" id="apellidoC" name="apellidoC" />
 					<label for="direccionC"><strong>Dirección</strong></label>
 						<input type="text" class="span12" id="direccionC" name="direccionC" />
 				</div>
@@ -321,19 +319,17 @@ locationInfoWMessage = "Esta bien esta ubicación?<br>Sino es asi, <strong>arras
 		focusInvalid:false,
 	    rules: {
 	    	nombreC:{required: true},
-			apellidoC:{required: true},
 			emailC:{email:true},
 			cuitC:{digits:true}
         },
 	    messages: {
 	    	nombreC: {required: "Campo obligatorio"},
-	    	apellidoC: {required: "Campo obligatorio"},
 	    	emailC:{email:"Email incorrecto"},
 	    	cuitC:{digits:"Campo numerico"}
 	    },
   	submitHandler: function() { 	  	
   		var nombreNew = jQuery("#nombreC").val();
-  		var apellidoNew = jQuery("#apellidoC").val();
+//   		var apellidoNew = jQuery("#apellidoC").val();
   		var direccionNew = jQuery("#direccionC").val();
   		var localidadNew = jQuery("#localidadC").val();
   		var emailNew = jQuery("#emailC").val();
@@ -353,7 +349,7 @@ locationInfoWMessage = "Esta bien esta ubicación?<br>Sino es asi, <strong>arras
   		var typeId = jQuery("#typeId").val();
   		var clientNum = jQuery("#clientNum").val();
   		
-  		var newClient = {'nombre':nombreNew,'apellido':apellidoNew,'direccion':direccionNew,"iddnitipo":typeId,
+  		var newClient = {'nombre':nombreNew,'direccion':direccionNew,"iddnitipo":typeId,
   					    'localidadId':localidadNew,'email':emailNew,'telefono':telNew+"@@"+telNew2+"@@"+telNew3,
   						'notas':comentNew,'estadoCliId':clientStateID,'puntuacion':puntuaNew, 'cuit':cuitNew, 'numerocli':clientNum};		  		 
   		 
@@ -467,7 +463,6 @@ locationInfoWMessage = "Esta bien esta ubicación?<br>Sino es asi, <strong>arras
 //Other functions
 function cleanScreenAdd(){
      jQuery("#nombreC").val("");
- 	 jQuery("#apellidoC").val("");
 	 jQuery("#direccionC").val("");
 	 jQuery("#localidadC").val(0);
      jQuery("#clientState").val(0);
