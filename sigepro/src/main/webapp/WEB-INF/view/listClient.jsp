@@ -82,7 +82,7 @@
 	}
 	.ui-autocomplete-loading { background: white url('css/images/ui-anim_basic_16x16.gif') right center no-repeat; }
 	.ui-loadingBar { background: transparent url('css/images/load.gif') center / 260px no-repeat;  }
-
+	.ui-pg-input { width: 10px !important;  }
     </style>
     <link href="css/bootstrap-responsive.css" rel="stylesheet">
     <link href="css/font-awesome.min.css" rel="stylesheet">
@@ -441,6 +441,7 @@ jQuery("#searchButton").click(function(){
 	 var name = jQuery("#nombreSearch").val();
 	 var cuit = jQuery("#cuitSearch").val();
 	 var score = "";
+	 // jQuery('#listClientTable').jqGrid('setGridParam',{loadonce:'false'});	
       jQuery("#listClientTable").jqGrid('setGridParam',{url:"<c:url value="/loadListClientsByParameter.htm" />?name="+name+"&cuit="+cuit+"&score="+score,page:1}).trigger('reloadGrid');
 });
 
@@ -574,15 +575,15 @@ jQuery("#listClientTable").jqGrid({
 			editable:true
 		}],
 		ondblClickRow: function(id ){},
-	  rowNum:10, 
-	  rowList:[10,20,30],
+	  rowNum:25, 
+	  rowList:[],
 	  multiselect: true,
 	  sortable: true,
 	  pager: '#listClientTableGrid',
-	  pgbuttons: false,
-	  pginput:false,
+	  pgbuttons: true,
+	  pginput:true,
 	  rownumbers : true,
-	  rowList: {},
+	  //loadonce:true,
 	  jsonReader : {
          root: "rows",
          page: "page",

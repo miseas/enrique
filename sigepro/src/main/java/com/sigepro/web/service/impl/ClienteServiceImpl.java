@@ -28,6 +28,7 @@ import com.sigepro.web.model.pojo.Cliente;
 import com.sigepro.web.model.pojo.EstadoCli;
 import com.sigepro.web.model.pojo.Localidad;
 import com.sigepro.web.service.ClienteService;
+import com.sigepro.web.service.HistorialService;
 import com.sigepro.web.transformer.Transformer;
 
 
@@ -54,6 +55,9 @@ public class ClienteServiceImpl implements ClienteService {
 	@Qualifier("clientTransformer")
 	Transformer<Cliente, ClienteDTO> clientTransformer;
 
+	@Autowired
+	HistorialService historialService;
+	
     private ClientDAO getClientDAO() {
         return DAOLocator.getInstance().lookup(ClientDAO.class.getName());
     }
@@ -74,6 +78,8 @@ public class ClienteServiceImpl implements ClienteService {
         Localidad localidad = new Localidad();
         localidad.setIdlocalidad(clientDTO.getLocalidadId());
         
+        cliente.setCoLatitude(clientDTO.getMapLatitud());
+        cliente.setCoLongitude(clientDTO.getMapLongitud());
         cliente.setLocalidad(localidad);
         cliente.setNotas(clientDTO.getNotas());
         if (!clientDTO.getPuntuacion().isEmpty()){
@@ -91,6 +97,7 @@ public class ClienteServiceImpl implements ClienteService {
         estadoCli.setIdestadocli(Integer.parseInt(clientDTO.getEstadoCliId()));
         cliente.setEstadoCli(estadoCli);
         Integer id =getClientDAO().saveClient(cliente);
+        historialService.saveHistorialCliente(cliente,"Cliente creado");
         return id;
 
     }

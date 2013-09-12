@@ -20,7 +20,8 @@ public class ClienteDTO {
 	private String estadoCliId;
 	private String estadoCli;
 	private String numerocli;
-
+	private String mapLongitud;
+	private String mapLatitud;
 	
 	public Integer getIdcliente() {
 		return idcliente;
@@ -130,6 +131,19 @@ public class ClienteDTO {
 	public void setNumerocli(String numerocli) {
 		this.numerocli = numerocli;
 	}
+	public String getMapLongitud() {
+		return mapLongitud;
+	}
+	public void setMapLongitud(String mapLongitud) {
+		this.mapLongitud = mapLongitud;
+	}
+	public String getMapLatitud() {
+		return mapLatitud;
+	}
+	public void setMapLatitud(String mapLatitud) {
+		this.mapLatitud = mapLatitud;
+	}
+	
 	
 	
 	

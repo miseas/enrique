@@ -128,7 +128,7 @@
                   <li class="divider"></li>
                   <li class=""><a href="listIncidencia.htm">Buscar</a></li>      
                   <li class="divider"></li>
-                  <li class="disabled"><a href="">Historial</a></li>
+                  <li class=""><a href="historialIncidencia.htm">Historial</a></li>
                 </ul>
                </li>
                <li class="dropdown">
@@ -349,9 +349,18 @@ locationInfoWMessage = "Esta bien esta ubicación?<br>Sino es asi, <strong>arras
   		var typeId = jQuery("#typeId").val();
   		var clientNum = jQuery("#clientNum").val();
   		
+		var clientLocation = jQuery.data(document.body,"clientLocation");
+		var longitude = "";
+		var latitude ="";
+		if (clientLocation != undefined ){
+			longitude = clientLocation.longitude;
+			latitude =	clientLocation.latitude;
+		}
+		
   		var newClient = {'nombre':nombreNew,'direccion':direccionNew,"iddnitipo":typeId,
   					    'localidadId':localidadNew,'email':emailNew,'telefono':telNew+"@@"+telNew2+"@@"+telNew3,
-  						'notas':comentNew,'estadoCliId':clientStateID,'puntuacion':puntuaNew, 'cuit':cuitNew, 'numerocli':clientNum};		  		 
+  						'notas':comentNew,'estadoCliId':clientStateID,'puntuacion':puntuaNew, 'cuit':cuitNew, 'numerocli':clientNum,
+  						'mapLongitud':longitude,'mapLatitud':latitude};		  		 
   		 
         jQuery.ajax({
              url: '<c:url value="/addNewClient.htm" />',
@@ -395,7 +404,6 @@ locationInfoWMessage = "Esta bien esta ubicación?<br>Sino es asi, <strong>arras
 		buttons: {
 			"Ok": function() {
 				jQuery( this ).dialog( "close" );
-				jQuery("#nombreC").focus();
 			}
 		},
 		resizable: false,
@@ -411,6 +419,7 @@ locationInfoWMessage = "Esta bien esta ubicación?<br>Sino es asi, <strong>arras
 		buttons: {
 			"Ok": function() {
 				jQuery( this ).dialog( "close" );
+				jQuery("#nombreC").focus();
 			}
 		},
 		resizable: false,

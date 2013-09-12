@@ -12,6 +12,7 @@
                  <entry key="com.sigepro.web.dao.AbonoDAO" value-ref="abonoDAO"/>
                  <entry key="com.sigepro.web.dao.IncidenciaDAO" value-ref="incidenciaDAO"/>
                  <entry key="com.sigepro.web.dao.VisitaDAO" value-ref="visitaDAO"/>
+                 <entry key="com.sigepro.web.dao.HistorialDAO" value-ref="historialDAO"/>  
 <!--                  <entry key="com.decorart.web.dao.OrdenCompraDAO" value-ref="ordenCompraDAO"/>    -->
 <!--                  <entry key="com.decorart.web.dao.ProductoOCDAO" value-ref="productoOCDAO"/>    -->
 <!--  				 <entry key="com.decorart.web.dao.PagoDAO" value-ref="pagoDAO"/>                                                        -->

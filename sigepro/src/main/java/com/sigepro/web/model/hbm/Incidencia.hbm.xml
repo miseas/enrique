@@ -32,6 +32,18 @@
           <property name="titulo" type="string">
             <column name="TITULO" length="100" />
         </property>
+        <set name="historiaIncs" table="HISTORIA_INC" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="IDINCIDENCIA" not-null="true" />
+            </key>
+            <one-to-many class="com.sigepro.web.model.pojo.HistoriaInc" />
+        </set>
+        <set name="historiaVises" table="HISTORIA_VIS" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="IDINCIDENCIA" />
+            </key>
+            <one-to-many class="com.sigepro.web.model.pojo.HistoriaVis" />
+        </set> 
         <set name="visitas" table="VISITA" inverse="true" lazy="false" fetch="select">
             <key>
                 <column name="IDINCIDENCIA" />

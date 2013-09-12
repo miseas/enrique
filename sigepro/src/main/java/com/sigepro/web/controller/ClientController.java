@@ -128,9 +128,9 @@ public class ClientController {
         List<ClienteDTO> listClientes = new ArrayList<ClienteDTO>();
         PageResult pageResult = new PageResult();
         try {
-            listClientes = clientService.listClientsByName("",fieldName,order,20);
+            listClientes = clientService.listClientsByName("",fieldName,order,50);
             pageResult.setPage("1");
-            pageResult.setTotal("1");
+            pageResult.setTotal("2");
             pageResult.setRecords(listClientes.size() + "");
             pageResult.setRows(listClientes);
         } catch (Exception e) {

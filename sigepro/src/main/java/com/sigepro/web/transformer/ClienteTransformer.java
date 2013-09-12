@@ -26,7 +26,8 @@ public class ClienteTransformer implements Transformer<Cliente,ClienteDTO> {
 		clienteDTO.setLocalidad(target.getLocalidad().getDescripcion());
 		clienteDTO.setLocalidadId(target.getLocalidad().getIdlocalidad());
 		clienteDTO.setNotas(target.getNotas());
-		clienteDTO.setPuntuacion(target.getPuntuacion().toString());
+		//not used
+//		clienteDTO.setPuntuacion(target.getPuntuacion().toString());
 		clienteDTO.setTelefono(target.getTelefono());
 		clienteDTO.setTelefono2(target.getTelefono2());
 		clienteDTO.setTelefono3(target.getTelefono3());
@@ -34,7 +35,9 @@ public class ClienteTransformer implements Transformer<Cliente,ClienteDTO> {
 		clienteDTO.setEstadoCli(target.getEstadoCli().getDescripcion());
 		clienteDTO.setEstadoCliId(target.getEstadoCli().getIdestadocli()+"");
 		clienteDTO.setNumerocli(target.getNumerocli());
+		if (target.getCatDnitipo()!=null){
 		clienteDTO.setIddnitipo(target.getCatDnitipo().getIddnitipo());
+		}
 		return clienteDTO;		
 	}
 

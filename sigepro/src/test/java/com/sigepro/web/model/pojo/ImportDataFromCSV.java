@@ -83,6 +83,7 @@ public class ImportDataFromCSV {
 private Cliente createClient(List<Object> clientList) {
 	Cliente cliente = new Cliente();	
 	cliente.setIdcliente(Integer.parseInt(clientList.get(0).toString()));
+	cliente.setNumerocli(clientList.get(0).toString());
 	cliente.setNombre(clientList.get(1).toString());
 	cliente.setDireccion(clientList.get(2).toString());
 	cliente.setLocalidad(getLocalidad(clientList.get(3)));

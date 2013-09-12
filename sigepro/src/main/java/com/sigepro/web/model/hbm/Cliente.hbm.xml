@@ -56,11 +56,29 @@
         <property name="cp" type="string">
             <column name="CP" length="25" />
         </property>
+        <property name="coLongitude" type="string">
+            <column name="CO_LONGITUDE" length="50" />
+        </property>
+        <property name="coLatitude" type="string">
+            <column name="CO_LATITUDE" length="50" />
+        </property> 
          <set name="incidencias" table="INCIDENCIA" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="IDTIPOINCIDENCIA" />
             </key>
             <one-to-many class="com.sigepro.web.model.pojo.Incidencia" />
+        </set>
+         <set name="historiaClis" table="HISTORIA_CLI" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="IDCLIENTE" />
+            </key>
+            <one-to-many class="com.sigepro.web.model.pojo.HistoriaCli" />
+        </set>
+        <set name="historiaIncs" table="HISTORIA_INC" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="IDCLIENTE" not-null="true" />
+            </key>
+            <one-to-many class="com.sigepro.web.model.pojo.HistoriaInc" />
         </set>
     </class>
 </hibernate-mapping>

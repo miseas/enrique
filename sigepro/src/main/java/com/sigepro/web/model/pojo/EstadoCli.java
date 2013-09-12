@@ -17,6 +17,8 @@ public class EstadoCli implements java.io.Serializable {
 	private String notas;
 	@JsonIgnore
 	private Set<Cliente> clientes = new HashSet<Cliente>(0);
+	@JsonIgnore
+	private Set<HistoriaCli> historiaClis = new HashSet<HistoriaCli>(0);
 
 	public EstadoCli() {
 	}
@@ -66,4 +68,13 @@ public class EstadoCli implements java.io.Serializable {
 		this.clientes = clientes;
 	}
 
+	public Set<HistoriaCli> getHistoriaClis() {
+		return historiaClis;
+	}
+
+	public void setHistoriaClis(Set<HistoriaCli> historiaClis) {
+		this.historiaClis = historiaClis;
+	}
+
+	
 }

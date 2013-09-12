@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 03-sep-2013 1:05:45 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.sigepro.web.model.pojo.HistoriaCli" table="HISTORIA_CLI" schema="SIGEPRODB">
+        <id name="idhistoriacli" type="java.lang.Long">
+            <column name="IDHISTORIACLI" />
+            <generator class="increment" />
+        </id>
+        <timestamp name="timestamp" column="TIMESTAMP" />
+        <many-to-one name="estadoCli" class="com.sigepro.web.model.pojo.EstadoCli" fetch="select">
+            <column name="IDESTADOCLI" />
+        </many-to-one>
+        <many-to-one name="cliente" class="com.sigepro.web.model.pojo.Cliente" fetch="select">
+            <column name="IDCLIENTE" />
+        </many-to-one>
+        <property name="descripcion" type="string">
+            <column name="DESCRIPCION" length="200" />
+        </property>
+        <property name="userid" type="java.lang.Integer">
+            <column name="USERID" />
+        </property>
+    </class>
+</hibernate-mapping>

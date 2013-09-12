@@ -154,7 +154,7 @@
                   <li class="divider"></li>
                   <li class=""><a href="listIncidencia.htm">Buscar</a></li>
                   <li class="divider"></li>
-                  <li class=""><a href="historialIncidencia.htm">Historial</a></li>
+                  <li class="disabled"><a href="">Historial</a></li>
                 </ul>
                </li>
                <li class="dropdown">
@@ -191,7 +191,7 @@
         <div class="span12">
 			<ul class="nav nav-pills">
 		    <li class="active">
-		    <a href="#">Buscar Incidencia</a>
+		    <a href="#">Historial Incidencia</a>
 		    </li>
 		    </ul>
 		    <div style="margin-bottom: -18px;" ></div>

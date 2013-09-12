@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sigepro.web.model.dto.AbonoDTO;
+import com.sigepro.web.model.dto.ClienteAbonoDTO;
 import com.sigepro.web.model.dto.PageResult;
 import com.sigepro.web.service.AbonoService;
 
@@ -98,9 +99,54 @@ public class AbonoController {
     @RequestMapping(value = "/editAbono", method = RequestMethod.POST)
     public @ResponseBody
     boolean editAbono(@RequestBody AbonoDTO abono) {
-    	LOG.info("ClientController.editClient()");
+    	LOG.info("AbonoController.editAbono()");
         try {
             abonoService.saveorUpdateAbono(abono);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+
+        return true;
+    }
+    
+    
+    @RequestMapping(value = "/asignNewAbono", method = RequestMethod.POST)
+    public @ResponseBody boolean asignNewAbono(@RequestBody ClienteAbonoDTO abonoDTO) {
+    	LOG.info("AbonoController.asignNewAbono()");
+        try {
+            abonoService.asignNewAbono(abonoDTO);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+    
+    @RequestMapping(value = "/listClientAbonos", method = RequestMethod.GET)
+    public @ResponseBody PageResult listClientAbonos(@RequestParam(value = "idC", required = false, defaultValue = "") Integer clientId) {
+    	LOG.info("AbonoController.listClientAbonos()");
+    	List<ClienteAbonoDTO> listAbonos = new ArrayList<ClienteAbonoDTO>();
+        PageResult pageResult = new PageResult();
+        try {
+            LOG.info("ClientController.listClients()");
+            listAbonos = abonoService.listClientAbonos(clientId);
+            pageResult.setPage("1");
+            pageResult.setTotal("1");
+            pageResult.setRecords(listAbonos.size() + "");
+            pageResult.setRows(listAbonos);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return pageResult;
+    }
+    
+    @RequestMapping(value = "/removeAsignAbono", method = RequestMethod.POST)
+    public @ResponseBody boolean deleteAsignAbono(@RequestBody ClienteAbonoDTO abonoDTO) {
+    	LOG.info("AbonoController.asignNewAbono()");
+        try {
+            abonoService.deleteAsignAbono(abonoDTO);
         } catch (Exception e) {
             e.printStackTrace();
             return false;

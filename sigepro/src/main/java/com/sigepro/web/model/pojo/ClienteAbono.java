@@ -12,6 +12,15 @@ public class ClienteAbono implements java.io.Serializable {
 	private ClienteAbonoId id;
 	private Date alta;
 	private Date baja;
+	private String descripcion;
+
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
 
 	public ClienteAbono() {
 	}

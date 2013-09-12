@@ -17,6 +17,8 @@ public class EstadoVis implements java.io.Serializable {
 	private String notas;
 	@JsonIgnore
 	private Set<Visita> visitas = new HashSet<Visita>(0);
+	@JsonIgnore
+	private Set<HistoriaVis> historiaVises = new HashSet<HistoriaVis>(0);
 
 	public EstadoVis() {
 	}
@@ -62,5 +64,13 @@ public class EstadoVis implements java.io.Serializable {
 		this.visitas = visitas;
 	}
 
+	public Set<HistoriaVis> getHistoriaVises() {
+		return historiaVises;
+	}
 
+	public void setHistoriaVises(Set<HistoriaVis> historiaVises) {
+		this.historiaVises = historiaVises;
+	}
+	
+	
 }

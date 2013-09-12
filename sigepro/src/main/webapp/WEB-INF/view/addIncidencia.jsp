@@ -162,7 +162,7 @@
                   <li class="divider"></li>
                   <li class=""><a href="listIncidencia.htm">Buscar</a></li>
                   <li class="divider"></li>
-                  <li class="disabled"><a href="">Historial</a></li>
+                  <li class=""><a href="historialIncidencia.htm">Historial</a></li>
                 </ul>
                </li>
                <li class="dropdown">

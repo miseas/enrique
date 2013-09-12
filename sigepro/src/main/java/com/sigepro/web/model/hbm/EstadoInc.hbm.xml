@@ -20,5 +20,11 @@
             </key>
             <one-to-many class="com.sigepro.web.model.pojo.Incidencia" />
         </set>
+        <set name="historiaIncs" table="HISTORIA_INC" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="IDESTADOINC" />
+            </key>
+            <one-to-many class="com.sigepro.web.model.pojo.HistoriaInc" />
+        </set> 
     </class>
 </hibernate-mapping>

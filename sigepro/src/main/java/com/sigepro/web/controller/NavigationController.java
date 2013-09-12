@@ -96,6 +96,13 @@ public class NavigationController {
         return model;
     }
     
+    @RequestMapping(value = "/historialIncidencia")
+    public ModelAndView loadHistorialIncidenciaPage() {
+        ModelAndView model = new ModelAndView();
+        model.setViewName("/historyIncidencia");
+        return model;
+    }
+    
 //    @RequestMapping(value = "/alerts")
 //    public ModelAndView loadAlertsPage() {
 //        System.out.println("NavigationController.loadAlertsPage()");

@@ -28,8 +28,12 @@ public class Cliente implements java.io.Serializable {
 	private String telefono3;
 	private String numerocli;
 	private String cp;
+	private String coLongitude;
+	private String coLatitude;
 	private Set<Incidencia> incidencias = new HashSet<Incidencia>(0);
-
+	private Set<HistoriaCli> historiaClis = new HashSet<HistoriaCli>(0);
+	private Set<HistoriaInc> historiaIncs = new HashSet<HistoriaInc>(0);
+	
 	public Cliente() {
 	}
 
@@ -201,6 +205,38 @@ public class Cliente implements java.io.Serializable {
 
 	public void setCp(String cp) {
 		this.cp = cp;
+	}
+
+	public Set<HistoriaCli> getHistoriaClis() {
+		return historiaClis;
+	}
+
+	public void setHistoriaClis(Set<HistoriaCli> historiaClis) {
+		this.historiaClis = historiaClis;
+	}
+
+	public Set<HistoriaInc> getHistoriaIncs() {
+		return historiaIncs;
+	}
+
+	public void setHistoriaIncs(Set<HistoriaInc> historiaIncs) {
+		this.historiaIncs = historiaIncs;
+	}
+
+	public String getCoLongitude() {
+		return coLongitude;
+	}
+
+	public void setCoLongitude(String coLongitude) {
+		this.coLongitude = coLongitude;
+	}
+
+	public String getCoLatitude() {
+		return coLatitude;
+	}
+
+	public void setCoLatitude(String coLatitude) {
+		this.coLatitude = coLatitude;
 	}
 	
 	

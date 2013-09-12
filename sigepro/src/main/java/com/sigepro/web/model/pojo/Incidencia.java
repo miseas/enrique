@@ -21,7 +21,8 @@ public class Incidencia implements java.io.Serializable {
 	private String descripcion;
 	private String titulo;
 	private Set<Visita> visitas = new HashSet<Visita>(0);
-
+	private Set<HistoriaInc> historiaIncs = new HashSet<HistoriaInc>(0);
+	private Set<HistoriaVis> historiaVises = new HashSet<HistoriaVis>(0);
 
 	public Incidencia() {
 	}
@@ -121,6 +122,22 @@ public class Incidencia implements java.io.Serializable {
 
 	public void setTitulo(String titulo) {
 		this.titulo = titulo;
+	}
+
+	public Set<HistoriaInc> getHistoriaIncs() {
+		return historiaIncs;
+	}
+
+	public void setHistoriaIncs(Set<HistoriaInc> historiaIncs) {
+		this.historiaIncs = historiaIncs;
+	}
+
+	public Set<HistoriaVis> getHistoriaVises() {
+		return historiaVises;
+	}
+
+	public void setHistoriaVises(Set<HistoriaVis> historiaVises) {
+		this.historiaVises = historiaVises;
 	}
 	
 	

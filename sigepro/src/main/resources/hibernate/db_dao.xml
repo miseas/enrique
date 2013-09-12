@@ -26,4 +26,7 @@
     	<bean id="visitaDAO" parent="hibernateDaoSupport"
     		class="com.sigepro.web.dao.impl.VisitaDAOImpl" />    
 	
+	    <bean id="historialDAO" parent="hibernateDaoSupport"
+    		class="com.sigepro.web.dao.impl.HistorialDAOImpl" />    
+    		
 </beans>

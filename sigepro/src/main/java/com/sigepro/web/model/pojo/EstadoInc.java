@@ -17,6 +17,8 @@ public class EstadoInc implements java.io.Serializable {
 	private String notas;
 	@JsonIgnore
 	private Set<Incidencia> incidencias = new HashSet<Incidencia>(0);
+	@JsonIgnore
+	private Set<HistoriaInc> historiaIncs = new HashSet<HistoriaInc>(0);
 
 	public EstadoInc() {
 	}
@@ -65,4 +67,13 @@ public class EstadoInc implements java.io.Serializable {
 		this.incidencias = incidencias;
 	}
 
+	public Set<HistoriaInc> getHistoriaIncs() {
+		return historiaIncs;
+	}
+
+	public void setHistoriaIncs(Set<HistoriaInc> historiaIncs) {
+		this.historiaIncs = historiaIncs;
+	}
+
+	
 }

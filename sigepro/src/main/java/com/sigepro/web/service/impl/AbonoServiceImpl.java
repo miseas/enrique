@@ -6,6 +6,8 @@ package com.sigepro.web.service.impl;
 
 
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +21,10 @@ import org.springframework.transaction.annotation.Transactional;
 import com.sigepro.web.dao.AbonoDAO;
 import com.sigepro.web.dao.impl.DAOLocator;
 import com.sigepro.web.model.dto.AbonoDTO;
+import com.sigepro.web.model.dto.ClienteAbonoDTO;
 import com.sigepro.web.model.pojo.Abono;
+import com.sigepro.web.model.pojo.ClienteAbono;
+import com.sigepro.web.model.pojo.ClienteAbonoId;
 import com.sigepro.web.service.AbonoService;
 import com.sigepro.web.transformer.Transformer;
 
@@ -42,6 +47,7 @@ public class AbonoServiceImpl implements AbonoService {
 	
 	
 	Logger LOG = LoggerFactory.getLogger(AbonoServiceImpl.class);
+	private SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy");
 
 	@Autowired
 	@Qualifier("abonoTransformer")
@@ -87,6 +93,56 @@ public class AbonoServiceImpl implements AbonoService {
         abono.setPrecio(Double.parseDouble(abonoDTO.getPrecio().replace(",", ".")));
         
         getAbonoDAO().saveAbono(abono);
+
+    }
+    
+    public boolean asignNewAbono(ClienteAbonoDTO abonoDTO) {
+
+        //Try to load Client by Name
+        Abono abono = getAbonoDAO().loadAbonoById(Integer.parseInt(abonoDTO.getIdabono()));
+        if (abono == null) {
+            LOG.error("ABONO NO ENCONTRADO!, no se puede asignar un abono que no existe");
+            return false;
+        }
+        
+        ClienteAbono clienteAbono = new ClienteAbono();
+        ClienteAbonoId clienteAbonoId = new ClienteAbonoId();
+        clienteAbonoId.setIdabono(Integer.parseInt(abonoDTO.getIdabono()));
+        clienteAbonoId.setIdcliente(Integer.parseInt(abonoDTO.getIdcliente()));
+		clienteAbono.setId(clienteAbonoId);
+		clienteAbono.setDescripcion(abonoDTO.getDescripcion());
+        try {
+			clienteAbono.setAlta(dateFormatter.parse(abonoDTO.getFechaAlta()));
+		} catch (ParseException e) {
+			LOG.error("FECHA INVALIDA");
+			e.printStackTrace();
+			return false;
+		}
+        
+        getAbonoDAO().saveAsignClientAbono(clienteAbono);
+        return true;
+    }
+    
+    
+    public boolean deleteAsignAbono(ClienteAbonoDTO abonoDTO) {        
+        ClienteAbono clienteAbono = new ClienteAbono();
+        ClienteAbonoId clienteAbonoId = new ClienteAbonoId();
+        clienteAbonoId.setIdabono(Integer.parseInt(abonoDTO.getIdabono()));
+        clienteAbonoId.setIdcliente(Integer.parseInt(abonoDTO.getIdcliente()));
+        
+        getAbonoDAO().deleteAsignAbono(clienteAbono);
+        return true;
+    }
+    
+    public List<ClienteAbonoDTO> listClientAbonos(Integer idClient) {
+        List<ClienteAbonoDTO> resultList = new ArrayList<ClienteAbonoDTO>();
+        try {
+        	resultList = getAbonoDAO().getListClientAbonoDTO(idClient);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return resultList;
 
     }
 

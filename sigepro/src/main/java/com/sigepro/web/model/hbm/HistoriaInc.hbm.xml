@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 03-sep-2013 1:05:45 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.sigepro.web.model.pojo.HistoriaInc" table="HISTORIA_INC" schema="SIGEPRODB">
+        <composite-id name="id" class="com.sigepro.web.model.pojo.HistoriaIncId">
+            <key-property name="idcliente" type="int">
+                <column name="IDCLIENTE" />
+            </key-property>
+            <key-property name="idincidencia" type="long">
+                <column name="IDINCIDENCIA" />
+            </key-property>
+        </composite-id>
+        <timestamp name="timestamp" column="TIMESTAMP" />
+        <many-to-one name="visita" class="com.sigepro.web.model.pojo.Visita" fetch="select">
+            <column name="IDVISITA" />
+        </many-to-one>
+        <many-to-one name="estadoInc" class="com.sigepro.web.model.pojo.EstadoInc" fetch="select">
+            <column name="IDESTADOINC" />
+        </many-to-one>
+        <many-to-one name="incidencia" class="com.sigepro.web.model.pojo.Incidencia" update="false" insert="false" fetch="select">
+            <column name="IDINCIDENCIA" not-null="true" />
+        </many-to-one>
+        <many-to-one name="cliente" class="com.sigepro.web.model.pojo.Cliente" update="false" insert="false" fetch="select">
+            <column name="IDCLIENTE" not-null="true" />
+        </many-to-one>
+        <property name="descripcion" type="string">
+            <column name="DESCRIPCION" length="150" />
+        </property>
+        <property name="userid" type="java.lang.Integer">
+            <column name="USERID" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -153,7 +153,7 @@
                   <li class="divider"></li>
                   <li class=""><a href="listIncidencia.htm">Buscar</a></li>
                   <li class="divider"></li>
-                  <li class="disabled"><a href="">Historial</a></li>
+                  <li class=""><a href="historialIncidencia.htm">Historial</a></li>
                 </ul>
                </li>
                <li class="dropdown">
@@ -295,15 +295,13 @@
 					<div class="span6">
 						<label for="clientState"><strong>Estado</strong></label>
 							<select id="clientState">
-							<option value="0">Nuevo</option>
-							<option value="-1">Otro...</option>
 							</select>
 					</div>		
 				</div>
 				<div class="row-fluid">
 						<div class="span12">
-					<label for="note"><strong>Nota</strong></label>
-					  <textarea name="note" id="note" rows="3" class="input-block-level"></textarea>
+					<label for="noteNewAbono"><strong>Nota</strong></label>
+					  <textarea name="noteNewAbono" id="noteNewAbono" rows="3" class="input-block-level"></textarea>
 					 </div> 
 				</div>		
 				</div>
@@ -322,66 +320,34 @@
 <script type="text/javascript">
 jQuery(function() {
 cleanScreenSearch();
-jQuery("#editClientForm").validate({
-		focusInvalid:false,
-	    rules: {
-	    	nombreC:{required: true},
-			apellidoC:{required: true},
-			emailC:{email:true},
-			cuitC:{digits:true}
-        },
-	    messages: {
-	    	nombreC: {required: "campo obligatorio"},
-	    	apellidoC: {required: "campo obligatorio"},
-	    	emailC:{email:"email incorrecto"},
-	    	cuitC:{digits:"campo numerico"}
-	    },
-  	submitHandler: function() { 	  	
-  		var nombreNew = jQuery("#nombreC").val();
-  		var apellidoNew = jQuery("#apellidoC").val();
-  		var direccionNew = jQuery("#direccionC").val();
-  		var localidadNew = jQuery("#localidadC").val();
-  		var emailNew = jQuery("#emailC").val();
-  		var telNew = jQuery("#telC-1").val();
-  		var telNew2 =" ";
- 		if (jQuery("#telC-2").length>0){
-  			telNew2 = jQuery("#telC-2").val();
-  		}
-  		var telNew3 =" ";
-  		if (jQuery("#telC-3").length>0){
-  				telNew3 = jQuery("#telC-3").val();
-  		}
-  		var cuitNew = jQuery("#cuitC").val();
-  		var puntuaNew = 1;
-  		var comentNew = jQuery("#comentC").val();
-  		var cuentaCNew = jQuery("#ccC").val();
-  		var idClient = jQuery("#idClientEdit").val();
 
-  		var newClient = {'idcliente':idClient,'nombre':nombreNew,'apellido':apellidoNew,'direccion':direccionNew,
-  					    'localidadId':localidadNew,'email':emailNew,'telefono':telNew+"@@"+telNew2+"@@"+telNew3,
-  						'notas':comentNew,'ccNro':cuentaCNew,'puntuacion':puntuaNew, 'cuit':cuitNew};		  		 
-  		 
-        jQuery.ajax({
-             url: '<c:url value="/editClient.htm" />',
-             type: "POST",
-             dataType: "json",
-             contentType: "application/json",
-             data: JSON.stringify( newClient ), 
-             success: function(resp){                                       
-              	 if(resp!=-1){ 
-              		jQuery("#dialogSuccessOperation").dialog( "option", "title", "Editar cliente" );
-            		 jQuery("#dialogSuccessOperation").dialog("open");
-            		 cancelEdit();
-         	 	}
-         	 	else{
-           		 jQuery("#dialogErrorOperation").dialog("open");
-         	 	}     
-             }
-           });
-  		
-  	}
-	         
-});
+jQuery.ajax({
+    url: '<c:url value="/loadAllCatAddClient.htm" />',
+    type: "GET",
+    dataType: "json",
+    contentType: "application/json",
+    data:"", 
+    success: function(resp){                                       
+//      var options = $("#localidadCSearch");
+//      $.each(resp.localidades, function() {
+//     	     options.append($("<option />").val(this.idlocalidad).text(this.descripcion));
+//      });   	 
+//      var options = $("#localidadC");
+//    	 $.each(resp.localidades, function() {
+//    	     options.append($("<option />").val(this.idlocalidad).text(this.descripcion));
+//    	 });
+//    	 var options = $("#typeId");
+//    	 $.each(resp.typeID, function() {
+//    	     options.append($("<option />").val(this.iddnitipo).text(this.descripcion));
+//    	 });
+   	 var options = $("#clientState");
+   	 $.each(resp.estadoCli, function() {
+   	     options.append($("<option />").val(this.idestadocli).text(this.descripcion));
+   	 });
+    }
+  });
+  
+  
 
 jQuery("#searchButton").click(function(){
 	 var name = jQuery("#nombreSearch").val();
@@ -393,7 +359,7 @@ jQuery("#searchButton").click(function(){
 
 jQuery("#clearSearchButton").click(function(){
 	 cleanScreenSearch();
-	 cancelEdit();
+	 cancelAsignAbonos();
 });
 
 
@@ -561,6 +527,7 @@ jQuery("#listClientTable").jqGrid('navGrid','#listClientTableGrid',{
 					baseClient.find(".tableContainer").html("<table id='tableClient"+id+"' class='scroll'></table><div id='tableClientPager"+id+"' class='scroll'></div>");
 					var row = jQuery('#listClientTable').jqGrid('getRowData',id);
 					createJqGridClient(id,row);
+					baseClient.show();
 					tableNames = tableNames+",#tableClient"+id;
 				});
 				jQuery("#listAbonoTable").jqGrid('gridDnD',{connectWith:tableNames,dropbyname:true,ondrop:function(event,object,data){createDialogAsign(event,object,data);}});
@@ -680,16 +647,16 @@ jQuery("#listAbonoTable").jqGrid({
 
 function createJqGridClient(id,row){
 	 jQuery("#tableClient"+id).jqGrid({ 
-		   url:'<c:url value="/listPagoOC.htm"/>?idocompra', 
+		   url:'<c:url value="/listClientAbonos.htm"/>?idC='+id, 
 		   caption:row.nombre+" "+row.apellido, 
 		   datatype: "local", 
 		   afterInsertRow:function(rowid){ jQuery.data(document.body,"rowIdAbonoAdded",rowid);},
-		   colNames: ['','Nombre','Fecha Alta','Fecha Baja','Nota','Operación'], 
+		   colNames: ['','Abono','Fecha Alta','Fecha Baja','Nota','Operación'], 
 		   colModel: [ 	{name : 'idabono',index : 'idabono', key:true, width: 1,hidden:true},
 		             {name:"nombre",index:"nombre",width:100,editable:true}, 
 		             {name:"fechaAlta",index:"fechaAlta",align:"center",width:100,editable:true}, 
 		             {name:"fechaBaja",index:"fechaBaja",width:100,align:"center",editable:true},
-		             {name:"nota",index:"nota",width:250,align:"center",editable:true},
+		             {name:"descripcion",index:"descripcion",width:250,align:"center",editable:true},
 			         {name: 'operacion',
 						 width:67, 
 						 fixed:true, 
@@ -752,11 +719,23 @@ function createJqGridClient(id,row){
 // 			  	} 
 		  },
 		  });
-// 	 var mydata3 = [ {idabono:"333",nombre:"Otro",fechaAlta:"test12",fechaBaja:'One2',nota:'One2'}]; 
-	 
-// 	 for (var i = 0; i <= mydata3.length; i++) { 
-// 		 jQuery("#tableClient"+id).jqGrid('addRowData',i + 1, mydata3[i]); 
-//      }
+
+//fix necesario apra cuando la tabla tiene dato local. El reader local, no sabe cual es el campo usado como id del array de datos.
+jQuery("#tableClient"+id).jqGrid()[0].p.localReader.id = "idabono";
+
+jQuery.ajax({
+    url: '<c:url value="/listClientAbonos.htm" />',
+    type: "GET",
+    dataType: "json",
+    contentType: "application/json",
+    data: {"idC":id}, 
+    success: function(resp){                                       
+   	 	for (var i = 0; i <= resp.rows.length; i++) { 
+		 jQuery("#tableClient"+id).jqGrid('addRowData',i + 1, resp.rows[i]); 
+    	}     
+    }
+  });
+  
 }
 
 
@@ -779,13 +758,11 @@ function createDialogAsign(event,object,data){
 		 jQuery("#"+idTable).jqGrid('delRowData',idRow);	
 		 return;
 	 }
-	 jQuery("#"+idTable).jqGrid('setCell',idRow,"fechaAlta",$.datepicker.formatDate('dd/mm/yy', new Date()));
-		 	 
-	 	
-	 
+		 	 	 	
+	 jQuery.data(document.body,"abonoTableSelected",{"rowSelected":idRow,"tableSelected":idTable}); 
 
 	
-	jQuery("#dialogAsignAbono").dialog( "option", "title", "Asignar Abono: "+data.nombre );
+	jQuery("#dialogAsignAbono").dialog( "option", "title", "Asignar Abono: "+data.nombre);
 	jQuery("#dialogAsignAbono").dialog( "open" );
 	
 }
@@ -849,29 +826,37 @@ jQuery("#dialogAsignAbono").dialog({
 			jQuery( this ).dialog( "close" );
 		},
 		"Asignar": function() {
-// 			jQuery(".ui-dialog-buttonset button").hide();
-// 			jQuery(".ui-dialog-buttonset").append("<div class='ui-loadingBar' style='width: 260px; height: 40px;'></div>");
-// 			var toEmail = jQuery("#toEmail").val();
-// 			var subjectEmail = jQuery("#subjectEmail").val();
-// 			var contentEmail = jQuery("#contentEmail").val();
-// 			var emailData = {"toEmail":toEmail.split(";"),"subject":subjectEmail,"content":contentEmail};
-			                				jQuery("#dialogAsignAbono").dialog( "close" );
 
-// 	         jQuery.ajax({
-//                  url: '<c:url value="/sendEmailClient.htm" />',
-//                  type: "POST",
-//                  dataType: "json",
-//                  contentType: "application/json",
-//                  data: JSON.stringify( emailData ), 
-//                  success: function(resp){                                       
-//                 			jSuccess("Operacion realizada exitosamente", "Enviar Email",function(){
-//                 				jQuery("#dialogSendEmail").dialog( "close" );
-//                 				jQuery(".ui-dialog-buttonset div").hide();
-//         						jQuery(".ui-dialog-buttonset button").show();
-//                 			},["Aceptar"]);
-                	                                
-//                  }
-//                });
+			 var dataAbonoSelected = jQuery.data(document.body,"abonoTableSelected");
+			 var idTable = dataAbonoSelected.tableSelected;
+			 var idRow = dataAbonoSelected.rowSelected;
+			 var dateNew = $("#fechaAlta").val();
+			 var noteNew = $("#noteNewAbono").val();
+			 var idAbono = $("#"+idTable).jqGrid('getCell',idRow,"idabono");
+			 jQuery("#"+idTable).jqGrid('setCell',idRow,"fechaAlta",dateNew);
+			 jQuery("#"+idTable).jqGrid('setCell',idRow,"descripcion",noteNew);
+			 jQuery("#dialogAsignAbono").dialog( "close" );
+			 var idClient = idTable.replace("tableClient","");
+		 
+		     var newCliAbono = {'idcliente':idClient,'idabono':idAbono,'descripcion':noteNew,'fechaAlta':dateNew};		  		 
+		  		 
+		        jQuery.ajax({
+		             url: '<c:url value="/asignNewAbono.htm" />',
+		             type: "POST",
+		             dataType: "json",
+		             contentType: "application/json",
+		             data: JSON.stringify( newCliAbono ), 
+		             success: function(resp){                                       
+		              	 if(resp){ 
+		              		jQuery("#dialogSuccessOperation").dialog( "option", "title", "Asignar Abono" );
+		            		 jQuery("#dialogSuccessOperation").dialog("open");
+		            		 //cancelEdit();
+		         	 	}
+		         	 	else{
+		           		 jQuery("#dialogErrorOperation").dialog("open");
+		         	 	}     
+		             }
+		           });
 		}
 	},
 	resizable: false,
@@ -999,6 +984,14 @@ function delClient(){
 		        });	 
 
 }
+
+function cancelAsignAbonos(){
+	jQuery("div .ui-inline-cancel").trigger("click");
+	jQuery(".assignClientAbonoDiv").hide();
+	jQuery("div[id^='baseClient-'] ").remove();
+	jQuery('#listClientTable').jqGrid('setGridState','visible');	
+	
+}	
 
 function cleanScreenSearch(){
 	 jQuery("#nombreSearch").val("");

@@ -23,7 +23,9 @@ import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.sigepro.web.dao.AbonoDAO;
+import com.sigepro.web.model.dto.ClienteAbonoDTO;
 import com.sigepro.web.model.pojo.Abono;
+import com.sigepro.web.model.pojo.ClienteAbono;
 
 
 /**
@@ -45,6 +47,12 @@ public class AbonoDAOImpl extends HibernateDaoSupport implements AbonoDAO {
     	LOG.info("AbonoDAOImpl.saveAbono()");
         getHibernateTemplate().saveOrUpdate(abono);
         return abono.getIdabono();
+    }
+    
+    public boolean saveAsignClientAbono(ClienteAbono cliAbono) throws DataAccessException {
+    	LOG.info("AbonoDAOImpl.saveAsignClientAbono()");
+        getHibernateTemplate().saveOrUpdate(cliAbono);
+        return true;
     }
 
     public List<Abono> getAbonosByName(final String name, final String fieldSort, final String sort, final int maxResult) throws DataAccessException {
@@ -139,23 +147,33 @@ public class AbonoDAOImpl extends HibernateDaoSupport implements AbonoDAO {
             return lstResult.get(0);
     }
         
-//    @SuppressWarnings("unchecked")
-//    public Integer loadLastClientId() throws DataAccessException {
-//
-//        List<Integer> lstCliente = getHibernateTemplate().find(
-//                "select max(idcliente) FROM Cliente");
-//
-//        if (lstCliente.isEmpty()) {
-//            return null;
-//        } else
-//            return lstCliente.get(0);
-//    }
-//    
+    public List<ClienteAbonoDTO> getListClientAbonoDTO(final int idClient)
+            throws DataAccessException {
+        List<ClienteAbonoDTO> listResult = new ArrayList<ClienteAbonoDTO>();
+        HibernateCallback callback = new HibernateCallback() {
+
+            public Object doInHibernate(Session session) throws HibernateException, SQLException {
+
+                Query query = session.createQuery(
+                        "select new com.sigepro.web.model.dto.ClienteAbonoDTO(A.idabono,C.idcliente,A.nombre,CA.alta,CA.baja,CA.descripcion) "
+                                + " FROM Cliente as C, Abono A, ClienteAbono CA" + " WHERE C.idcliente="+idClient+" and CA.id.idcliente=C.idcliente and CA.id.idabono=A.idabono");
+                List result = query.list();
+                return result;
+            }
+        };
+        listResult = (List<ClienteAbonoDTO>) this.getHibernateTemplate().execute(callback);
+        return listResult;
+    }
     
     
-    
+     
     public void deleteAbono(Abono abono) throws DataAccessException {
     	LOG.info("AbonoDAOImpl.deleteAbono()");
         getHibernateTemplate().delete(abono);
+    }
+    
+    public void deleteAsignAbono(ClienteAbono cliAbono) throws DataAccessException {
+    	LOG.info("AbonoDAOImpl.deleteAsignAbono()");
+        getHibernateTemplate().delete(cliAbono);
     }
 }
